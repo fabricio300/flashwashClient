@@ -1,0 +1,203 @@
+<ion-header style="z-index: 100;">
+  <ion-toolbar color='primary'>
+      <ion-buttons slot="start">
+      <ion-button  (click)="openFirst()">
+    
+      <ion-icon name="menu"></ion-icon>
+    </ion-button>
+          
+      </ion-buttons>
+
+
+      
+
+
+
+     <ion-input  placeholder="Busca una lavanderia" class="anchoDebuscador">
+
+     </ion-input>
+         
+    
+        
+         
+
+ 
+
+      <ion-buttons slot="end">
+          <ion-button >
+              <img src="../../../assets/iconos/search.png" class="iconoFiltro">
+          </ion-button>
+
+          
+          <ion-button  *ngIf="filActivo" (click)=" ocultarFiltros()">
+              <img  src="../../../assets/iconos/filter (1).png" class="iconoFiltro">
+          </ion-button>
+
+
+          <ion-button  *ngIf="!filActivo" (click)="verfiltros()">
+              <img  src="../../../assets/iconos/filter.png" class="iconoFiltro">
+          </ion-button>
+      </ion-buttons>
+
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <ion-menu side="start" menuId="first" >
+      
+        <ion-content color='secondary'>
+           
+            <ion-item color='secondary'  routerLink="{{p.url}}" (click)="closeFirst()"  *ngFor="let p of paginas"  >
+              <img src="{{p.icon}}" style="width: 18px; margin: 8px;">
+               {{p.titulo}}
+            </ion-item>
+
+           
+            <ion-item color='secondary'  routerLink='/login'(click)="closeFirst()" *ngIf="!this.global.status_de_secion">
+                <img src="../../../assets/iconos/user.png" style="width: 18px; margin: 8px;">
+               Iniciar sesion
+            </ion-item>
+
+            <ion-item color='secondary'  (click)="cerraSecion()" *ngIf="this.global.status_de_secion" style="cursor: pointer;">
+                <img src="../../../assets/iconos/close.png" style="width: 18px; margin: 8px;">
+               Cerrar sesion
+            </ion-item>
+        </ion-content>
+      </ion-menu>      
+
+  <ion-router-outlet main></ion-router-outlet>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style="display: flex; flex-wrap: wrap; width: 100%;">
+    
+          <ion-toolbar style="text-align: center;">
+             <ion-title style="color: #23374d;" class="centrar">
+              
+              Cerca de ti:</ion-title>
+          </ion-toolbar>
+      
+      
+            <div class="lavanderiaCont" *ngFor='let dd of filtros'>
+              <div class="contImgLavanderia centrar">
+                <img src="../../../assets/iconos/shutterstock_422824102.jpg" >
+              </div>
+              <div style="width: 75%;">
+                  <h4 style="margin: 5px; color: #af0404; font-size: 18px;">nombre de la lavanderia</h4>       
+                  <p style="margin: 5px; font-size: 15px;">Horario: 08:00am a 08:00 pm</p>
+                  <p style="margin: 5px; font-size: 15px;">Status:Cerrado</p>
+                  <ion-button color='dark' class="botonVermas"
+                  (click)="irALavanderia()"
+                  >Ver más</ion-button>        
+              </div>
+             
+             
+            </div>
+      
+            
+            
+          
+      
+      
+</div>
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="filtroscontent" id="filtros">
+    <ion-label style="color:gold;">Filtros de busqueda:</ion-label>
+    
+    
+      <div  *ngFor='let fil of filtros' style="margin: 10px"
+          (click)="activaFiltro(fil)">
+          
+          <label class="container ">
+              {{fil.opcion}}
+             
+            <div class="bu">
+              <img *ngIf='fil.activo' src="../../../assets/iconos/fle1.png" >
+            </div>
+          </label>
+        </div>
+     
+
+      <div class="opciones">
+        <ion-button style="margin-right:90px; "
+        (click)=" ocultarFiltros()">
+        Cancelar
+      </ion-button>
+        <ion-button color="success"
+        (click)=" ocultarFiltros()"
+        >Buscar</ion-button>
+      </div>
+    
+  </div>
+       
+
+</ion-content>

@@ -1,0 +1,78 @@
+.centrar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+
+
+
+.container{
+    position: relative;
+    padding-left: 25px;
+    height: auto;
+    font-size: 17px;
+    margin-bottom: -20px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+.lavanderiaCont{
+    //background: gray;
+    min-width: 45%;
+    max-width: 98%;
+    display: flex;
+    //flex-wrap: wrap;
+    margin-bottom: 35px;
+    margin: 15px;
+}
+.contImgLavanderia{
+    padding: 2px;
+    background: #3c9d9b;
+    margin-top: auto;
+    margin-bottom: auto;
+    overflow: hidden;
+    border-radius: 5px;
+    
+}
+
+.contImgLavanderia::content img{
+    width: 112px;
+    border-radius: 5px;
+}
+
+.botonVermas{
+    width: 80px;
+    height: 25px;
+    margin-top: auto;
+    font-size: 10px;
+    float:right;
+}
+
+ion-item.selectable:hover {
+    background-color: #afaeb6 !important;
+  }
+  
+@media(max-width:600px){
+   
+
+    .iconoFiltro{
+        width: 18px;
+        height: 18px;
+        margin:5px auto;
+    }
+
+    .lavanderiaCont{
+        //background: gray;
+        margin: auto;
+        width: 98%;
+        margin-bottom: 45px;
+    }
+}

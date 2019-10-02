@@ -1,0 +1,144 @@
+<ion-header>
+    <ion-toolbar color='primary'>
+        <ion-buttons slot="start">
+        <ion-back-button defaultHref="/inicio"></ion-back-button>
+     </ion-buttons> 
+      <ion-title>Staus de pedido</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+  <div style="display: flex; flex-wrap: wrap; margin-bottom: 10px;" >
+  
+  
+   <div class="contPedido" *ngFor="let pedido of pedidos">
+      <div class="dotos centrar "
+        [ngClass]="{'enLavabderia': pedido.status=='En lavanderia', 'enCamino':pedido.status=='En camino', 'entregando':pedido.status=='En entraga' }"
+      >
+  
+        <div class="parte centrar" style="color: white;">
+          <label> 
+            <p style="margin: 10px;">{{pedido.nombre}}</p>
+            <p style="margin: 10px;"> {{pedido.hora}}</p>
+  
+          </label>
+            
+        </div>
+  
+        <div class="medio centrar">
+          <img  
+          (click)="this.efectos.mostrarStatus(pedido)"
+          *ngIf="!pedido.visto"  src="{{this.efectos.iconArrowDown}}" style="width: 25px; margin-top: auto; cursor: pointer;">
+        
+          <img  
+          (click)="this.efectos.mostrarStatus(pedido)"
+          *ngIf="pedido.visto"  src="{{this.efectos.iconArrowUp}}" style="width: 25px; margin-top: auto; cursor: pointer;">
+        
+        
+        </div>
+  
+        <div class="parte ">
+            <p style="font-size: 15px; width: 100%; text-align:center;">Status:</p>
+            <label class="centrar">
+              <img 
+              [ngClass]="{'rota-horizontal':pedido.status=='En entraga'}"
+              src="{{pedido.icon}}" style="width: 30px; margin: 5px;">
+              <p style="color: white;">{{pedido.status}}</p>
+            </label>
+        </div>
+  
+      </div>
+  
+      <div id="{{pedido.id}}" class="informacion centrar">
+        <div class="listaServices " style=" overflow-y: scroll;">
+            <p style="color: gold;">Servicios:</p>
+           
+  
+                <p *ngFor="let servicio of pedido.servicios"
+                    style="color: white; font-size: 12px; border-bottom: 1px solid #979797; ">
+                    
+                    {{servicio}}
+                </p>
+               
+            <p style="color: gold;">Indicaciones:</p>
+              
+            <p style="color: white; font-size: 12px; ">
+            
+            Una indicación es el término que describe una razón válida para emplear una prueba diagnóstica, un procedimiento médico, un determinado medicamento, o técnica quirúrgica.
+                
+        </p>
+  
+        </div>
+  
+        <div class="infoGeneral centrar">
+  
+          <label class="centrar" style="width: 50%; font-size: 12px; color: gold">
+            Total:
+            <p class="centrar" style="height: 30px; width: 90%; background: white; border-radius: 10px; color: black;">
+              $50
+            </p>
+          </label>
+  
+  
+          <label class="centrar" style="width: 50%; font-size: 12px; color: gold">
+               Entrega en:
+              <p class="centrar" style="height: 30px; width: 90%; background: white; border-radius: 10px; color: black;">
+               120 min
+              </p>
+          </label>
+  
+  
+          <label class="centrar" style="width: 50%; font-size: 12px; color: gold">
+              <p style="width: 100%; text-align: center">Ver lavanderia:</p>
+              <img 
+              (click)="irAlavanderia()"
+              src="{{this.efectos.tienda}}" style="width: 40px; cursor: pointer;">
+         </label>
+  
+  
+         <label class="centrar" style="width: 50%; font-size: 12px; color: gold">
+            <p style="width: 100%; text-align: center">Ver ruta:</p>
+            <img 
+            (click)="irAStatus()"
+            src="{{this.efectos.mapa}}" style="width: 40px; cursor: pointer;">
+       </label>
+       
+         
+        
+  
+        <div class="centrar" style="width: 100%; margin-top: 15px;">
+        <ion-button color='success' style="height: 20px; width: 40%; font-size: 12px;">
+          Cambiar
+        </ion-button> 
+        <ion-button style="height: 20px; width: 40%; font-size: 12px;">
+            Cancelar
+        </ion-button>
+     
+        
+        </div>
+  
+   
+  
+        </div>
+  
+        
+  
+      </div>
+     
+      
+   </div>
+  
+  
+   
+  
+   
+  
+  
+  
+  
+  
+   
+  
+  </div>
+  
+  </ion-content>

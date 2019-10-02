@@ -1,0 +1,42 @@
+<ion-header>
+    <ion-toolbar color='primary'>
+        <ion-buttons slot="start">
+            <ion-back-button ></ion-back-button>
+         </ion-buttons> 
+      <ion-title>Guardados</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  
+
+<div style="display: flex; flex-wrap: wrap; width: 100%;">
+  
+
+      <div class="lavanderiaCont" *ngFor='let dd of filtros'>
+        <div class="contImgLavanderia centrar">
+          <img src="../../../assets/iconos/shutterstock_422824102.jpg" >
+        </div>
+        <div style="width: 75%;">
+            <h4 style="margin: 5px; color: #af0404; font-size: 18px;">nombre de la lavanderia</h4>       
+            <p style="margin: 5px; font-size: 15px;">Horario: 08:00am a 08:00 pm</p>
+            <p style="margin: 5px; font-size: 15px;">Status:Cerrado</p>
+            <ion-button color='dark' class="botonVermas"
+            (click)="irALavanderia()"
+            >Ver más</ion-button>        
+        </div>
+       
+       
+      </div>
+
+      
+      
+    
+
+
+</div>
+  
+
+</ion-content>

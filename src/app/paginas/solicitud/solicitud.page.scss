@@ -1,0 +1,84 @@
+.centrar{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;    
+}
+
+
+.info{
+    
+    width: 100%;
+    padding-left: 15px;
+    position: relative;
+    //min-height: 200px;
+    transition: 0.5s;
+    height: auto;
+   // background: #394a6d;
+}
+
+
+.centrarIZ{
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: left;
+    align-items: center;
+    
+
+}
+
+.addServices{
+    background: #394a6d;
+    width: 80%;
+    height: 0px;
+    overflow: hidden;
+    border-radius: 5px;
+    margin: 15px;
+}
+
+.imagenL{
+    width: auto;
+    height:180px ;
+    float:right;
+}
+
+
+.numeros{
+    outline: none;
+    border: none;
+    margin: 5px;
+    border-bottom:1px solid #C9CBC9;
+    width: 200px;
+    margin-left: 20px;
+}
+
+.fondo{
+    width: 200%;
+    overflow: hidden;
+    transition: 0.5s;
+    //background: #394a6d;
+    display: flex;
+}
+
+.parte{
+    width: 50%;
+    overflow: hidden;
+}
+
+.formato{
+    width: 90%;
+    min-height: 400px;
+    background: #414141;
+}
+
+
+
+@media(max-width:600px){
+
+    .imagenL{
+        width: 35%;
+        float:right;
+        height: auto;
+    }
+
+}

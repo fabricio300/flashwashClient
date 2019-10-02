@@ -1,0 +1,199 @@
+<ion-header>
+    <ion-toolbar color='primary'>
+        <ion-buttons slot="start">
+            <ion-back-button ></ion-back-button>
+         </ion-buttons>  
+      <ion-title>Solicitud de servicio</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content >
+  
+    <div id="primero" class="fondo">
+        <div class="parte">
+          <div class="info"  >
+  
+              <h2 style="color: #949694;" id="sec">
+              <img src="{{this.efectos.iconLavadors}}" style="width: 25px;">
+          
+                Servicios elegidos:</h2>
+          
+          
+          
+              <label *ngIf='!this.efectos.almenos1ServicioElegido'>
+                <p style="width: 60%; padding: 5px; border-bottom:1px solid #C9CBC9;">
+                    Ninguno :( 
+                </p>
+              </label>
+          
+              <label *ngFor="let elegido of servicios" >
+                  <p *ngIf='elegido.elegido' class="centrarIZ" style="width: 60%; padding: 5px; border-bottom:1px solid #C9CBC9;">
+                      <img 
+                      (click)="this.efectos.removeService(elegido)"
+                      src="../../../assets/iconos/error.png" style="width: 27px; cursor: pointer;">
+                       
+                      <a style="margin: 4px; color: black;">
+                          {{elegido.servicio}}
+                      </a>
+                      
+                  </p>
+          
+              </label>
+             
+          
+          
+            
+          
+              
+             
+              
+          
+              
+          
+            </div>
+          
+            
+            <p class="centrarIZ" style="cursor: pointer; margin: 10px;" (click)='this.efectos.viewServices()'>
+                <img  *ngIf="!this.efectos.serviciosVicible" src="{{this.efectos.iconMas}}" style="width: 27px; margin: 4px;">
+                <img *ngIf="this.efectos.serviciosVicible" src="{{this.efectos.iconMenos}}" style="width: 27px; margin: 4px;">
+                  Agregar servicio
+            </p>
+          
+            <div id="ServicesX"  class="addServices">
+              <div  *ngFor="let service of servicios" >
+                  <ion-item 
+                  *ngIf="!service.elegido" 
+                  (click)="this.efectos.addService(service)"
+                  color='medium'>
+          
+                        <ion-checkbox ></ion-checkbox>
+                        <p style="margin: 5px;">
+                            {{service.servicio}}
+                        </p>
+                  
+                </ion-item>
+          
+          
+                <ion-item  *ngIf='this.efectos.numeroDeserviciosNoSolicitados==0' color='tertiary' >
+                    <p class="centrarIZ" style="font-size: 14px;">
+                      
+                          Has solicitado todos los servicios de la lavanderia :)
+                      
+                     </p>
+                  
+                  </ion-item>
+          
+              </div>
+                
+          
+              
+            </div>
+          
+          
+          
+            
+            <ion-label  class="centrarIZ" style="font-size: 15px; color:#949694; margin:5px; margin-left: 15px;">
+              <img src="{{this.efectos.iconRopa}}" style="width: 18px; margin: 5px;">
+              Cantidad de piezas:
+            </ion-label>
+            <ion-input color="primary" type="number" placeholder="#Cantidad" class="numeros"></ion-input>
+            
+          
+                <br>
+                <ion-label  class="centrarIZ" style="font-size: 15px; color:#949694; margin:5px; margin-left: 15px;">
+                  <img src="{{this.efectos.iconinstrucciones}}" style="width: 18px; margin: 5px;">
+                  indicaciones:
+                </ion-label>
+                <ion-textarea color="danger" placeholder="Enter more information here..." style="width: 90%;" class="numeros"></ion-textarea>
+                <br><br>
+          
+                <div class="centrar">
+                  <ion-button 
+                  (click)="this.efectos.siguiente()"
+                  color='danger' style="margin:10px; width: 150px;">
+                    Continuar
+                  </ion-button>
+          
+                  <ion-button style="margin:10px; width: 150px;">
+                      Cancelar
+                    </ion-button>
+          
+                </div>
+      </div>
+  
+  
+      <div class="parte centrar">
+  
+          <h2 style="color: #23374d;" id="pri">Forma de pago</h2>
+  
+  
+  
+          <div class="formato">
+            <div class="centrar" style="width:100%; background: #252525; padding: 5px;">
+              <img src="{{this.efectos.iconMoney}}" style="width: 30px;">
+            </div>
+            <h2 style="text-align:center; color: white;">Efectivo</h2>
+            <div class="centrar">
+  
+             
+              <div  style="width: 60%; padding: 10px;">
+                  <p style="color: gold; ">Servicios:</p>
+                  <label *ngFor="let fin of servicios">
+                    <p *ngIf='fin.elegido' style="color: white;">
+                        {{fin.servicio}}
+                    </p>
+                  </label>
+  
+                  
+  
+                  <label class="centrarIZ">
+                      <p style="color: gold;">Piezas:</p>
+                      <p style="color: white;">10</p>
+                  </label>
+  
+              </div>
+  
+  
+              <div class="centrar" style="width: 40%; height: 180px; margin: auto;">
+                <p style="color: gold; width: 100%; text-align: center">Total:</p>
+                  <p class="centrar" style="background: white; width: 100px; height: 100px; border-radius: 50%; font-size: 20px;">
+                      500$
+                  
+                  </p>
+                
+  
+              </div>
+  
+            </div>
+  
+            <div class="centrarIZ" style="width: 100%; padding: 10px;">
+                <p style="color: gold; width: 100%;">Idicaciones:</p>
+                <p style="color: white; width: 100%; font-size: 13px;">
+                    Una indicación es el término que describe una razón válida para emplear una prueba diagnóstica, un procedimiento médico, un determinado medicamento, o técnica quirúrgica.
+                
+                </p>
+            </div>
+  
+          </div>
+  
+  
+  
+  
+          <div class="centrar">
+              <ion-button 
+              color='warning' style="margin:10px; width: 150px;">
+                Aceptar
+              </ion-button>
+      
+              <ion-button 
+              (click)="this.efectos.regresar()"
+              style="margin:10px; width: 150px;">
+                  Regresar
+                </ion-button>
+      
+            </div>
+      </div>
+    
+    </div>
+  
+  </ion-content>

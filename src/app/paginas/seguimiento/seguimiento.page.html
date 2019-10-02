@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-toolbar color='primary'>
+        <ion-buttons slot="start">
+            <ion-back-button ></ion-back-button>
+         </ion-buttons> 
+      <ion-title>Seguimiento</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+  
+    <div class="conteMapa">
+
+        <agm-map
+        [style.height.px]="height"
+        [latitude]="lat"
+        [longitude]="lng">
+          <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+       </agm-map>
+    </div>
+  
+  
+  </ion-content>
