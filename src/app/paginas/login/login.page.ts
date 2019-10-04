@@ -10,7 +10,7 @@ import { GlobalElementService } from '../../global-element.service';
 })
 export class LoginPage implements OnInit {
 
-  tipoLogin=1
+
   
   constructor(
     private router: Router,
@@ -18,35 +18,45 @@ export class LoginPage implements OnInit {
   ) { }
 
   ngOnInit() {
-  }
-
-  ocultarInicio(){
-    document.getElementById('init').style.transition='0.7s'
-    document.getElementById('init').style.overflow='hidden'
-    document.getElementById('init').style.height='0px'
-  }
-
-  verInicio(){
-    document.getElementById('init').style.transition='0.7s'
-    document.getElementById('init').style.height='100%'
-  }
+    this.ocultarPart('part2')
+    this.ocultarPart('part3')
   
-  login(){
-    this.tipoLogin=1
-    this.ocultarInicio()
   }
 
-  registrarce(){
-    this.tipoLogin=0
-    this.ocultarInicio()
+
+  goOP(id){
+      this.verPart(id)
+      this.ocultarPart('part1')
   }
 
-  iniciar(){
-    this.verInicio()
-    localStorage.setItem('secion','true')
-    this.router.navigate(['/inicio'])
-    this.global.status_de_secion=true
-    
+  retornar(id){
+      this.ocultarPart(id)
+      this.verPart('part1')
   }
 
+
+
+
+  verPart(id){
+    document.getElementById(id).style.transition="0.5s"
+    document.getElementById(id).style.height='100%'
+  }
+
+  ocultarPart(id){
+    document.getElementById(id).style.transition="0.5s"
+    document.getElementById(id).style.height='0px'
+  }
+
+
+
+  iniciarSecion(){
+      localStorage.setItem('secion','true')
+      this.global.status_de_secion=true
+      this.ocultarPart('part2')
+      this.ocultarPart('part3')
+      this.verPart('part1')
+      this.router.navigate(['/inicio'])
+
+  }
+ 
 }
