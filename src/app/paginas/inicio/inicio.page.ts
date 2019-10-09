@@ -3,6 +3,7 @@ import { MenuController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { GlobalElementService } from '../../global-element.service';
 
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-inicio',
@@ -63,10 +64,14 @@ export class InicioPage implements OnInit {
   constructor(
     private menu: MenuController,
     private router:Router,
-    private global:GlobalElementService
+    private global:GlobalElementService,
+    private socket: Socket
     ) { 
 
-      
+      socket.on('mensajeServidor',function(data){
+        console.log('data=',data);
+        
+      })
     }
 
   
@@ -138,4 +143,47 @@ export class InicioPage implements OnInit {
     localStorage.setItem('secion','false')
     this.global.status_de_secion=false
   }
+
+
+
+
+
+
+  emitirMensaje(){
+    let mensaje={
+      id:1,
+      texto:'hola',
+      hora:'10:30 pm',
+      status:'A lavandería'
+    }
+    this.socket.emit('message',mensaje)
+
+    console.log("enviado");
+    
+  }
+
+ 
+
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

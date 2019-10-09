@@ -88,27 +88,31 @@
 
 
 .lavanderiaCont{
-    //background: gray;
-    min-width: 45%;
-    max-width: 98%;
+    background: #e5e5e5;
+    width: 45%;
     display: flex;
-    //flex-wrap: wrap;
-    margin-bottom: 35px;
+    margin-bottom: 25px;
     margin: 15px;
+    padding: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 7px 5px 9px -4px rgba(0,0,0,0.75);
+    -moz-box-shadow: 7px 5px 9px -4px rgba(0,0,0,0.75);
+    box-shadow: 7px 5px 9px -4px rgba(0,0,0,0.75);
 }
 .contImgLavanderia{
     padding: 2px;
-    background: #3c9d9b;
+    //background: #3c9d9b;
     margin-top: auto;
     margin-bottom: auto;
     overflow: hidden;
-    border-radius: 5px;
     
 }
 
 .contImgLavanderia::content img{
-    width: 112px;
+    max-height: 180px;
+    width: auto;
     border-radius: 5px;
+
 }
 
 .botonVermas{
@@ -122,7 +126,15 @@
 ion-item.selectable:hover {
     background-color: #afaeb6 !important;
   }
-  
+
+.statusOpen{
+    background: #23374d;
+    color: #E3EAE6;
+    text-align: center;
+    width: 80px;
+    padding: 4px;
+}  
+
 @media(max-width:600px){
    
 
@@ -138,7 +150,7 @@ ion-item.selectable:hover {
     .lavanderiaCont{
         //background: gray;
         margin: auto;
-        width: 98%;
+        width: 95%;
         margin-bottom: 45px;
     }
 }

@@ -24,7 +24,7 @@
  
 
       <ion-buttons slot="end">
-          <ion-button >
+          <ion-button (click)=" emitirMensaje()">
               <img src="../../../assets/iconos/search.png" class="iconoFiltro">
           </ion-button>
 
@@ -78,16 +78,6 @@
           </ion-toolbar>
 
       </ion-header>
-
-
-
-
-
-
-
-
-
-
       
         <ion-content color='secondary'>
            
@@ -151,11 +141,16 @@
               <div class="contImgLavanderia centrar">
                 <img src="../../../assets/iconos/shutterstock_422824102.jpg" >
               </div>
-              <div style="width: 75%;">
-                  <h4 style="margin: 5px; color: #af0404; font-size: 18px;">nombre de la lavanderia</h4>       
-                  <p style="margin: 5px; font-size: 15px;">Horario: 08:00am a 08:00 pm</p>
-                  <p style="margin: 5px; font-size: 15px;">Status:Cerrado</p>
-                  <ion-button color='dark' class="botonVermas"
+              <div style="width: 75%; font-size: 13px;">
+                
+                
+                    <h4 style="margin: 5px; color: #1089ff; font-size: 15px;">nombre de la lavanderia</h4>       
+                    <p style="margin: 5px; color: #3c9d9b;">Horario:</p>
+                    <p style="margin: 5px;">08:00am a 08:00 pm</p>
+                    <p style="margin: 5px;" class="statusOpen">Cerrado</p>
+
+                  
+                  <ion-button color='medium' class="botonVermas"
                   (click)="irALavanderia()"
                   >Ver más</ion-button>        
               </div>
