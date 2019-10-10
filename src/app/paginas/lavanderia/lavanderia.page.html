@@ -11,10 +11,34 @@
   </ion-header>
   
   <ion-content >
-    <div class="contenedor1 centrar" style="height: auto;">
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div style=" background: #252525; color: white; padding: 1px;">
+        <h4>Galeria:</h4>
+      </div>
+    
       <div class="contenedorSlider centrar">
-        <h4>Galeria</h4>
+        
           <ion-slides class="slider centrar">
             <ion-slide *ngFor="let imagen of imagenes">
               <img src="{{imagen}}" >
@@ -23,117 +47,198 @@
           </ion-slides>
       </div>
       
-      <div class="datos ">
-        
-          <ion-item  color="tertiary" style="width: 100%;">
-              Datos:
-          </ion-item>
-          
-        <label class="centrarIZ color2" style="color: #3c9d9b; font-size: 16px;">
-            <img src="{{this.efectos.direccion}}" class="imgIcono">
-            Dirección: 
-             
-        </label>
-        <p style="max-width: 90%; font-size: 13px; margin-left: 10px;">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div style=" padding: 15px;">
+        <h4>Datos de la empresa:</h4>
+
+        <label>
+          <p class="icon centrarIz">
+            <img  src="{{this.efectos.direccion}}" >
+            direccion:
+          </p>
+          <p style="margin-left: 20px;">
             Parque Central Tuxtla Gutiérrez, Chiapas, Zona Sin Asignación de Nombre de Colonia 42, Tuxtla Gutiérrez, Chis.
-        </p> 
-  
-       
-  
-  
-        <label class="centrarIZ color2" style="color: #3c9d9b; font-size: 16px;">
-            <img src="{{this.efectos.correo}}" class="imgIcono">
-              Correo:
+          </p>
         </label>
-        <p style="max-width: 90%; font-size: 13px; margin-left: 10px;">
-          correo@gmail.com
-        </p>
-  
-  
-        <label class="centrarIZ color2" style="color: #3c9d9b; font-size: 16px;">
-            <img src="{{this.efectos.iconCel}}" class="imgIcono">
-              Tel:   
+
+
+        <label >
+          <p class="icon centrarIz">
+            <img  src="{{this.efectos.iconCel}}" >
+            Telefono:
+          </p>
+          <p  style="margin-left: 20px;">
+              000-000-0000
+          </p>
         </label>
-  
-        <p style="max-width: 90%; font-size: 13px; margin-left: 10px;">
-          163-116-7855
-        </p>
-      
-  
-        <label class="centrarIZ color2 " style="color: #3c9d9b; font-size: 16px;">
-            <img src="{{this.efectos.iconUrl}}" class="imgIcono">
-              Visita nuestra Web
+
+
+        <label >
+          <p class="icon centrarIz">
+            <img  src="{{this.efectos.correo}}" >
+            Correo:
+          </p>
+          <p  style="margin-left: 20px;">
+              correo@gmail.com
+          </p>
         </label>
-        
-        
+
+
+        <label >
+          <p class="icon centrarIz">
+            <img  src="{{this.efectos.horario}}" >
+            Horario:
+          </p>
+          <p  style="margin-left: 20px;">
+              Lunes a viernes 08:00 aam - 08:00 pm
+          </p>
+        </label>
+
+
+      </div>
+   
+
+
+
+
+
+
+
+
+
+
+      <div style=" padding: 15px;" id="services">
+        <h4>Servicios</h4>
+
+        <div *ngFor="let servi of servicios">
+            <p class="centrarIz " [ngClass]="{'actual':servi.visto==true}">
+                <ion-checkbox style="margin: 5px;"
+                (click)="seleccionar(servi)"
+                ></ion-checkbox>
+                {{servi.servicio}}  ${{servi.precio }}  por {{servi.unidad}} 
+                
+                
+                <img 
+                [ngClass]="{'UParrow':servi.visto==true}"
+                src="{{this.efectos.more}}"  style="width: 22px; margin-left: 10px; cursor: pointer;"
+                (click)="this.efectos. viewInfoService(servi)"
+                >
+            </p>
+
+            <div class="infoServicio centrar" id="{{servi.servicio}}">
+
   
-  
-      </div >
-  
-  
-    </div>
-    
-  
-    <div class="contenedor1 " style=" min-height: 100%; height: auto; position: relative;">
-        <ion-item color="tertiary">
-            Servicios:
-        </ion-item>
-      
-        <div class="contenedorService centrar"   
-        
-        *ngFor='let servicio of servicios'
-        
-        >
-        <div style="width: 85%; height: 55px; z-index: 100;"  [ngClass]="{'blanco':!servicio.visto, 'negro':servicio.visto}">
-          <ion-item  color='light'(click)="seleccionar(servicio)">
-              <ion-checkbox ></ion-checkbox>
-              <p style="margin-left:5px; "  [ngClass]="{'color1':servicio.visto}">
-                  {{servicio.servicio}} / ${{servicio.precio}}
-              </p>
-                 
-          </ion-item>
-        </div>
-          <button class="botonArrow"  
-          [ngClass]="{'negro':!servicio.visto, 'blanco':servicio.visto}"
-          (click)="this.efectos.viewService(servicio)">
-              <img  *ngIf='!servicio.visto' src="{{this.efectos.iconArrowDown}}" class="imgIcono">
-              <img  *ngIf='servicio.visto' src="{{this.efectos.iconArrowUp}}" class="imgIcono">
-          </button>
-  
-  
-  
-  
-          <div  id="{{servicio.servicio}}"  class="infoService centrarIZ ">
-              <p style="width: 100%; color: #52de97">Descripción del servicio:</p>
-              <p  class="descrip color1" style="font-size: 12px; padding: 5px;"> Normalmente, los procesos de lavado se llevan a
-                  cabo en una sala reservada a tal efecto, una habitación individual, 
-                  o cámara de lavado que a las casas particulares se le llamaba "el cuarto del lavadero".
-              </p>
-  
-              <div class="ima centrar">
-                  <img id="{{servicio.servicio}}point" src="../../../assets/iconos/shutterstock_422824102.jpg" >
-              </div>
+              <p>Preferentemente y para brindar un mejor servicio: las prendas deberán ser separadas de la manera en que se prefiera que sean tratadas; por Tipo, Texturas y Colores</p>
               
-            
-          </div>
-          
+              <img src="../../../assets/iconos/shutterstock_422824102.jpg" >
+
+            </div>
+    
         </div>
-  
-        <ion-item color='light' style="margin-top:40px;">
-            <ion-button
-            (click)="irASolicitud()"
-            color='success' class="centrar" style="width: 50%; margin: auto; height: 80%;">
-                <img src="{{this.efectos.iconWash}}" class="imgIcono">
-                 Solicitar servico
-               </ion-button>
-  
-  
-        </ion-item>
         
-            
+
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div style=" padding: 15px; margin-bottom: 20px;" id="ofertasX">
+        <h4>Promociones y ofertas:)</h4>
+
+        <div *ngFor="let ofert of ofertas">
+
+            <p class="centrarIz " [ngClass]="{'actual':ofert.visto==true}">
+               {{ofert.titulo}}
+                <img 
+               *ngIf="!ofert.visto"
+                src="{{this.efectos.promo1}}"  style="width: 22px; margin-left: 10px; cursor: pointer;"
+                    (click)="this.efectos.viewOfert(ofert)"
+                >
+
+
+                <img 
+                *ngIf="ofert.visto"
+                src="{{this.efectos.promo2}}"  style="width: 22px; margin-left: 10px; cursor: pointer;"
+                (click)="this.efectos.viewOfert(ofert)"
+                >
+
+                
+
+            </p>
+
+            <div class="infoOferta centrar" id="{{ofert.titulo}}">
+
+  
+                <p>{{ofert.info}}</p>
+                
+                <img src="../../../assets/iconos/shutterstock_422824102.jpg" >
+  
+            </div>
         
-    </div>
-   
-   
+        </div>
+      
+      </div>
+      
+
+
+
+      <ion-button style="margin:5px; float:right;"
+      (click)="irASolicitud()"
+      >
+        solicitar servicio
+      </ion-button>
+
+
+
+
+
   
   </ion-content>

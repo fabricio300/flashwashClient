@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { GlobalElementService } from '../../global-element.service';
+import {efectos} from './efectos'
 
 import { Socket } from 'ngx-socket-io';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-inicio',
@@ -11,7 +12,7 @@ import { Socket } from 'ngx-socket-io';
   styleUrls: ['./inicio.page.scss'],
 })
 export class InicioPage implements OnInit {
-
+  efectos1=new efectos()
   paginas=[
    
     {
@@ -39,30 +40,34 @@ export class InicioPage implements OnInit {
     },
     {
       activo:false,
-      opcion:'opcion3'
-    },
-    {
-      activo:false,
-      opcion:'opcion4'
-    }
-    ,
-    {
-      activo:false,
-      opcion:'opcion5'
-    },
-    
-    {
-      activo:false,
-      opcion:'opcion6'
+      opcion:'opcion2'
     }
     
   ]
 
-  
-  filActivo=false;
+  lavandrias=[
+    {
+      id:1,
+      nombre:'lavandería 1',
+      imagene:'../../../assets/iconos/shutterstock_422824102.jpg',
+      precioporKilo:'40$'
+    },
+    {
+      id:2,
+      nombre:'lavandería 2',
+      imagene:'../../../assets/iconos/flaswash.png',
+      precioporKilo:'30$'
+    },
+    {
+      id:1,
+      nombre:'lavandería 3',
+      imagene:'../../../assets/iconos/700x420_lavanderia-autoservicio.jpg',
+      precioporKilo:'50$'
+    }
+  ]
 
   constructor(
-    private menu: MenuController,
+    private menu:MenuController,
     private router:Router,
     private global:GlobalElementService,
     private socket: Socket
@@ -74,6 +79,7 @@ export class InicioPage implements OnInit {
       })
     }
 
+
   
   ngOnInit() {
     if(localStorage.getItem('secion')=='true'){
@@ -83,61 +89,29 @@ export class InicioPage implements OnInit {
     }
     console.log("secion",this.global.status_de_secion);
 
-
     document.getElementById('filtros').style.transition="0.5s"
-    this.ocultarFiltros()
+    this.efectos1.ocultarFiltros()
+
   }
 
 
-
+ openFirst() {
+    
+          this.menu.enable(true, 'first');
+          this.menu.open('first');
+    
+    
+      }
+    
+      closeFirst(){
+        
+        this.menu.enable(false, 'first');
+        this.menu.close('first');
+      }
  
 
-  ocultarFiltros(){ 
-    document.getElementById('filtros').style.marginTop="-100%" 
-    //this.recetearFiltros()
-    this.filActivo=false
-  }
-
-  verfiltros(){
-    document.getElementById('filtros').style.marginTop="0"
-    this.filActivo=true
-  }
-
-  activaFiltro(filtro:any){
-    if(filtro.activo==false)
-      filtro.activo=true
-    else
-      filtro.activo=false
-
-    //console.log(this.filtros);  
-  }
-
-  recetearFiltros(){
-    this.filtros.forEach(element => {
-        element.activo=false;
-    });
-  }
-
-
-
-  openFirst() {
-
-      this.menu.enable(true, 'first');
-      this.menu.open('first');
-
-
-  }
-
-  closeFirst(){
-    
-    this.menu.enable(false, 'first');
-    this.menu.close('first');
-  }
-
-
-  irALavanderia(){
-    this.router.navigate(['/lavanderia'])
-  }
+ 
+  
 
   cerraSecion(){
     localStorage.setItem('secion','false')
@@ -145,7 +119,9 @@ export class InicioPage implements OnInit {
   }
 
 
-
+  irALavanderia(){
+    this.router.navigate(['/lavanderia'])
+  }
 
 
 

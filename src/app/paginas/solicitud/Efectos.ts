@@ -8,105 +8,108 @@ export class Efectos{
     iconRopa='../../../assets/iconos/casual-t-shirt.png'
     iconMoney='../../../assets/iconos/coin.png'
     iconinstrucciones='../../../assets/iconos/strategy.png'
+    iconMoto='../../../assets/iconos/bike.png'
+    iconNota='../../../assets/iconos/invoice.png'
+    duda='../../../assets/imagenes/information.png'
 
 
+    actual=0
+
+    listaServicios=false
+
+    cantidadServicios
+    pedidos=0
+    todo=false
+     
+
+    tipoDeEntrega
+    reparto
 
 
-    numeroDeserviciosNoSolicitados=0
-    almenos1ServicioElegido=false
-    serviciosVicible=false;
-    servicios
+    indicaciones=''
+
+    tipoEntrega(tipo){
+       this.tipoDeEntrega= tipo
+    }
     constructor(){
 
     }
 
-
-    setServiciosNoSolicitados(services){
-        this.servicios=services
-
-        services.forEach(element => {
-            if(element.elegido==false)
-                this.numeroDeserviciosNoSolicitados++
-            
+    medir(servicios:any){
+ 
+        this.cantidadServicios=servicios.length
+        servicios.forEach(element => {
+            if(element.elegido==true){
+                this.pedidos=this.pedidos+1
+            }
         });
-        
-        console.log("dcsdvff",this.numeroDeserviciosNoSolicitados);
-        this.existeElegido()
     }
 
 
-    viewServices(){
-        if(this.serviciosVicible==true){
-            this.serviciosVicible=false
-            this.ocultarServicios()
-        }else{
-            this.serviciosVicible=true
-            this.mostrarServicios()
+    next(){
+        this.actual=this.actual+1
+
+        console.log("tipo ",this.tipoDeEntrega);
+        console.log("tipodd ",this.indicaciones);
+        
+        switch(this.actual){
+            case 3: this.optenerTipoDetransporte()
+            break;
         }
-    }
-
-
-    mostrarServicios(){
-        document.getElementById('ServicesX').style.transition='0.5s'
-
-        if(this.numeroDeserviciosNoSolicitados==0)
-            document.getElementById('ServicesX').style.height='54px'
-        else
-            document.getElementById('ServicesX').style.height=''+(this.numeroDeserviciosNoSolicitados*54)+'px'
-       
-    }
-
-    ocultarServicios(){
-        document.getElementById('ServicesX').style.transition='0.5s'
-        document.getElementById('ServicesX').style.height='0px'
-    }
-
-
-
-    addService(service){
-            service.elegido=true
-            this.numeroDeserviciosNoSolicitados--
-            this.mostrarServicios()
-            this.existeElegido()
-    }
-
-
-    removeService(service){
-        service.elegido=false
-        this.numeroDeserviciosNoSolicitados++
-        if(this.serviciosVicible==true)
-                this.mostrarServicios()
-        this.existeElegido()
-    }
-
-
-    existeElegido(){
-        let va=false
-            this.servicios.forEach(element => {
-                if(element.elegido==true){
-                    va=true
-                    
-                }
-                        
-            });
-        this.almenos1ServicioElegido=va           
-    }
-
-
-
-
-    siguiente(){
         
-        document.getElementById('primero').style.transition='0.5s'
-        document.getElementById('primero').style.marginLeft='-100%'
-        document.getElementById('pri').scrollIntoView(true)
-        this.serviciosVicible=false
-        this.ocultarServicios()
-    }
+      }
+    
+      regresar(){
+        this.actual=this.actual-1
+      }
+    
 
-    regresar(){
-        document.getElementById('primero').style.transition='0.5s'
-        document.getElementById('primero').style.marginLeft='0'
-        document.getElementById('sec').scrollIntoView(true)
-    }
+      mostrarLista(){
+          console.log("bhh");
+          if(this.listaServicios==false)
+          this.listaServicios=true
+          else
+          this.listaServicios=false
+      }
+
+
+      addServicio(servicio){
+            servicio.elegido=true;
+            this.pedidos=this.pedidos+1
+            
+            if(this.pedidos==this.cantidadServicios){
+                this.todo=true
+            }
+      }
+
+
+      removerServicio(servicio){
+          servicio.elegido=false
+          this.pedidos=this.pedidos-1
+          this.todo=false
+      }
+
+
+      mostrarReparto(id){
+        if(this.reparto==id){
+                this.reparto=''
+        }else
+            this.reparto=id
+
+            
+      }
+
+
+      optenerTipoDetransporte(){
+          if(this.tipoDeEntrega=='tipo1'){
+            this.tipoDeEntrega='tipo1'
+          }
+          if(this.tipoDeEntrega=='tipo2'){
+            this.tipoDeEntrega='tipo2'
+            }
+
+            if(this.tipoDeEntrega=='tipo3'){
+                this.tipoDeEntrega='tipo3'
+            }
+      }
 }

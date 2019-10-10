@@ -13,12 +13,13 @@ export class SolicitudPage implements OnInit {
     
   servicios
 
-
+  
 
   constructor(private route: ActivatedRoute, private router: Router) {
     this.route.queryParams.subscribe(params => {
         this.servicios = JSON.parse(params.special);
         console.log("data= ",this.servicios);
+        this.efectos.medir(this.servicios)
     });
 
    
@@ -26,7 +27,12 @@ export class SolicitudPage implements OnInit {
   }
 
   ngOnInit() {
-    this.efectos.setServiciosNoSolicitados(this.servicios)
+    
   }
+
+
+  
+
+
 
 }

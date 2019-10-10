@@ -19,32 +19,55 @@ export class LavanderiaPage implements OnInit {
 
   servicios=[
     {
-      servicio:'Ropa de color',
+      servicio:'Lavado de ropa',
       precio: 30,
       visto: false,
-      elegido:false
+      elegido:false,
+      unidad: 'Kilo'
     },
     {
       servicio:'Planchado',
-      precio: 40,
+      precio: 5,
       visto: false,
-      elegido:false
+      elegido:false,
+      unidad: 'Pieza'
     },
     {
       servicio:'Ropa de ceda',
-      precio: 100,
+      precio: 20,
       visto: false,
-      elegido:false
+      elegido:false,
+      unidad: 'Pieza'
     },
 
     {
       servicio:'Ropa de cama',
-      precio: 100,
+      precio: 10,
       visto: false,
-      elegido:false
+      elegido:false,
+      unidad: 'Pieza'
     },
     
   ]
+
+
+  ofertas=[
+    
+      {
+        titulo:'viernes 1x2',
+        info:'Todos los Lunes y/o Viernes, agenda tu servicio de las 8:00 a las 14:00 horas y pagas tan solo $22.00 x Kilo',
+        visto: false,
+      },
+      
+      {
+        titulo:'jueves 1x2',
+        info:'Todos los Lunes y/o Viernes, agenda tu servicio de las 8:00 a las 14:00 horas y pagas tan solo $22.00 x Kilo',
+        visto: false,
+      }
+
+      
+    ]
+  
 
 
   efectos=new Efectos()
@@ -55,7 +78,7 @@ export class LavanderiaPage implements OnInit {
 
   ngOnInit() {
 
-   
+    this.efectos.espavlecerTamaño(this.servicios.length,this.ofertas.length)
   }
 
  /* irASolicitud(){

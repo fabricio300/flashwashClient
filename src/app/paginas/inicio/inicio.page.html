@@ -24,17 +24,17 @@
  
 
       <ion-buttons slot="end">
-          <ion-button (click)=" emitirMensaje()">
+          <ion-button (click)=" this.efectos1.emitirMensaje()">
               <img src="../../../assets/iconos/search.png" class="iconoFiltro">
           </ion-button>
 
           
-          <ion-button  *ngIf="filActivo" (click)=" ocultarFiltros()">
+          <ion-button  *ngIf="this.efectos1.filActivo" (click)=" this.efectos1.ocultarFiltros()">
               <img  src="../../../assets/iconos/filter (1).png" class="iconoFiltro">
           </ion-button>
 
 
-          <ion-button  *ngIf="!filActivo" (click)="verfiltros()">
+          <ion-button  *ngIf="!this.efectos1.filActivo" (click)="this.efectos1.verfiltros()">
               <img  src="../../../assets/iconos/filter.png" class="iconoFiltro">
           </ion-button>
       </ion-buttons>
@@ -137,17 +137,18 @@
           </ion-toolbar>
       
       
-            <div class="lavanderiaCont" *ngFor='let dd of filtros'>
+            <div class="lavanderiaCont" *ngFor='let dd of lavandrias'>
               <div class="contImgLavanderia centrar">
-                <img src="../../../assets/iconos/shutterstock_422824102.jpg" >
+                <img src="{{dd.imagene}}" >
               </div>
               <div style="width: 75%; font-size: 13px;">
                 
                 
-                    <h4 style="margin: 5px; color: #1089ff; font-size: 15px;">nombre de la lavanderia</h4>       
-                    <p style="margin: 5px; color: #3c9d9b;">Horario:</p>
-                    <p style="margin: 5px;">08:00am a 08:00 pm</p>
-                    <p style="margin: 5px;" class="statusOpen">Cerrado</p>
+                    <h4 style="margin: 5px; color: #1089ff; font-size: 17px;">
+                      {{dd.nombre}}
+                    </h4>       
+                    
+                    <p  class="statusClose">Lavado de ropa $40 por kilo</p>
 
                   
                   <ion-button color='medium' class="botonVermas"
@@ -204,11 +205,11 @@
 
       <div class="opciones">
         <ion-button style="margin-right:90px; "
-        (click)=" ocultarFiltros()">
+        (click)="this.efectos1.ocultarFiltros()">
         Cancelar
       </ion-button>
         <ion-button color="success"
-        (click)=" ocultarFiltros()"
+        (click)="this.efectos1.ocultarFiltros()"
         >Buscar</ion-button>
       </div>
     

@@ -9,191 +9,502 @@
   
   <ion-content >
   
-    <div id="primero" class="fondo">
-        <div class="parte">
-          <div class="info"  >
-  
-              <h2 style="color: #949694;" id="sec">
-              <img src="{{this.efectos.iconLavadors}}" style="width: 25px;">
+  <div class="contenedor" >
+
+    <div class="infoStatus centrar">
+
+
+        <div class="parte centrar  "  [ngClass]="{'actual':this.efectos.actual==0 }">
+          <img src="{{this.efectos.iconLavadors}}" width="30px">
+        </div>
+
+
+        <div class="parte centrar"  [ngClass]="{'actual':this.efectos.actual==1 }">
+          <img src="{{this.efectos.iconMoto}}" width="30px">
+        </div>
+
+        <div class="parte centrar"  [ngClass]="{'actual':this.efectos.actual==2 }">
+            <img src="{{this.efectos.iconinstrucciones}}" width="30px">
+        </div>
+
+
+        <div class="parte centrar"  [ngClass]="{'actual':this.efectos.actual==3 }">
+            <img src="{{this.efectos.iconNota}}" width="30px">
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     <!--servcios----------------------------------------------------------> 
+
+      <div 
+          style="position: relative;"
+          [ngClass]="{'ocultar':this.efectos.actual!=0,'semegmento':this.efectos.actual==0 }"
+      >
+      
+    
+      <h4>Servicios requeridos</h4>      
+      <div class="contScroll">
+
+        <label *ngFor="let servi of servicios">
+              <p  class="centrarIZ"  *ngIf="servi.elegido">
+
+                  {{servi.servicio}}
+                  <img 
+                  (click)="this.efectos.removerServicio(servi)"
+                  src="{{this.efectos.iconMenos}}" width="20px" style="margin-left: 5px; cursor: pointer;">
+              </p>
+
+
+        </label>
+
+        
+
+        <label *ngIf="this.efectos.pedidos==0">Ninguno :(</label>
+        
           
-                Servicios elegidos:</h2>
+      </div>    
+
+      
+      <div class="conteother">
+          <div class="listaNoelegida" *ngIf="this.efectos.listaServicios">
+              <label *ngFor="let servi2 of servicios">
+                  <p  
+                  (click)="this.efectos. addServicio(servi2)"
+                  class="centrarIZ"  *ngIf="!servi2.elegido">
+                      {{servi2.servicio}}
+                 </p>
+    
+    
+            </label>
+
+            <label *ngIf="this.efectos.todo">
+              A solicitado todos los servicios disponibles :)
+            </label>
+          </div>
+
+
+          <button style="float: right; background: transparent; outline: none;" 
           
-          
-          
-              <label *ngIf='!this.efectos.almenos1ServicioElegido'>
-                <p style="width: 60%; padding: 5px; border-bottom:1px solid #C9CBC9;">
-                    Ninguno :( 
+          (click)="this.efectos.mostrarLista()">
+            <img *ngIf="!this.efectos.listaServicios"
+            src="{{this.efectos.iconMas}}" width="40px">
+            <img *ngIf="this.efectos.listaServicios"
+            src="{{this.efectos.iconMenos}}" width="40px">
+          </button>
+      </div>
+     
+
+     
+
+      
+      <div class="centrar" style="height: 10%">
+
+
+
+        <ion-button
+        (click)="this.efectos.next()"
+        >
+          Continuar
+        </ion-button>
+      </div>
+
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div 
+  [ngClass]="{'ocultar':this.efectos.actual!=1,'semegmento':this.efectos.actual==1 }">
+      
+    
+      <h4>Tipo de entrega</h4>      
+      <div class="contScroll">
+
+          <ion-list>
+          <ion-radio-group [(ngModel)]="this.efectos.tipoDeEntrega">
+            
+        
+                <p class="centrarIZ"    >
+                    <ion-radio slot="start"  style="margin:3px; "
+                    value="tipo1"
+                    ></ion-radio>
+                    Solo deseo que vengan por mi ropa
+
+                    <img 
+                    (click)="this.efectos.mostrarReparto('tipo1')"
+                    src="{{this.efectos.duda}}" width="20px" style="margin:3px;cursor: pointer;  ">
+                </p>  
+    
+               
+                <p class="infoS"  *ngIf="this.efectos.reparto=='tipo1'">
+                    En este servicio un empleado de flash wash llegara su domicilio para encargarse del pesaje de las prendas que tenga a disposición, del cobro de servicios de lavandería y transporte. Para posteriormente transporta la ropa a la lavandería seleccionada.
                 </p>
-              </label>
+
           
-              <label *ngFor="let elegido of servicios" >
-                  <p *ngIf='elegido.elegido' class="centrarIZ" style="width: 60%; padding: 5px; border-bottom:1px solid #C9CBC9;">
-                      <img 
-                      (click)="this.efectos.removeService(elegido)"
-                      src="../../../assets/iconos/error.png" style="width: 27px; cursor: pointer;">
-                       
-                      <a style="margin: 4px; color: black;">
-                          {{elegido.servicio}}
-                      </a>
-                      
-                  </p>
-          
-              </label>
-             
-          
-          
+           
+         
+
+
+            <p class="centrarIZ">
+                <ion-radio 
+                style="margin:3px; "
+                value="tipo2" ></ion-radio>
+                Solo deseo que traigan  mi ropa
+                <img 
+                (click)="this.efectos.mostrarReparto('tipo2')"
+                src="{{this.efectos.duda}}" width="20px" style="margin:3px;cursor: pointer; ">
+            </p>  
+
+
+            <p class="infoS" *ngIf="this.efectos.reparto=='tipo2'">
+                En este servicio un empleado de flash wash se encargar de entregar a su domicilio las prendas que usted llevara a la lavandería seleccionada. Una vez echa la entrega se cobrará este servicio. 
+            </p>
+
             
-          
-              
-             
-              
-          
-              
-          
-            </div>
-          
-            
-            <p class="centrarIZ" style="cursor: pointer; margin: 10px;" (click)='this.efectos.viewServices()'>
-                <img  *ngIf="!this.efectos.serviciosVicible" src="{{this.efectos.iconMas}}" style="width: 27px; margin: 4px;">
-                <img *ngIf="this.efectos.serviciosVicible" src="{{this.efectos.iconMenos}}" style="width: 27px; margin: 4px;">
-                  Agregar servicio
+            <p class="centrarIZ">
+                <ion-radio
+                style="margin:3px; "
+                value="tipo3" ></ion-radio>
+                Servicio completo
+                <img 
+                (click)="this.efectos.mostrarReparto('tipo3')"
+                src="{{this.efectos.duda}}" width="20px" style="margin:3px; cursor: pointer; ">
+            </p>    
+
+           
+            <p class="infoS" *ngIf="this.efectos.reparto=='tipo3'">
+               
+              Este servicio incluye el transporte de la ropa de: su domicilio a lavandería y de lavandería a su domicilio.  Es servicio se divide en dos cobros:  cundo se recoge la ropa y cuando se entrega. 
+
             </p>
           
-            <div id="ServicesX"  class="addServices">
-              <div  *ngFor="let service of servicios" >
-                  <ion-item 
-                  *ngIf="!service.elegido" 
-                  (click)="this.efectos.addService(service)"
-                  color='medium'>
-          
-                        <ion-checkbox ></ion-checkbox>
-                        <p style="margin: 5px;">
-                            {{service.servicio}}
-                        </p>
-                  
-                </ion-item>
-          
-          
-                <ion-item  *ngIf='this.efectos.numeroDeserviciosNoSolicitados==0' color='tertiary' >
-                    <p class="centrarIZ" style="font-size: 14px;">
-                      
-                          Has solicitado todos los servicios de la lavanderia :)
-                      
-                     </p>
-                  
-                  </ion-item>
-          
-              </div>
-                
-          
               
-            </div>
-          
-          
-          
+        
             
-            <ion-label  class="centrarIZ" style="font-size: 15px; color:#949694; margin:5px; margin-left: 15px;">
-              <img src="{{this.efectos.iconRopa}}" style="width: 18px; margin: 5px;">
-              Cantidad de piezas:
-            </ion-label>
-            <ion-input color="primary" type="number" placeholder="#Cantidad" class="numeros"></ion-input>
-            
+            </ion-radio-group>
+          </ion-list>
+
+
           
-                <br>
-                <ion-label  class="centrarIZ" style="font-size: 15px; color:#949694; margin:5px; margin-left: 15px;">
-                  <img src="{{this.efectos.iconinstrucciones}}" style="width: 18px; margin: 5px;">
-                  indicaciones:
-                </ion-label>
-                <ion-textarea color="danger" placeholder="Enter more information here..." style="width: 90%;" class="numeros"></ion-textarea>
-                <br><br>
-          
-                <div class="centrar">
-                  <ion-button 
-                  (click)="this.efectos.siguiente()"
-                  color='danger' style="margin:10px; width: 150px;">
-                    Continuar
-                  </ion-button>
-          
-                  <ion-button style="margin:10px; width: 150px;">
-                      Cancelar
-                    </ion-button>
-          
-                </div>
-      </div>
-  
-  
-      <div class="parte centrar">
-  
-          <h2 style="color: #23374d;" id="pri">Forma de pago</h2>
-  
-  
-  
-          <div class="formato">
-            <div class="centrar" style="width:100%; background: #252525; padding: 5px;">
-              <img src="{{this.efectos.iconMoney}}" style="width: 30px;">
-            </div>
-            <h2 style="text-align:center; color: white;">Efectivo</h2>
-            <div class="centrar">
-  
-             
-              <div  style="width: 60%; padding: 10px;">
-                  <p style="color: gold; ">Servicios:</p>
-                  <label *ngFor="let fin of servicios">
-                    <p *ngIf='fin.elegido' style="color: white;">
-                        {{fin.servicio}}
-                    </p>
-                  </label>
-  
-                  
-  
-                  <label class="centrarIZ">
-                      <p style="color: gold;">Piezas:</p>
-                      <p style="color: white;">10</p>
-                  </label>
-  
-              </div>
-  
-  
-              <div class="centrar" style="width: 40%; height: 180px; margin: auto;">
-                <p style="color: gold; width: 100%; text-align: center">Total:</p>
-                  <p class="centrar" style="background: white; width: 100px; height: 100px; border-radius: 50%; font-size: 20px;">
-                      500$
-                  
-                  </p>
-                
-  
-              </div>
-  
-            </div>
-  
-            <div class="centrarIZ" style="width: 100%; padding: 10px;">
-                <p style="color: gold; width: 100%;">Idicaciones:</p>
-                <p style="color: white; width: 100%; font-size: 13px;">
-                    Una indicación es el término que describe una razón válida para emplear una prueba diagnóstica, un procedimiento médico, un determinado medicamento, o técnica quirúrgica.
-                
-                </p>
-            </div>
-  
-          </div>
-  
-  
-  
-  
-          <div class="centrar">
-              <ion-button 
-              color='warning' style="margin:10px; width: 150px;">
-                Aceptar
-              </ion-button>
+            <br>
+            <label >
+              Ingrese su direccion:
+            </label>
+            <ion-input placeholder="direccion"></ion-input>
+
+      </div>    
+
+     
+
+
       
-              <ion-button 
-              (click)="this.efectos.regresar()"
-              style="margin:10px; width: 150px;">
-                  Regresar
-                </ion-button>
-      
-            </div>
+      <div class="centrar" style="height: 10%">
+
+          <ion-button
+          (click)="this.efectos.regresar()"
+          >
+            Regresar
+          </ion-button>
+
+
+        <ion-button
+        (click)="this.efectos.next()"
+        >
+          Continuar
+        </ion-button>
       </div>
+
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div 
+      [ngClass]="{'ocultar':this.efectos.actual!=2,'semegmento':this.efectos.actual==2 }">
+      
     
+      <h4>Indicaciones</h4>      
+      <div class="contScroll">
+
+        <label >
+          Indique información respecto a la situación de sus prendas:
+          <br>
+          <a style="font-size: 12px;">Este campo es opcional</a>
+        </label>
+
+        <ion-textarea [(ngModel)]="this.efectos.indicaciones"
+        rows="20" style="width: 100%; height: 50%; border: 1px solid gray; padding: 5px;"></ion-textarea>
+
+      </div>    
+
+     
+
+
+      
+      <div class="centrar" style="height: 10%">
+
+          <ion-button
+          (click)="this.efectos.regresar()"
+          >
+            Regresar
+          </ion-button>
+
+
+        <ion-button
+        (click)="this.efectos.next()"
+        >
+          Continuar
+        </ion-button>
+      </div>
+
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div 
+      [ngClass]="{'ocultar':this.efectos.actual!=3,'semegmento':this.efectos.actual==3 }">
+      
+    
+      <h4>Ticket</h4>      
+      <div class="contScroll " style="display: flex; flex-wrap: wrap; justify-content: center; ">
+
+       
+
+        <div class="cobros">
+            <h6 style="color: #ff0000;">Costes:</h6>
+          <label *ngIf="this.efectos.tipoDeEntrega=='tipo1' || this.efectos.tipoDeEntrega=='tipo3'">
+              <p style="font-size: 12px;">transportar a lavandería:</p>
+              <p style="color: #3BB200;">$50</p>
+            
+          </label>
+         
+
+          <label *ngIf="this.efectos.tipoDeEntrega=='tipo2' || this.efectos.tipoDeEntrega=='tipo3'">
+              <p style="font-size: 12px;">transportar a domicilio:</p>
+              <p style="color: #3BB200;">$50</p>
+          </label>
+          
+          <label >
+            <p style="font-size: 12px;">servicios de lavandería:</p>
+            <p style="color: #3BB200;">
+              $50
+            </p>
+          </label>
+
+
+          <label >
+            <p style="color: #ff0000;">Total:</p>
+            <p style="color: #3BB200;">
+                $150
+            </p>
+          </label>
+
+
+        </div>
+
+        <div class="listaSer ">
+            <h6 style="color: white; font-size: 15px;">Servicios solicitados:</h6>
+            <label *ngFor="let servi3 of servicios">
+                <p  class="centrarIZ" 
+                style="font-size: 13px;"
+                *ngIf="servi3.elegido">
+    
+                    - {{servi3.servicio}}
+                </p>
+    
+    
+          </label>
+
+
+          
+        <label *ngIf="this.efectos.indicaciones!=''">
+          <br>
+            <p style="color: white;font-size: 15px;">Indicaciones:</p>
+            <p style="font-size:12px; ">{{this.efectos.indicaciones}}   </p>
+          </label>
+  
+        </div>
+
+        
+
+
+      </div>    
+
+     
+
+
+      
+      <div class="centrar" style="height: 10%">
+         <ion-button
+          (click)="this.efectos.regresar()"
+          >
+            Regresar
+          </ion-button>
+
+          <ion-button
+          >
+            Aceptar
+          </ion-button>
+      </div>
+
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
+            
+          
+  
   
   </ion-content>

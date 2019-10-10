@@ -39,7 +39,7 @@ export class LoginPage implements OnInit {
 
   verPart(id){
     document.getElementById(id).style.transition="0.5s"
-    document.getElementById(id).style.height='100%'
+    document.getElementById(id).style.height='auto'
   }
 
   ocultarPart(id){

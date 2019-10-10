@@ -1,5 +1,5 @@
 .part{
-    height: 100%;
+    height: auto;
     width: 100%;
     overflow: hidden;
 }
@@ -33,4 +33,11 @@
 
 .formulario::content label{
     color: #707070 ;
+}
+
+
+@media(max-width:600px){
+    .media{
+        width: 90%; margin:auto; margin-top:30%;
+    }
 }

@@ -9,57 +9,101 @@ export class Efectos{
     iconArrowDown='../../../assets/iconos/arrow-down-sign-to-navigate.png'
     iconArrowUp='../../../assets/iconos/chevron.png'
     iconWash='../../../assets/iconos/washing-machine (1).png'
-
+    horario='../../../assets/iconos/clock-circular-outline (1).png'
+    more='../../../assets/iconos/down-chevron (1).png'
+    promo1='../../../assets/iconos/tag.png'
+    promo2='../../../assets/iconos/tag (1).png'
     //efectos de servcio
     anterior
-
-
+    anterior2
+    tamanio
+    tamanio2
     constructor(){
+            
 
+    }
+
+    espavlecerTamaño(cantidad, cantidad2){
+        this.tamanio=(cantidad*74)
+        this.tamanio2=(cantidad2*75)
+        //document.getElementById('services').style.background="red"
+        document.getElementById('services').style.height=''+this.tamanio+'px'
+        document.getElementById('ofertasX').style.height=''+this.tamanio2+'px'
+       
     }
     
 
-    viewService(servicio){
-        
-        if(this.anterior!=null && this.anterior.servicio!=servicio.servicio){
-            this.anterior.visto=false
-            this.ocultar(this.anterior.servicio)  
-       }
-        
+
+    viewInfoService(servicio){
+
+        if(this.anterior!=null && servicio.servicio != this.anterior.servicio)
+            this.ocultar(this.anterior)
 
         if(servicio.visto==true){
-            servicio.visto=false
-            this.ocultar(servicio.servicio)
+            this.ocultar(servicio)
         }else{
-            servicio.visto=true
-            this.mostrar(servicio.servicio)
-            
-            document.getElementById(servicio.servicio+'point').scrollIntoView(true);
+            this.mostrar(servicio)
         }
-
 
         this.anterior=servicio
     }
 
 
-
-
-
-    mostrar(id){
-        document.getElementById(id).style.transition='0.5s'
-        document.getElementById(id).style.marginTop='0px'
-        document.getElementById(id).style.height='200px'
-    }
- 
-    ocultar(id){
-        document.getElementById(id).style.transition='0.5s'
-        document.getElementById(id).style.height='0px'
-      
-        document.getElementById(id).style.marginTop='-20px'
+    mostrar(servicio){
+        servicio.visto=true
+        document.getElementById('services').style.height=''+(this.tamanio+200)+"px"
+        document.getElementById(servicio.servicio).style.transition='0.5s'
+        document.getElementById(servicio.servicio).style.height=''+200+"px"
+       // document.getElementById(servicio.servicio).scrollIntoView(true)
     }
 
-    
 
- 
+    ocultar(servicio){
+        servicio.visto=false
+        document.getElementById(servicio.servicio).style.transition='0.5s'
+        document.getElementById(servicio.servicio).style.height=''+0+"px"
+        document.getElementById('services').style.height=''+(this.tamanio)+"px"
+    }
+
+
+
+
+
+
+
+
+
+
+
+    viewOfert(oferta){
+
+        if(this.anterior2!=null && oferta.titulo != this.anterior2.titulo)
+            this.ocultar2(this.anterior2)
+
+        if(oferta.visto==true){
+            this.ocultar2(oferta)
+        }else{
+            this.mostrar2(oferta)
+        }
+
+        this.anterior2=oferta
+    }
+
+
+    mostrar2(oferta){
+        oferta.visto=true
+        document.getElementById('ofertasX').style.height=''+(this.tamanio2+200)+"px"
+        document.getElementById(oferta.titulo).style.transition='0.5s'
+        document.getElementById(oferta.titulo).style.height=''+200+"px"
+        document.getElementById(oferta.titulo).scrollIntoView(true)
+    }
+
+
+    ocultar2(oferta){
+        oferta.visto=false
+        document.getElementById(oferta.titulo).style.transition='0.5s'
+        document.getElementById(oferta.titulo).style.height=''+0+"px"
+        document.getElementById('ofertasX').style.height=''+(this.tamanio2)+"px"
+    }
 
 }
