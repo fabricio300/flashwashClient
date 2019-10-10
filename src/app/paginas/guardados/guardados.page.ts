@@ -7,20 +7,25 @@ import { Router } from '@angular/router';
   styleUrls: ['./guardados.page.scss'],
 })
 export class GuardadosPage implements OnInit {
-  filtros=[
+  lavandrias=[
     {
-      activo:false,
-      opcion:'opcion1'
+      id:1,
+      nombre:'lavandería 1',
+      imagene:'../../../assets/iconos/shutterstock_422824102.jpg',
+      precioporKilo:'40$'
     },
     {
-      activo:false,
-      opcion:'opcion2'
+      id:2,
+      nombre:'lavandería 2',
+      imagene:'../../../assets/iconos/flaswash.png',
+      precioporKilo:'30$'
     },
     {
-      activo:false,
-      opcion:'opcion3'
+      id:1,
+      nombre:'lavandería 3',
+      imagene:'../../../assets/iconos/700x420_lavanderia-autoservicio.jpg',
+      precioporKilo:'50$'
     }
-    
   ]
 
 

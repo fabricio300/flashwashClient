@@ -191,7 +191,7 @@
     
     
       <div  *ngFor='let fil of filtros' style="margin: 10px"
-          (click)="activaFiltro(fil)">
+          (click)="this.efectos1.activaFiltro(fil)">
           
           <label class="container ">
               {{fil.opcion}}

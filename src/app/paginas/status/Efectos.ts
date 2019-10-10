@@ -1,35 +1,39 @@
 export class Efectos{
     iconArrowDown='../../../assets/iconos/arrow-down-sign-to-navigate.png'
     iconArrowUp='../../../assets/iconos/up-arrow.png'
-    enLavanderia='../../../assets/iconos/washing-machine (1).png'
-    moto='../../../assets/iconos/vespa1.png'
+    enLavanderia='../../../assets/iconos/washing-machine2.png'
+   
     mapa='../../../assets/iconos/map.png'
     tienda='../../../assets/iconos/store.png'
+
+    moto0='../../../assets/iconos/vespa4.png'
+    moto1='../../../assets/iconos/vespa3.png'
+    moto2='../../../assets/iconos/vespa2.png'
 
     constructor(){
 
     }
 
 
-    mostrarStatus(pedido){
+    verInfo( pedido){
 
-        if(pedido.visto==true){
-            pedido.visto=false;
-            this.ocultarInfo(pedido.id)
+        if(pedido.visto==false){
+            pedido.visto=true
+            this.mostrar(pedido.id)
         }else{
-            pedido.visto=true;
-            this.mostrarInfo(pedido.id)
+            pedido.visto=false
+            this.ocultar(pedido.id)
         }
+
     }
 
-
-    mostrarInfo(id){
+    mostrar(id){
         document.getElementById(id).style.transition='0.5s'
-        document.getElementById(id).style.height='270px'
-        document.getElementById(id).scrollIntoView(true)
+        document.getElementById(id).style.height='400px'
     }
 
-    ocultarInfo(id){
+
+    ocultar(id){
         document.getElementById(id).style.transition='0.5s'
         document.getElementById(id).style.height='0px'
     }

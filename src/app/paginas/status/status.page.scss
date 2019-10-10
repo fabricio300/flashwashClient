@@ -1,3 +1,105 @@
+.contePrime{
+    width: 45%;
+    height: auto;
+    overflow: hidden;
+    border-radius: 10px;
+    margin:10px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: auto;
+    -webkit-box-shadow: 7px 5px 9px -4px rgba(0,0,0,0.75);
+    -moz-box-shadow: 7px 5px 9px -4px rgba(0,0,0,0.75);
+    box-shadow: 7px 5px 9px -4px rgba(0,0,0,0.75);
+}
+
+
+.vista{
+    height: 130px;
+    //background: aqua;
+    width: 100%;
+}
+
+
+.mitad{
+    width: 45%;
+    height: 100%;
+    //background: red;
+}
+
+.medio{
+    width:30px;
+    height: 100%;
+    //background: blue;
+}
+
+.centrar{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.centrarIz{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-items: center;
+}
+
+
+.info{
+    width: 100%;
+    height: 0px;
+   // height: 420px;
+    background: #252525;
+    overflow: hidden;
+}
+
+.scroll1{
+    width: 100%;
+    height: 100%;
+    //background: chartreuse;
+    overflow-y: scroll;
+    padding: 5px;
+}
+
+::-webkit-scrollbar{
+    width: 0px;
+}
+
+
+.cancelado{
+    background: #ff0000;
+    color: aliceblue;
+
+}
+
+.nuevo{
+    background: #8a00d4;
+    color: white;
+}
+
+.lavanderia{
+    background: #1089ff;
+    color: #e5e5e5
+}
+
+.encalino1{
+    background: #94fc13;
+    color: #032d3c;
+}
+
+.encalino2{
+    background: #032d3c;
+    color: #94fc13;
+}
+
+.recojer{
+    background: #23374d;
+    color: #e5e5e5;
+}
+
+
 .rota-horizontal{
     -webkit-transform: scaleX(-1);
     -moz-transform: scaleX(-1);
@@ -6,100 +108,12 @@
     -ms-filter: "FlipH";
 }
 
-.centrar{
-display: flex;
-justify-content: center;
-align-items: center;
-flex-wrap: wrap;
-}
-
-
-.contPedido{
-width: 48%;
-//background: gray;
-height: auto;
-margin-left: 10px;
-border-radius: 10px;
-margin-top: 15px;
-overflow: hidden;
-}
-
-.dotos{
-width: 100;
-min-height:100px;
-//background: red;
-}
-
-.parte{
-width: 45%;
-min-height: 100px;
-// background: blueviolet;
-}
-
-.medio{
-width: 10%;
-min-height: 100px;
-// background: blue;
-}
-
-.centrarIZ{
-display: flex;
-flex-wrap:wrap;
-justify-content: left;
-align-items: center;
-}
-
-
-.enLavabderia{
-background: #129EC7 ;
-}
-.enCamino{
-background: #FF9052;
-}
-
-.entregando{
-background: #18C712 ;
-}
-
-
-.informacion{
-width: 100%;
-background: #23374d;
-height: 0px;
-overflow: hidden;
-}
-
-.listaServices{
-background: #252525;
-width: 45%;
-height: 100%;
-padding: 5px;
-
-}
-
-.listaServices::content p{
-width: 100%;
-text-align: center;
-}
-
-.infoGeneral{
-background: #414141;
-width: 55%;
-height: 100%;
-}
-
-::-webkit-scrollbar{
-width: 0px;
-}
-
 @media(max-width:600px){
-
-.contPedido{
-width: 95%;
-margin: auto;
-margin-top: 15px;
-}
-
-
+    .contePrime{
+        width: 95%;
+        margin: auto;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
 
 }
