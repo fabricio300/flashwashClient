@@ -18,8 +18,6 @@ export class efectos {
       ]
 
     constructor(
-
-        
     ){
         
     }

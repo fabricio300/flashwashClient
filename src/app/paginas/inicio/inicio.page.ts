@@ -6,6 +6,11 @@ import {efectos} from './efectos'
 import { Socket } from 'ngx-socket-io';
 import { MenuController } from '@ionic/angular';
 
+
+
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { BackgroundMode } from '@ionic-native/background-mode/ngx';
+
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.page.html',
@@ -13,6 +18,7 @@ import { MenuController } from '@ionic/angular';
 })
 export class InicioPage implements OnInit {
   efectos1=new efectos()
+  
   paginas=[
    
     {
@@ -70,13 +76,31 @@ export class InicioPage implements OnInit {
     private menu:MenuController,
     private router:Router,
     private global:GlobalElementService,
-    private socket: Socket
+    private socket: Socket,
+    private notificacion:LocalNotifications,
+    private backgroundMode: BackgroundMode,
     ) { 
+
+     
 
       socket.on('mensajeServidor',function(data){
         console.log('data=',data);
         
       })
+
+
+
+    
+     
+     
+        
+     
+     
+
+
+
+
+
     }
 
 
@@ -84,14 +108,18 @@ export class InicioPage implements OnInit {
   ngOnInit() {
     if(localStorage.getItem('secion')=='true'){
       this.global.status_de_secion=true
+      this.entraAsegudoPlano() //avilitar en segundo plano
     }else{
       this.global.status_de_secion=false
+      this.backgroundMode.disable();//inavilitar en segundo plano
     }
     console.log("secion",this.global.status_de_secion);
 
     document.getElementById('filtros').style.transition="0.5s"
     this.efectos1.ocultarFiltros()
 
+      this.mensaje()
+   
   }
 
 
@@ -146,17 +174,49 @@ export class InicioPage implements OnInit {
 
 
 
+/**--------------------notificaciones ------------------------------------------------------------------------------------------- */
+
+  mensaje(){
+    console.log('mensaje');
+    
+    this.notificacion.schedule({
+        id: 1,
+        smallIcon: 'res://information',
+        text: 'mensaje',
+        icon: 'file://assets/iconos/flaswash.png', 
+      });
+}
 
 
 
 
 
+/*----------------------------segudo plano----------------------------------------------------------------------- */
 
 
 
 
+entraAsegudoPlano(){
+ 
+  this.backgroundMode.enable()
+  this.backgroundMode.isActive();
+  this.backgroundMode.on('activate').subscribe(()=>{
+
+    setInterval(function(){
+      console.log("entrar");
+      
+      this.notificacion.schedule({
+        id: 1,
+        smallIcon: 'res://information',
+        text: 'en segundo plano',
+        icon: 'file://assets/iconos/flaswash.png', 
+      });
+
+    }.bind(this), 5000);
+  });
 
 
+}
 
 
 
