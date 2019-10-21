@@ -1,0 +1,107 @@
+<ion-header>
+  <ion-toolbar color='primary'>
+    <ion-buttons slot="start">
+    <ion-back-button ></ion-back-button>
+ </ion-buttons> 
+  <ion-title>Pedido</ion-title>
+</ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+
+
+
+
+
+  <div class="contPart1 primero">
+     <h4>{{pedido.nombre}}</h4> 
+
+    <h5>Servicios solicitaodos:</h5>
+    <p *ngFor="let servico of pedido.servicios">- {{servico}}</p>
+    
+
+    <br>
+    <h5>Indicaciones:</h5>
+    <p style="width: 95%;" >
+      En medicina, una indicación es el término que describe una razón válida para emplear una prueba diagnóstica, un procedimiento médico, un determinado medicamento, o técnica quirúrgica.
+    </p>
+
+
+    <div class="status1 centrar "
+    [ngClass]="{
+      'lavanderia':pedido.status=='En lavanderia',
+      'encalino1':pedido.status=='En entraga',
+      'encalino2':pedido.status=='A lavandería',
+      'recojer':pedido.status=='En camino'
+    }"
+    >
+        <p style="width: 100%; text-align: center; font-size: 11px;">status:</p>
+        <img src="{{pedido.icon}}" width="40px">
+        <p style="width: 100%; text-align: center; font-size: 12px;">{{pedido.status}}</p>
+    </div>
+
+
+  </div>
+
+
+
+
+
+
+
+
+  <div class="contPart ">
+      <br>
+    <h5>Datos de ropa:</h5>
+    <label >Kilos: </label> <p>5 kg</p>
+    <label >Piezas extras: </label> <p> pieza / tipo</p>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+  <div class="contPart ">
+      <br>
+    <h5>Costes:</h5>
+
+    <label >Transporte a lavandería:</label>
+    <p>$50</p>
+
+    <label >Transporte a su domicilio:</label>
+    <p>$50</p>
+
+    <label >Servicios de lavandería:</label>
+    <p>$100</p>
+
+    <label >total:</label>
+    <p>$200</p>
+
+    <label >fecha</label>
+
+  </div>
+
+
+
+
+
+<div >
+  <label >
+    Ver lavandería
+  </label>
+
+  <label >
+    Ver ruta
+  </label>
+
+</div>
+
+</ion-content>

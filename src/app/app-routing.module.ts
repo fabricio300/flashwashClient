@@ -11,7 +11,8 @@ const routes: Routes = [
   { path: 'seguimiento', loadChildren: './paginas/seguimiento/seguimiento.module#SeguimientoPageModule' },
   { path: 'lavanderia', loadChildren: './paginas/lavanderia/lavanderia.module#LavanderiaPageModule' },
   { path: 'solicitud', loadChildren: './paginas/solicitud/solicitud.module#SolicitudPageModule' },
-  { path: 'guardados', loadChildren: './paginas/guardados/guardados.module#GuardadosPageModule' },
+  { path: 'guardados', loadChildren: './paginas/guardados/guardados.module#GuardadosPageModule' },  { path: 'info-pedido', loadChildren: './paginas/info-pedido/info-pedido.module#InfoPedidoPageModule' },
+
 ];
 
 @NgModule({

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Efectos } from './Efectos';
-import { Router } from '@angular/router';
+import { Router,NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-status',
@@ -98,4 +98,16 @@ export class StatusPage implements OnInit {
   irAStatus(){
     this.router.navigate(['/seguimiento'])
   }
+
+
+  verDetalles(pedido){
+    
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        special: JSON.stringify(pedido)
+      }
+    };
+    this.router.navigate(['/info-pedido'], navigationExtras);
+  }
+
 }

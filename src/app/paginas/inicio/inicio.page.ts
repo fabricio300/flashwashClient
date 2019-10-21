@@ -108,7 +108,7 @@ export class InicioPage implements OnInit {
   ngOnInit() {
     if(localStorage.getItem('secion')=='true'){
       this.global.status_de_secion=true
-      this.entraAsegudoPlano() //avilitar en segundo plano
+     //this.entraAsegudoPlano() //avilitar en segundo plano
     }else{
       this.global.status_de_secion=false
       this.backgroundMode.disable();//inavilitar en segundo plano
@@ -195,28 +195,6 @@ export class InicioPage implements OnInit {
 
 
 
-
-entraAsegudoPlano(){
- 
-  this.backgroundMode.enable()
-  this.backgroundMode.isActive();
-  this.backgroundMode.on('activate').subscribe(()=>{
-
-    setInterval(function(){
-      console.log("entrar");
-      
-      this.notificacion.schedule({
-        id: 1,
-        smallIcon: 'res://information',
-        text: 'en segundo plano',
-        icon: 'file://assets/iconos/flaswash.png', 
-      });
-
-    }.bind(this), 5000);
-  });
-
-
-}
 
 
 
