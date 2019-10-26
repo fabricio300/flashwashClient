@@ -103,4 +103,9 @@ export class StatusPage implements OnInit {
     this.router.navigate(['/info-pedido'], navigationExtras);
   }
 
+
+  regresar(){
+    this.router.navigate(['/inicio'])
+  }
+
 }

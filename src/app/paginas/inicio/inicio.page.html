@@ -71,17 +71,15 @@
     <ion-menu side="start" menuId="first" style="position: fixed; z-index: 100;">
 
       <ion-header >
-          <ion-toolbar color="dark">
-            <img src="../../../assets/iconos/flaswash11.png"  style="max-width: 100%; height:auto; border: none;">
-            <ion-title>
-              Menu
-            </ion-title>
+          <ion-toolbar color="secondary" style="padding-bottom: 10px;">
+            <img src="../../../assets/iconos/flaswash12.png"  style="max-width: 100%; height:auto; border: none;">
+           
           </ion-toolbar>
 
       </ion-header>
       
         <ion-content color='secondary'>
-           <div *ngIf="this.global.status_de_secion" style="overflow: hidden;">
+           <div *ngIf="this.global.status_de_secion" style="overflow: hidden; ">
  
             <ion-item  color='secondary'  routerLink="{{p.url}}" (click)="closeFirst()"  *ngFor="let p of paginas"  >
               <img src="{{p.icon}}" style="width: 18px; margin: 8px;">
@@ -192,7 +190,7 @@
 
 <div class="filtroscontent" id="filtros">
  
- <div class="fonton1"  (click)="this.efectos1.ocultarFiltros()">
+ <div class="fonton1"  (click)="this.efectos1.ocultarFiltros()" >
     
 
  </div>   

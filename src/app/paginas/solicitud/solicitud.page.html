@@ -116,6 +116,7 @@
 
 
         <ion-button
+        [disabled]="this.efectos.pedidos==0"
         (click)="this.efectos.next()"
         >
           Continuar
@@ -244,6 +245,7 @@
 
 
         <ion-button
+        [disabled]="this.efectos.tipoDeEntrega==null"
         (click)="this.efectos.next()"
         style="margin: auto;"
         >
@@ -466,6 +468,7 @@
 
           <ion-button
           style="margin: auto;"
+          (click)="irAStatus()"
           >
             Aceptar
           </ion-button>

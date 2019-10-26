@@ -27,11 +27,13 @@ export class SolicitudPage implements OnInit {
   }
 
   ngOnInit() {
-    
+    this.efectos.verSiPidioTodo(this.servicios)
   }
 
 
-  
+  irAStatus(){
+    this.router.navigate(['/status', {replaceUrl: true}])
+  }  
 
 
 

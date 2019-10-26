@@ -82,6 +82,20 @@ export class Efectos{
             }
       }
 
+      verSiPidioTodo(servicios){
+          let tamanio=servicios.length
+          let sepidio=0
+            servicios.forEach(element => {
+                if(element.elegido==true){
+                    sepidio=sepidio+1
+                    this.pedidos=this.pedidos+1
+                }
+            });
+            if(sepidio==tamanio){
+                this.todo=true
+            }
+      }
+
 
       removerServicio(servicio){
           servicio.elegido=false
@@ -92,7 +106,7 @@ export class Efectos{
 
       mostrarReparto(id){
         if(this.reparto==id){
-                this.reparto=''
+            this.reparto=''
         }else
             this.reparto=id
 

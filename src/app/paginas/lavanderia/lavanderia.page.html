@@ -34,7 +34,7 @@
 
 
       <div style=" background: #252525; color: white; padding: 1px;">
-        <h4>Galeria:</h4>
+        <h4 style="margin-left: 15px;">Galeria:</h4>
       </div>
     
       <div class="contenedorSlider centrar">
@@ -49,102 +49,14 @@
       
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <div style=" padding: 15px;">
-        <h4>Datos de la empresa:</h4>
-
-        <label>
-          <p class="icon centrarIz">
-            <img  src="{{this.efectos.direccion}}" >
-            direccion:
-          </p>
-          <p style="margin-left: 20px;">
-            Parque Central Tuxtla Gutiérrez, Chiapas, Zona Sin Asignación de Nombre de Colonia 42, Tuxtla Gutiérrez, Chis.
-          </p>
-        </label>
-
-
-        <label >
-          <p class="icon centrarIz">
-            <img  src="{{this.efectos.iconCel}}" >
-            Telefono:
-          </p>
-          <p  style="margin-left: 20px;">
-              000-000-0000
-          </p>
-        </label>
-
-
-        <label >
-          <p class="icon centrarIz">
-            <img  src="{{this.efectos.correo}}" >
-            Correo:
-          </p>
-          <p  style="margin-left: 20px;">
-              correo@gmail.com
-          </p>
-        </label>
-
-
-        <label >
-          <p class="icon centrarIz">
-            <img  src="{{this.efectos.horario}}" >
-            Horario:
-          </p>
-          <p  style="margin-left: 20px;">
-              Lunes a viernes 08:00 aam - 08:00 pm
-          </p>
-        </label>
-
-
-      </div>
-   
-
-
-
-
-
-
-
-
-
-
       <div style=" padding: 15px;" id="services">
         <h4>Servicios</h4>
 
         <div *ngFor="let servi of servicios">
             <p class="centrarIz " [ngClass]="{'actual':servi.visto==true}">
-                <ion-checkbox style="margin: 5px;"
+                <ion-checkbox 
+                *ngIf="this.global.status_de_secion"
+                style="margin: 5px;"
                 (click)="seleccionar(servi)"
                 ></ion-checkbox>
                 {{servi.servicio}}  ${{servi.precio }}  por {{servi.unidad}} 
@@ -227,6 +139,63 @@
       
       </div>
       
+
+
+
+
+
+
+
+      
+      <div style=" padding: 15px;">
+        <h4>Datos de la empresa:</h4>
+
+        <label>
+          <p class="icon centrarIz">
+            <img  src="{{this.efectos.direccion}}" >
+            direccion:
+          </p>
+          <p style="margin-left: 20px;">
+            Parque Central Tuxtla Gutiérrez, Chiapas, Zona Sin Asignación de Nombre de Colonia 42, Tuxtla Gutiérrez, Chis.
+          </p>
+        </label>
+
+
+        <label >
+          <p class="icon centrarIz">
+            <img  src="{{this.efectos.iconCel}}" >
+            Telefono:
+          </p>
+          <p  style="margin-left: 20px;">
+              000-000-0000
+          </p>
+        </label>
+
+
+        <label >
+          <p class="icon centrarIz">
+            <img  src="{{this.efectos.correo}}" >
+            Correo:
+          </p>
+          <p  style="margin-left: 20px;">
+              correo@gmail.com
+          </p>
+        </label>
+
+
+        <label >
+          <p class="icon centrarIz">
+            <img  src="{{this.efectos.horario}}" >
+            Horario:
+          </p>
+          <p  style="margin-left: 20px;">
+              Lunes a viernes 08:00 aam - 08:00 pm
+          </p>
+        </label>
+
+
+      </div>
+   
 
 
 
