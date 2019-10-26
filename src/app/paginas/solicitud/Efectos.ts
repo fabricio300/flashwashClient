@@ -4,12 +4,12 @@ export class Efectos{
     iconCancelar='../../../assets/iconos/error.png'
     iconMas='../../../assets/iconos/add-button-inside-black-circle.png'
     iconMenos='../../../assets/iconos/minus-sign-inside-a-black-circle.png'
-    iconLavadors='../../../assets/iconos/washing-machine.png'
+    iconLavadors='../../../assets/pedir/washing-machine2.png'
     iconRopa='../../../assets/iconos/casual-t-shirt.png'
     iconMoney='../../../assets/iconos/coin.png'
-    iconinstrucciones='../../../assets/iconos/strategy.png'
-    iconMoto='../../../assets/iconos/bike.png'
-    iconNota='../../../assets/iconos/invoice.png'
+    iconinstrucciones='../../../assets/pedir/strategy.png'
+    iconMoto='../../../assets/pedir/bike.png'
+    iconNota='../../../assets/pedir/invoice.png'
     duda='../../../assets/imagenes/information.png'
 
 

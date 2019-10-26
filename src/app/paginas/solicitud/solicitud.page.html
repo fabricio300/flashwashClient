@@ -7,7 +7,7 @@
     </ion-toolbar>
   </ion-header>
   
-  <ion-content >
+  <ion-content color=secondary>
   
   <div class="contenedor" >
 
@@ -97,7 +97,7 @@
           </div>
 
 
-          <button style="float: right; background: transparent; outline: none;" 
+          <button class="centrar thebotonmas"  
           
           (click)="this.efectos.mostrarLista()">
             <img *ngIf="!this.efectos.listaServicios"
@@ -158,10 +158,10 @@
       
     
       <h4>Tipo de entrega</h4>      
-      <div class="contScroll">
+      <div class="contScroll" >
 
-          <ion-list>
-          <ion-radio-group [(ngModel)]="this.efectos.tipoDeEntrega">
+          <ion-list style="background: #252525">
+          <ion-radio-group   [(ngModel)]="this.efectos.tipoDeEntrega">
             
         
                 <p class="centrarIZ"    >
@@ -214,7 +214,7 @@
            
             <p class="infoS" *ngIf="this.efectos.reparto=='tipo3'">
                
-              Este servicio incluye el transporte de la ropa de: su domicilio a lavandería y de lavandería a su domicilio.  Es servicio se divide en dos cobros:  cundo se recoge la ropa y cuando se entrega. 
+              Este servicio incluye el transporte de la ropa de: su domicilio a lavandería y de lavandería a su domicilio.  Este servicio se divide en dos cobros:  cuando se recoge la ropa y cuando se entrega. 
 
             </p>
           
@@ -225,12 +225,7 @@
           </ion-list>
 
 
-          
-            <br>
-            <label >
-              Ingrese su direccion:
-            </label>
-            <ion-input placeholder="direccion"></ion-input>
+
 
       </div>    
 
@@ -242,6 +237,7 @@
 
           <ion-button
           (click)="this.efectos.regresar()"
+          style="margin: auto;"
           >
             Regresar
           </ion-button>
@@ -249,6 +245,7 @@
 
         <ion-button
         (click)="this.efectos.next()"
+        style="margin: auto;"
         >
           Continuar
         </ion-button>
@@ -316,7 +313,7 @@
         <label >
           Indique información respecto a la situación de sus prendas:
           <br>
-          <a style="font-size: 12px;">Este campo es opcional</a>
+          <a style="font-size: 12px; color: #52de97;">Este campo es opcional</a>
         </label>
 
         <ion-textarea [(ngModel)]="this.efectos.indicaciones"
@@ -332,6 +329,7 @@
 
           <ion-button
           (click)="this.efectos.regresar()"
+          style="margin: auto;"
           >
             Regresar
           </ion-button>
@@ -339,6 +337,7 @@
 
         <ion-button
         (click)="this.efectos.next()"
+        style="margin: auto;"
         >
           Continuar
         </ion-button>
@@ -395,30 +394,30 @@
        
 
         <div class="cobros">
-            <h6 style="color: #ff0000;">Costes:</h6>
+            <h6 style="color: gold;">Costes:</h6>
           <label *ngIf="this.efectos.tipoDeEntrega=='tipo1' || this.efectos.tipoDeEntrega=='tipo3'">
-              <p style="font-size: 12px;">transportar a lavandería:</p>
-              <p style="color: #3BB200;">$50</p>
+              <p style="font-size: 12px; color: #52de97;">transportar a lavandería:</p>
+              <p >$50</p>
             
           </label>
          
 
           <label *ngIf="this.efectos.tipoDeEntrega=='tipo2' || this.efectos.tipoDeEntrega=='tipo3'">
-              <p style="font-size: 12px;">transportar a domicilio:</p>
-              <p style="color: #3BB200;">$50</p>
+              <p style="font-size: 12px; color: #52de97;">transportar a domicilio:</p>
+              <p >$50</p>
           </label>
           
           <label >
-            <p style="font-size: 12px;">servicios de lavandería:</p>
-            <p style="color: #3BB200;">
+            <p style="font-size: 12px; color: #52de97;">servicios de lavandería:</p>
+            <p>
               $50
             </p>
           </label>
 
 
           <label >
-            <p style="color: #ff0000;">Total:</p>
-            <p style="color: #3BB200;">
+            <p style="color: gold;">Total:</p>
+            <p >
                 $150
             </p>
           </label>
@@ -459,13 +458,14 @@
 
       
       <div class="centrar" style="height: 10%">
-         <ion-button
+         <ion-button style="margin: auto;"
           (click)="this.efectos.regresar()"
           >
             Regresar
           </ion-button>
 
           <ion-button
+          style="margin: auto;"
           >
             Aceptar
           </ion-button>

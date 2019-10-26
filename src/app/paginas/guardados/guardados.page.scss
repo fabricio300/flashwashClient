@@ -15,16 +15,20 @@
 
 
 .lavanderiaCont{
-    background: #e5e5e5;
+    background: #eeeeee;
     width: 45%;
     display: flex;
-    //margin-bottom: 15px;
+    color: #394a6d;
     margin: 10px;
     padding: 5px;
     border-radius: 5px;
+
     -webkit-box-shadow: 7px 5px 9px -4px rgba(0,0,0,0.75);
     -moz-box-shadow: 7px 5px 9px -4px rgba(0,0,0,0.75);
     box-shadow: 7px 5px 9px -4px rgba(0,0,0,0.75);
+
+
+    
 }
 .contImgLavanderia{
     padding: 2px;
@@ -65,8 +69,8 @@ ion-item.selectable:hover {
     .lavanderiaCont{
         //background: gray;
         margin: auto;
-        width: 95%;
-        margin-bottom: 45px;
+        width: 90%;
+        margin-bottom: 30px;
     }
 
 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Efectos } from './Efectos';
 import { Router ,NavigationExtras } from '@angular/router';
+import { GlobalElementService} from '../../global-element.service';
+
 
 @Component({
   selector: 'app-lavanderia',
@@ -73,7 +75,8 @@ export class LavanderiaPage implements OnInit {
   efectos=new Efectos()
 
   constructor(
-    private router:Router
+    private router:Router,
+    private global:GlobalElementService
   ) { }
 
   ngOnInit() {

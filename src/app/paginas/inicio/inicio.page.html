@@ -44,7 +44,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content >
+<ion-content color=secondary>
 
 
 
@@ -81,11 +81,14 @@
       </ion-header>
       
         <ion-content color='secondary'>
-           
-            <ion-item color='secondary'  routerLink="{{p.url}}" (click)="closeFirst()"  *ngFor="let p of paginas"  >
+           <div *ngIf="this.global.status_de_secion" style="overflow: hidden;">
+ 
+            <ion-item  color='secondary'  routerLink="{{p.url}}" (click)="closeFirst()"  *ngFor="let p of paginas"  >
               <img src="{{p.icon}}" style="width: 18px; margin: 8px;">
                {{p.titulo}}
             </ion-item>
+           
+          </div>
 
            
             <ion-item color='secondary'  routerLink='/login'(click)="closeFirst()" *ngIf="!this.global.status_de_secion">
@@ -131,8 +134,8 @@
 
 <div style="display: flex; flex-wrap: wrap; width: 100%;">
     
-          <ion-toolbar style="text-align: center;">
-             <ion-title style="color: #23374d;" class="centrar">
+          <ion-toolbar color=secondary style="text-align: center;">
+             <ion-title style="color: white;" class="centrar">
               
               Cerca de ti:</ion-title>
           </ion-toolbar>
@@ -188,33 +191,41 @@
 
 
 <div class="filtroscontent" id="filtros">
+ 
+ <div class="fonton1"  (click)="this.efectos1.ocultarFiltros()">
+    
+
+ </div>   
+ 
+ <div class="fondo2">
     <ion-label style="color:gold;">Filtros de busqueda:</ion-label>
     
     
-      <div  *ngFor='let fil of filtros' style="margin: 10px"
-          (click)="this.efectos1.activaFiltro(fil)">
-          
-          <label class="container ">
-              {{fil.opcion}}
-             
-            <div class="bu">
-              <img *ngIf='fil.activo' src="../../../assets/iconos/fle1.png" >
-            </div>
-          </label>
-        </div>
-     
+    <ion-item color=success *ngFor='let fil of filtros' >
 
-      <div class="opciones">
-        <ion-button style="margin-right:90px; "
-        (click)="this.efectos1.ocultarFiltros()">
-        Cancelar
-      </ion-button>
-        <ion-button color="success"
-        (click)="this.efectos1.ocultarFiltros()"
-        >Buscar</ion-button>
-      </div>
+        <ion-checkbox style="margin: 5px;"
+        (click)="this.efectos1.activaFiltro(fil)"
+        color="danger"
+        ></ion-checkbox>
+            {{fil.opcion}}
+           
+       
+      </ion-item>
+   
+
+    <div class="opciones" style="z-index: 90;">
+      <ion-button style="margin-right:90px; "
+      (click)="this.efectos1.ocultarFiltros()">
+      Cancelar
+    </ion-button>
+      <ion-button color="danger"
+      (click)="this.efectos1.ocultarFiltros()"
+      >Buscar</ion-button>
+    </div>
+
+  </div>  
     
-  </div>
+</div>
        
 
 </ion-content>

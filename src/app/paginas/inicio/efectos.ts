@@ -38,13 +38,13 @@ export class efectos {
 
       ocultarFiltros(){ 
         
-        document.getElementById('filtros').style.marginTop="-100%" 
+        document.getElementById('filtros').style.height="0px" 
         //this.recetearFiltros()
         this.filActivo=false
       }
     
       verfiltros(){
-        document.getElementById('filtros').style.marginTop="0"
+        document.getElementById('filtros').style.height="100%"
         this.filActivo=true
       }
     

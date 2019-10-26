@@ -91,13 +91,6 @@ export class StatusPage implements OnInit {
   ngOnInit() {
   }
 
-  irAlavanderia(){
-    this.router.navigate(['/lavanderia'])
-  }
-
-  irAStatus(){
-    this.router.navigate(['/seguimiento'])
-  }
 
 
   verDetalles(pedido){

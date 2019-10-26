@@ -7,7 +7,7 @@
 </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color=secondary>
 
 
 
@@ -18,12 +18,23 @@
   <div class="contPart1 primero">
      <h4>{{pedido.nombre}}</h4> 
 
-    <h5>Servicios solicitaodos:</h5>
+    <h5 class="centrarIz">
+     
+          <img src="../../../assets/Status/hanger.png" class="iconos">
+          Servicios solicitados:
+     
+      </h5>
     <p *ngFor="let servico of pedido.servicios">- {{servico}}</p>
     
 
     <br>
-    <h5>Indicaciones:</h5>
+    <h5 class="centrarIz">
+      
+      <img src="../../../assets/Status/strategy.png" class="iconos">
+      Indicaciones:
+    
+    </h5>
+
     <p style="width: 95%;" >
       En medicina, una indicación es el término que describe una razón válida para emplear una prueba diagnóstica, un procedimiento médico, un determinado medicamento, o técnica quirúrgica.
     </p>
@@ -54,7 +65,11 @@
 
   <div class="contPart ">
       <br>
-    <h5>Datos de ropa:</h5>
+    <h5 class="centrarIz">
+    
+      <img src="../../../assets/Status/t-shirt-black-silhouette.png" class="iconos">
+      Datos de ropa:</h5>
+
     <label >Kilos: </label> <p>5 kg</p>
     <label >Piezas extras: </label> <p> pieza / tipo</p>
 
@@ -71,7 +86,11 @@
 
   <div class="contPart ">
       <br>
-    <h5>Costes:</h5>
+    <h5 class="centrarIz">
+      
+      <img src="../../../assets/Status/invoice.png" class="iconos">
+      Costes:
+    </h5>
 
     <label >Transporte a lavandería:</label>
     <p>$50</p>
@@ -93,15 +112,26 @@
 
 
 
-<div >
-  <label >
-    Ver lavandería
-  </label>
+<div class="centrar partend">
 
-  <label >
-    Ver ruta
-  </label>
+  <div style="margin:auto;">
+    <p>Ver lavandería</p>
+      <button 
+      (click)="irAlavanderia()"
+      class="butonicon centrar" style="text-align: center;">
+          <img src="../../../assets/iconos/store.png" class="iconos" style="margin:auto;">
+      </button>
+  </div>
 
+  
+  <div style="margin:auto;">
+    <p>Ver ruta</p>
+    <button
+    (click)="irAStatus()"
+    class="butonicon centrar" style="text-align: center;">
+        <img src="../../../assets/iconos/map.png" class="iconos" style="margin:auto;">
+    </button>
+  </div>
 </div>
 
 </ion-content>

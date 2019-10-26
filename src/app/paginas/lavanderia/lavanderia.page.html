@@ -10,7 +10,7 @@
    
   </ion-header>
   
-  <ion-content >
+  <ion-content color=secondary>
 
 
 
@@ -230,13 +230,11 @@
 
 
 
-      <ion-button style="margin:5px; float:right;"
-      (click)="irASolicitud()"
-      >
-        solicitar servicio
-      </ion-button>
 
 
+      <button *ngIf="this.global.status_de_secion" (click)="irASolicitud()" class="thebotton centrar">
+            <img src="../../../assets/iconsWhite/basket.png" style="width: 30px;">
+      </button>
 
 
 

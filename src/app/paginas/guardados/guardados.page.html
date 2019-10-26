@@ -7,7 +7,7 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color=secondary>
 
 
   
@@ -16,28 +16,27 @@
        
     
     
-          <div class="lavanderiaCont" *ngFor='let dd of lavandrias'>
-            <div class="contImgLavanderia centrar">
-              <img src="{{dd.imagene}}" >
-            </div>
-            <div style="width: 75%; font-size: 13px;">
+      <div class="lavanderiaCont" *ngFor='let dd of lavandrias'>
+        <div class="contImgLavanderia centrar">
+          <img src="{{dd.imagene}}" >
+        </div>
+        <div style="width: 75%; font-size: 13px;">
+          
+          
+              <h4 style="margin: 5px; color: #1089ff; font-size: 17px;">
+                {{dd.nombre}}
+              </h4>       
               
-              
-                  <h4 style="margin: 5px; color: #1089ff; font-size: 17px;">
-                    {{dd.nombre}}
-                  </h4>       
-                  
-                  <p  class="statusClose">Lavado de ropa $40 por kilo</p>
+              <p  class="statusClose">Lavado de ropa $40 por kilo</p>
 
-                
-                <ion-button color='medium' class="botonVermas"
-                (click)="irALavanderia()"
-                >Ver más</ion-button>        
-            </div>
-           
-           
-          </div>
-    
+            
+            <ion-button color='medium' class="botonVermas"
+            (click)="irALavanderia()"
+            >Ver más</ion-button>        
+        </div>
+       
+       
+      </div>
           
           
         

@@ -22,7 +22,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
-    SocketIoModule.forRoot(config),
+    //SocketIoModule.forRoot(config),
     BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [
     StatusBar,

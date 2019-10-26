@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { GlobalElementService } from '../../global-element.service';
 import {efectos} from './efectos'
 
-import { Socket } from 'ngx-socket-io';
+//import { Socket } from 'ngx-socket-io';
 import { MenuController } from '@ionic/angular';
 
 
@@ -76,17 +76,17 @@ export class InicioPage implements OnInit {
     private menu:MenuController,
     private router:Router,
     private global:GlobalElementService,
-    private socket: Socket,
+   // private socket: Socket,
     private notificacion:LocalNotifications,
     private backgroundMode: BackgroundMode,
     ) { 
 
      
 
-      socket.on('mensajeServidor',function(data){
+     /* socket.on('mensajeServidor',function(data){
         console.log('data=',data);
         
-      })
+      })*/
 
 
 
@@ -160,7 +160,7 @@ export class InicioPage implements OnInit {
       hora:'10:30 pm',
       status:'A lavandería'
     }
-    this.socket.emit('message',mensaje)
+    //this.socket.emit('message',mensaje)
 
     console.log("enviado");
     

@@ -13,6 +13,7 @@ export class InfoPedidoPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router:Router
   ) { 
 
     this.route.queryParams.subscribe(params => {
@@ -26,6 +27,16 @@ export class InfoPedidoPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+
+  
+  irAlavanderia(){
+    this.router.navigate(['/lavanderia'])
+  }
+
+  irAStatus(){
+    this.router.navigate(['/seguimiento'])
   }
 
 }

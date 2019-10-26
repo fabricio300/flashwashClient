@@ -49,7 +49,7 @@ color: #3c9d9b;
 
 .infoServicio{
     height: 0px;
-    background: #252525;
+    background: #414141;
     overflow: hidden;
     color: white;
 }
@@ -77,6 +77,22 @@ color: #3c9d9b;
 .actual{
     color: #BDBDBD;
     border-bottom: 1px solid #BDBDBD;
+}
+
+
+.thebotton{
+    position: fixed;
+    bottom: 8px;
+    right: 8px;
+    height: 50px;
+    width: 50px;
+    background: #ff0000;
+    border-radius: 50%;
+    outline: none;
+    -webkit-box-shadow: 1px 4px 13px 3px rgba(0,0,0,0.75);
+-moz-box-shadow: 1px 4px 13px 3px rgba(0,0,0,0.75);
+box-shadow: 1px 4px 13px 3px rgba(0,0,0,0.75);
+
 }
 
 @media(max-width:600px){
