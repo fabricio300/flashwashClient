@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Efectos } from './Efectos';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router,NavigationExtras } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-solicitud',
@@ -15,14 +17,18 @@ export class SolicitudPage implements OnInit {
 
   
 
-  constructor(private route: ActivatedRoute, private router: Router) {
+  constructor(
+    private route: ActivatedRoute, 
+    private router: Router,
+
+    ) {
     this.route.queryParams.subscribe(params => {
         this.servicios = JSON.parse(params.special);
         console.log("data= ",this.servicios);
         this.efectos.medir(this.servicios)
     });
 
-   
+    
     
   }
 
@@ -32,7 +38,12 @@ export class SolicitudPage implements OnInit {
 
 
   irAStatus(){
-    this.router.navigate(['/status', {replaceUrl: true}])
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        special: JSON.stringify(this.servicios)
+      }
+    };
+    this.router.navigate(['status'], navigationExtras);
   }  
 
 

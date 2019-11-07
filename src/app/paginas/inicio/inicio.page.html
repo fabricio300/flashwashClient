@@ -148,13 +148,20 @@
                 
                     <h4 style="margin: 5px; color: #1089ff; font-size: 17px;">
                       {{dd.nombre}}
-                    </h4>       
-                    
-                    <p  class="statusClose">Lavado de ropa $40 por kilo</p>
+                    </h4> 
+
+                   <div style="margin: 5px;">
+                      <label class="statusClose" *ngFor="let service of dd.servicios">
+                          {{service.servicio}} ${{service.precio}} por {{service.unidad}}
+                          <br>
+                        </label>
+
+                   </div> 
+                   
 
                   
                   <ion-button color='medium' class="botonVermas"
-                  (click)="irALavanderia()"
+                  (click)="irALavanderia(dd.id)"
                   >Ver más</ion-button>        
               </div>
              

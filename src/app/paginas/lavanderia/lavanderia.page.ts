@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Efectos } from './Efectos';
-import { Router ,NavigationExtras } from '@angular/router';
+import { Router ,NavigationExtras,ActivatedRoute } from '@angular/router';
 import { GlobalElementService} from '../../global-element.service';
 
 
@@ -10,6 +10,8 @@ import { GlobalElementService} from '../../global-element.service';
   styleUrls: ['./lavanderia.page.scss'],
 })
 export class LavanderiaPage implements OnInit {
+
+    idLavanderia
 
   imagenes=[
     '../../../assets/iconos/shutterstock_422824102.jpg',
@@ -76,8 +78,18 @@ export class LavanderiaPage implements OnInit {
 
   constructor(
     private router:Router,
-    private global:GlobalElementService
-  ) { }
+    private global:GlobalElementService,
+    private route: ActivatedRoute, 
+  ) {
+    this.route.queryParams.subscribe(params => {
+      console.log("parametros",params);
+      
+     this.idLavanderia=JSON.parse(params.special)
+      console.log(this.idLavanderia);
+      
+      });
+
+   }
 
   ngOnInit() {
 
@@ -105,4 +117,8 @@ export class LavanderiaPage implements OnInit {
     this.router.navigate(['solicitud'], navigationExtras);
   }
 
+
+  getServicios(){
+    this.global.getLavanderias()
+  }
 }

@@ -72,9 +72,9 @@
 
       <form [formGroup]="formInicio" class="formulario" style="margin-top: 10px;">
         <label >
-          <img src="../../../assets/imagenes/user.png" style="width: 12px;">
-          Nombre(s):</label>
-        <ion-input formControlName="nombre"   type="text" placeholder="Nombre"></ion-input>
+          <img src="../../../assets/imagenes/at.png" style="width: 12px;">
+          Correo:</label>
+        <ion-input formControlName="nombre"   type="text" placeholder="correo@algo.com"></ion-input>
 
         
         <div class="infoVali" (click)="mostrarInfoCampoInicio('nombre') ">
@@ -136,7 +136,7 @@
       <div class="centrar" style="width: 100%; margin-top: 30px;">
       <ion-button 
       [disabled]="!formInicio.valid"
-      (click)="iniciarSecion()"
+      (click)="iniciarSesion()"
       color="tertiary">
           Aceptar
         </ion-button>
@@ -491,7 +491,7 @@
   
               <ion-button
               class="centrar"
-              (click)="iniciarSecion()"
+              (click)="Registrar()"
               color=none
               >
                   <img src="../../../assets/iconsWhite/check-mark.png" width="20px" style="margin: 3px;">

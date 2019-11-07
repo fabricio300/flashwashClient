@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Efectos } from './Efectos';
-import { Router,NavigationExtras } from '@angular/router';
+import { Router,NavigationExtras,ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-status',
@@ -10,6 +10,8 @@ import { Router,NavigationExtras } from '@angular/router';
 export class StatusPage implements OnInit {
 
   efectos=new Efectos()
+
+  servicios
 
   pedidos=[
     {
@@ -85,8 +87,18 @@ export class StatusPage implements OnInit {
   ]
 
   constructor(
-    private router:Router
-  ) { }
+    private router:Router,
+    private router1:ActivatedRoute
+  ) {
+
+    this.router1.queryParams.subscribe(params => {
+      this.servicios = JSON.parse(params.special);
+      console.log("data= ",this.servicios);
+    
+  });
+
+
+   }
 
   ngOnInit() {
   }
@@ -105,7 +117,10 @@ export class StatusPage implements OnInit {
 
 
   regresar(){
-    this.router.navigate(['/inicio'])
+    if(this.servicios!=null)
+      this.router.navigate(['/lavanderia'])
+    else
+      this.router.navigate(['/inicio'])
   }
 
 }

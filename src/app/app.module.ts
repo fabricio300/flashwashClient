@@ -14,6 +14,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 
 import {  SocketIoModule, SocketIoConfig } from 'ngx-socket-io'
+import { HttpClientModule } from '@angular/common/http';
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
@@ -23,6 +24,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
   entryComponents: [],
   imports: [
     //SocketIoModule.forRoot(config),
+    HttpClientModule,
     BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [
     StatusBar,

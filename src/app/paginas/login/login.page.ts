@@ -4,6 +4,7 @@ import { GlobalElementService } from '../../global-element.service';
 
 import {Validators, FormBuilder, FormGroup,AbstractControl } from '@angular/forms';
 import { variable } from '@angular/compiler/src/output/output_ast';
+import { AlertController } from '@ionic/angular';
 
 
 @Component({
@@ -41,7 +42,8 @@ export class LoginPage implements OnInit {
   constructor(
     private router: Router,
     private global:GlobalElementService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private alertacontroller: AlertController
   ) {
 
     this.formRegistro = this.formBuilder.group({
@@ -76,7 +78,7 @@ export class LoginPage implements OnInit {
     this.formInicio=this.formBuilder.group({
       nombre: ['', Validators.compose([
         Validators.required,
-        Validators.pattern(this.nombreValido),
+        Validators.pattern(this.emailValido),
       ])],
       contrasenia: ['',Validators.compose([
         Validators.required,
@@ -121,7 +123,7 @@ export class LoginPage implements OnInit {
 
 
 
-  iniciarSecion(){
+  iniciar(){
       localStorage.setItem('secion','true')
       this.global.status_de_secion=true
       this.router.navigate(['/inicio'])
@@ -203,5 +205,58 @@ export class LoginPage implements OnInit {
     this.router.navigate(['/menu'])
   }
 
+
+
+
+  Registrar(){
+    let item={
+      nombres:this.formRegistro.get('nombre').value,
+      apellidos:this.formRegistro.get('apellidos').value,
+      correo_electronico: this.formRegistro.get('correo').value,
+      contraseña: this.formRegistro.get('contrasenia').value,
+      telefono: this.formRegistro.get('telefono').value,
+      direccion:'suchipa'
+    }
+
+
+    this.global.registrar(item).subscribe(()=>{
+      console.log("registrado");
+      this.iniciar()
+    })
+
+  }
+
+
+
+  iniciarSesion(){
+    let item={
+      correo_electronico:this.formInicio.get('nombre').value,
+      contraseña:this.formInicio.get('contrasenia').value
+    }
+
+    this.global.login(item).subscribe(response=>{
+      console.log(response);
+      this.iniciar()
+    },error=>{
+      console.log("error");
+      this.verAlerta()
+    })
+
+
+    
+  }
+
+
+  async verAlerta(){
+    const alerta=await this.alertacontroller.create({
+      header:'Error',
+      subHeader:'Correo o contraseña incorrectos',
+      message:'vuelva a intentar',
+      buttons:['Aceptar']
+
+  })
+
+  await alerta.present()
+  }
 
 }

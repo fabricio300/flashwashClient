@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router,NavigationExtras } from '@angular/router';
 import { GlobalElementService } from '../../global-element.service';
 import {efectos} from './efectos'
 
@@ -51,26 +51,82 @@ export class InicioPage implements OnInit {
     
   ]
 
-  lavandrias=[
-    {
+  lavandrias=[]
+    /*{
       id:1,
       nombre:'lavandería 1',
       imagene:'../../../assets/iconos/shutterstock_422824102.jpg',
-      precioporKilo:'40$'
+      servicios:[
+        {
+          servicio:'Lavado de ropa',
+          precio: 30,
+          visto: false,
+          elegido:false,
+          unidad: 'Kilo'
+        },
+        {
+          servicio:'Planchado',
+          precio: 5,
+          visto: false,
+          elegido:false,
+          unidad: 'Pieza'
+        },
+        {
+          servicio:'Ropa de ceda',
+          precio: 20,
+          visto: false,
+          elegido:false,
+          unidad: 'Pieza'
+        },
+    
+        {
+          servicio:'Ropa de cama',
+          precio: 10,
+          visto: false,
+          elegido:false,
+          unidad: 'Pieza'
+        },
+      ]
+
     },
     {
       id:2,
-      nombre:'lavandería 2',
-      imagene:'../../../assets/iconos/flaswash.png',
-      precioporKilo:'30$'
-    },
-    {
-      id:1,
-      nombre:'lavandería 3',
-      imagene:'../../../assets/iconos/700x420_lavanderia-autoservicio.jpg',
-      precioporKilo:'50$'
+      nombre:'lavandería 1',
+      imagene:'../../../assets/iconos/shutterstock_422824102.jpg',
+      servicios:[
+        {
+          servicio:'Lavado de ropa',
+          precio: 30,
+          visto: false,
+          elegido:false,
+          unidad: 'Kilo'
+        },
+        {
+          servicio:'Planchado',
+          precio: 5,
+          visto: false,
+          elegido:false,
+          unidad: 'Pieza'
+        },
+        {
+          servicio:'Ropa de ceda',
+          precio: 20,
+          visto: false,
+          elegido:false,
+          unidad: 'Pieza'
+        },
+    
+        {
+          servicio:'Ropa de cama',
+          precio: 10,
+          visto: false,
+          elegido:false,
+          unidad: 'Pieza'
+        },
+      ]
+
     }
-  ]
+  ]*/
 
   constructor(
     private menu:MenuController,
@@ -119,7 +175,7 @@ export class InicioPage implements OnInit {
     this.efectos1.ocultarFiltros()
 
       this.mensaje()
-   
+    this.getLavanderias1()
   }
 
 
@@ -148,8 +204,14 @@ export class InicioPage implements OnInit {
   }
 
 
-  irALavanderia(){
-    this.router.navigate(['/lavanderia'])
+  irALavanderia(id){
+   
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        special: JSON.stringify({id:id})
+      }
+    };
+    this.router.navigate(['lavanderia'], navigationExtras);
   }
 
 
@@ -195,10 +257,54 @@ export class InicioPage implements OnInit {
 /*----------------------------segudo plano----------------------------------------------------------------------- */
 
 
+/*---------------------------api----------------------------------------------------------------------- */
+
+getLavanderias1(){
+  this.lavandrias=null
+  this.lavandrias=[]
+  this.global.getLavanderias().subscribe(Response=>{
+    console.log(Response);
+    
+    Response.forEach(element => {
+      console.log(element.id);
+      this.global.getServiciosLavanderia(element.id).subscribe(echo=>{
+        console.log(echo);
+        this.modificar(echo,element)
+        console.log("LAVANDERIAS:",this.lavandrias)
+      })
+    });
+   
+    
+   
+  })
+}
+
+
+modificar(arreglo:any, element:any){
+  console.log("estre,",arreglo);
+  console.log(element);
+
+  let servicios1=[]
+  
 
 
 
 
+console.log("servicio",arreglo[0].servicio);
+
+
+  let item={id:element.id,
+    nombre:element.nombre_lavanderia,
+    imagene:'../../../assets/iconos/shutterstock_422824102.jpg',
+    servicios:JSON.parse(arreglo[0].servicio)
+  }
+
+
+  console.log(item);
+  
+  this.lavandrias.push(item)
+  
+}
 
 
 }
