@@ -85,16 +85,37 @@
 }
 
 .listaNoelegida{
-    background: #3c9d9b;
+    background: rgba(#3c9d9b,0.9) ;
     color: white;
-    padding: 8px;
-    height:  230px;
+   // padding: 8px;
+    height:  320px;
     overflow-y: scroll;
-    border-radius: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
+   // border-radius: 10px;
+    //padding-left: 10px;
+//padding-right: 10px;
+   
+    width: 320px;
+}
 
-    width: 200px;
+.menuBotono{
+    width: 100%;
+    height: 30px;
+    background: #414141;
+    
+}
+.botonIcon{
+    width: 33%;
+    margin: auto;
+    height: 100%;
+    //border: 1px solid gray;
+    position: relative;
+    background: transparent;
+}
+
+.este{    
+    -webkit-box-shadow: 10px 3px 32px 6px rgba(0,0,0,0.75);
+-moz-box-shadow: 10px 3px 32px 6px rgba(0,0,0,0.75);
+box-shadow: 10px 3px 32px 6px rgba(0,0,0,0.75);
 }
 
 .listaNoelegida::content p{
@@ -114,10 +135,10 @@
 .listaSer{
     
     width: 49%;
-    max-height:85%;
+    max-height:90%;
     background: #414141;
     padding: 10px;
-  
+    
     margin: 5px;
     margin-bottom: auto;
     overflow-y: scroll;

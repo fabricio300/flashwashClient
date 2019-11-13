@@ -1,0 +1,115 @@
+.contenedorUno{
+    position:absolute;
+    //background: blue;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.parte{
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.cetrar{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.formulario{
+    width: 80%;
+   // background: chartreuse;
+    height: 50%;
+}
+
+.formulario::content input{
+    background: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid gray;
+    width: 95%;
+    position: relative;
+    z-index: 90;
+}
+
+.menuBotons{
+    height: 12%;
+    width: 100%;
+    background: #252525;
+}
+
+.botonMenu{
+    width: 50%;
+    height: 100%;
+    outline: none;
+    background: transparent;
+}
+
+.actual{
+    width: 50%;
+    height: 100%;
+    outline: none;
+    background: #414141;
+}
+
+.infoValidator{
+    background: #414141;
+    color: white;
+    height: auto;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    margin-top: -16px;
+}
+
+.infoVali{
+    width: 15px;
+    height: 15px;
+    background: transparent;
+    z-index: 100;
+    float:right;
+    margin-top: -29px;
+   // margin-right: 4%;
+}
+
+.formularioz{
+    ///background: turquoise;
+    margin: auto;
+   
+}
+
+.formularioz ::content ion-input{
+    width: 95%;
+    border-bottom: 1px solid grey ;
+    margin-bottom: 20px;
+}
+
+
+.infoValidator2{
+    background: #414141;
+    color: white;
+    height: auto;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    //margin-top: -5px;
+}
+
+.infoVali2{
+    width: 15px;
+    height: 15px;
+    background: transparent;
+    z-index: 100;
+    float:right;
+    margin-top: -14px;
+   // margin-right: 4%;
+}
+
+.mapa{
+    width: 100%;
+    height: 250px;
+    margin-bottom:15px;
+}

@@ -27,42 +27,42 @@ export class Efectos{
         this.tamanio=(cantidad*74)
         this.tamanio2=(cantidad2*75)
         //document.getElementById('services').style.background="red"
-        document.getElementById('services').style.height=''+this.tamanio+'px'
-        document.getElementById('ofertasX').style.height=''+this.tamanio2+'px'
+        //document.getElementById('services').style.height=''+this.tamanio+'px'
+       // document.getElementById('ofertasX').style.height=''+this.tamanio2+'px'
        
     }
     
 
 
-    viewInfoService(servicio){
+    viewInfoService(servicio,id){
 
         if(this.anterior!=null && servicio.servicio != this.anterior.servicio)
-            this.ocultar(this.anterior)
+            this.ocultar(this.anterior,id)
 
         if(servicio.visto==true){
-            this.ocultar(servicio)
+            this.ocultar(servicio,id)
         }else{
-            this.mostrar(servicio)
+            this.mostrar(servicio,id)
         }
 
         this.anterior=servicio
     }
 
 
-    mostrar(servicio){
+    mostrar(servicio,id){
         servicio.visto=true
-        document.getElementById('services').style.height=''+(this.tamanio+200)+"px"
+        //document.getElementById(id).style.height=''+(this.tamanio+200)+"px"
         document.getElementById(servicio.servicio).style.transition='0.5s'
         document.getElementById(servicio.servicio).style.height=''+200+"px"
        // document.getElementById(servicio.servicio).scrollIntoView(true)
     }
 
 
-    ocultar(servicio){
+    ocultar(servicio,id){
         servicio.visto=false
         document.getElementById(servicio.servicio).style.transition='0.5s'
         document.getElementById(servicio.servicio).style.height=''+0+"px"
-        document.getElementById('services').style.height=''+(this.tamanio)+"px"
+       // document.getElementById(id).style.height=''+(this.tamanio)+"px"
     }
 
 
@@ -75,35 +75,35 @@ export class Efectos{
 
 
 
-    viewOfert(oferta){
+    viewOfert(oferta,id){
 
         if(this.anterior2!=null && oferta.titulo != this.anterior2.titulo)
-            this.ocultar2(this.anterior2)
+            this.ocultar2(this.anterior2,id)
 
         if(oferta.visto==true){
-            this.ocultar2(oferta)
+            this.ocultar2(oferta,id)
         }else{
-            this.mostrar2(oferta)
+            this.mostrar2(oferta,id)
         }
 
         this.anterior2=oferta
     }
 
 
-    mostrar2(oferta){
+    mostrar2(oferta,id){
         oferta.visto=true
-        document.getElementById('ofertasX').style.height=''+(this.tamanio2+200)+"px"
+       // document.getElementById(id).style.height=''+(this.tamanio2+200)+"px"
         document.getElementById(oferta.titulo).style.transition='0.5s'
-        document.getElementById(oferta.titulo).style.height=''+200+"px"
-        document.getElementById(oferta.titulo).scrollIntoView(true)
+        document.getElementById(oferta.titulo).style.height=''+120+"px"
+        
     }
 
 
-    ocultar2(oferta){
+    ocultar2(oferta,id){
         oferta.visto=false
         document.getElementById(oferta.titulo).style.transition='0.5s'
         document.getElementById(oferta.titulo).style.height=''+0+"px"
-        document.getElementById('ofertasX').style.height=''+(this.tamanio2)+"px"
+        ///document.getElementById(id).style.height=''+(this.tamanio2)+"px"
     }
 
 }

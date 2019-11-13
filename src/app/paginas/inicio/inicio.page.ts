@@ -3,7 +3,7 @@ import { Router,NavigationExtras } from '@angular/router';
 import { GlobalElementService } from '../../global-element.service';
 import {efectos} from './efectos'
 
-//import { Socket } from 'ngx-socket-io';
+import { Socket } from 'ngx-socket-io';
 import { MenuController } from '@ionic/angular';
 
 
@@ -20,7 +20,11 @@ export class InicioPage implements OnInit {
   efectos1=new efectos()
   
   paginas=[
-   
+    {
+      titulo:'Editar información',
+      url:'/edit-info',
+      icon: '../../../assets/iconos/edit.png'
+    },
     {
       titulo:'Estado de pedido',
       url:'/status',
@@ -132,7 +136,7 @@ export class InicioPage implements OnInit {
     private menu:MenuController,
     private router:Router,
     private global:GlobalElementService,
-   // private socket: Socket,
+    private socket: Socket,
     private notificacion:LocalNotifications,
     private backgroundMode: BackgroundMode,
     ) { 
@@ -148,6 +152,7 @@ export class InicioPage implements OnInit {
 
     
      
+     console.log("id usuario=",localStorage.getItem('idUser'));
      
         
      
@@ -179,6 +184,7 @@ export class InicioPage implements OnInit {
   }
 
 
+
  openFirst() {
     
           this.menu.enable(true, 'first');
@@ -201,6 +207,8 @@ export class InicioPage implements OnInit {
   cerraSecion(){
     localStorage.setItem('secion','false')
     this.global.status_de_secion=false
+    localStorage.clear()
+    this.closeFirst()
   }
 
 
@@ -293,7 +301,8 @@ modificar(arreglo:any, element:any){
 console.log("servicio",arreglo[0].servicio);
 
 
-  let item={id:element.id,
+  let item={
+    id:element.id,
     nombre:element.nombre_lavanderia,
     imagene:'../../../assets/iconos/shutterstock_422824102.jpg',
     servicios:JSON.parse(arreglo[0].servicio)

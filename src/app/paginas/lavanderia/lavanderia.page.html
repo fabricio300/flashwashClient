@@ -4,7 +4,7 @@
            <ion-back-button ></ion-back-button>
         </ion-buttons>   
         <ion-title>
-            Nombre de la lavanderia
+           {{nombreLavanderia}}
         </ion-title>
     </ion-toolbar>
    
@@ -48,33 +48,108 @@
       </div>
       
 
+      <br>
+      <h4 style="margin-left: 10px;">Servicios:</h4>
+      <div class="menuServicios centrarIz">
+        <button class="botonservice centrar" (click)="nuevoActual(0)" [ngClass]="{'actualSS':actualS==0}">
+          <img *ngIf="actualS!=0" src="../../../assets/pedir/washing-machine.png" width="20px">
+          <img *ngIf="actualS==0" src="../../../assets/pedir/washing-machineG.png" width="20px">
+        </button>
+        <button class="botonservice centrar" *ngIf="tintoreria.length>0" (click)="nuevoActual(1)"[ngClass]="{'actualSS':actualS==1}">
+          <img *ngIf="actualS!=1" src="../../../assets/pedir/suit.png" width="20px">
+          <img *ngIf="actualS==1" src="../../../assets/pedir/suitG.png" width="20px">
+        </button>
+        <button class="botonservice centrar" *ngIf="planchados.length>0" (click)="nuevoActual(2)" [ngClass]="{'actualSS':actualS==2}">
+          <img *ngIf="actualS!=2" src="../../../assets/pedir/iron.png" width="20px">
+          <img *ngIf="actualS==2" src="../../../assets/pedir/ironG.png" width="20px">
+        </button>
+        <button class="botonservice centrar" *ngIf="ofertas.length>0" (click)="nuevoActual(3)" [ngClass]="{'actualSS':actualS==3}">
+          <img *ngIf="actualS!=3" src="../../../assets/pedir/tag.png" width="20px">
+          <img *ngIf="actualS==3" src="../../../assets/pedir/tagG.png" width="20px">
+        </button>
+        <button class="botonservice centrar" *ngIf="otrosServicios.length>0" (click)="nuevoActual(4)" [ngClass]="{'actualSS':actualS==4}">
+          <img *ngIf="actualS!=4" src="../../../assets/pedir/clipboards.png" width="20px">
+          <img *ngIf="actualS==4" src="../../../assets/pedir/clipboardsG.png" width="20px">
+        </button>
+      </div>
 
-      <div style=" padding: 15px;" id="services">
-        <h4>Servicios</h4>
+
+      <div style=" padding: 15px;" id="services" *ngIf="actualS==0"  [ngClass]="{'ocultar':actualS==3}">
+        <h4>Lavanderia</h4>
 
         <div *ngFor="let servi of servicios">
             <p class="centrarIz " [ngClass]="{'actual':servi.visto==true}">
-                <ion-checkbox 
-                *ngIf="this.global.status_de_secion"
-                style="margin: 5px;"
-                (click)="seleccionar(servi)"
-                ></ion-checkbox>
+
+              <button class="centrar"
+              *ngIf="this.global.status_de_secion"
+              (click)="seleccionar(servi)"
+              [ngClass]="{'checa':servi.elegido==true, 'checkD':servi.elegido==false}">
+                <img src="../../../assets/pedir/check-mark.png" width="14px" style="position: absolute; margin: auto;">
+              </button>
+
+
                 {{servi.servicio}}  ${{servi.precio }}  por {{servi.unidad}} 
                 
                 
                 <img 
                 [ngClass]="{'UParrow':servi.visto==true}"
                 src="{{this.efectos.more}}"  style="width: 22px; margin-left: 10px; cursor: pointer;"
-                (click)="this.efectos. viewInfoService(servi)"
+                (click)="this.efectos. viewInfoService(servi,'services')"
                 >
             </p>
 
             <div class="infoServicio centrar" id="{{servi.servicio}}">
 
   
-              <p>Preferentemente y para brindar un mejor servicio: las prendas deberán ser separadas de la manera en que se prefiera que sean tratadas; por Tipo, Texturas y Colores</p>
+              <p style="margin: auto;">{{servi.descripcion}}</p>
               
-              <img src="../../../assets/iconos/shutterstock_422824102.jpg" >
+              <img style="margin:auto"  src="{{servi.imagen}}" >
+
+            </div>
+    
+        </div>
+        
+
+
+      </div>
+
+
+
+
+      
+
+
+      <div style=" padding: 15px;" id="Tintoreria" *ngIf="actualS==1">
+        <h4>Tintoreria</h4>
+
+        <div *ngFor="let tinto of tintoreria">
+            <p class="centrarIz " [ngClass]="{'actual':tinto.visto==true}">
+               
+
+
+                <button class="centrar"
+                *ngIf="this.global.status_de_secion"
+                (click)="seleccionar(tinto)"
+                [ngClass]="{'checa':tinto.elegido==true, 'checkD':tinto.elegido==false}">
+                <img src="../../../assets/pedir/check-mark.png" width="14px" style="position: absolute; margin: auto;">
+              </button>
+
+                {{tinto.servicio}}  ${{tinto.precio }}  por {{tinto.unidad}} 
+                
+                
+                <img 
+                [ngClass]="{'UParrow':tinto.visto==true}"
+                src="{{this.efectos.more}}"  style="width: 22px; margin-left: 10px; cursor: pointer;"
+                (click)="this.efectos. viewInfoService(tinto,'Tintoreria')"
+                >
+            </p>
+
+            <div class="infoServicio centrar" id="{{tinto.servicio}}">
+
+  
+              <p style="margin: auto;">{{tinto.descripcion}}</p>
+              
+              <img  style="margin:auto" src="{{tinto.imagen}}" >
 
             </div>
     
@@ -94,34 +169,62 @@
 
 
 
+      <div style=" padding: 15px;" id="Planchado" *ngIf="actualS==2">
+        <h4>Planchado</h4>
+
+        <div *ngFor="let plan of planchados">
+            <p class="centrarIz " [ngClass]="{'actual':plan.visto==true}">
+             
+
+                <button class="centrar"
+              *ngIf="this.global.status_de_secion"
+              (click)="seleccionar(plan)"
+              [ngClass]="{'checa':plan.elegido==true, 'checkD':plan.elegido==false}">
+                <img src="../../../assets/pedir/check-mark.png" width="14px" style="position: absolute; margin: auto;">
+              </button>
+
+
+                 ${{plan.precio }}  por {{plan.unidad}} 
+                
+                
+                <img 
+                [ngClass]="{'UParrow':plan.visto==true}"
+                src="{{this.efectos.more}}"  style="width: 22px; margin-left: 10px; cursor: pointer;"
+                (click)="this.efectos. viewInfoService(plan,'Planchado')"
+                >
+            </p>
+
+            <div class="infoServicio centrar" id="{{plan.servicio}}">
+
+  
+              <p style="margin: auto;">{{plan.descripcion}}</p>
+              
+              <img style="margin: auto;" src="{{plan.imagen}}" >
+
+            </div>
+    
+        </div>
+        
+
+
+      </div>
 
 
 
-
-
-
-
-
-      <div style=" padding: 15px; margin-bottom: 20px;" id="ofertasX">
+      <div style=" padding: 15px; margin-bottom: 20px;" id="ofertasX" *ngIf="actualS==3">
         <h4>Promociones y ofertas:)</h4>
 
         <div *ngFor="let ofert of ofertas">
 
             <p class="centrarIz " [ngClass]="{'actual':ofert.visto==true}">
                {{ofert.titulo}}
-                <img 
-               *ngIf="!ofert.visto"
-                src="{{this.efectos.promo1}}"  style="width: 22px; margin-left: 10px; cursor: pointer;"
-                    (click)="this.efectos.viewOfert(ofert)"
-                >
-
+              
 
                 <img 
-                *ngIf="ofert.visto"
-                src="{{this.efectos.promo2}}"  style="width: 22px; margin-left: 10px; cursor: pointer;"
-                (click)="this.efectos.viewOfert(ofert)"
+                [ngClass]="{'UParrow':ofert.visto==true}"
+                src="{{this.efectos.more}}"  style="width: 22px; margin-left: 10px; cursor: pointer;"
+                (click)="this.efectos. viewOfert(ofert,'ofertasX')"
                 >
-
                 
 
             </p>
@@ -129,9 +232,47 @@
             <div class="infoOferta centrar" id="{{ofert.titulo}}">
 
   
-                <p>{{ofert.info}}</p>
+                <p style="margin: auto;">{{ofert.info}}</p>
                 
-                <img src="../../../assets/iconos/shutterstock_422824102.jpg" >
+              
+  
+            </div>
+        
+        </div>
+      
+      </div>
+      
+
+      
+
+
+
+     
+
+      <div style=" padding: 15px; margin-bottom: 20px;" id="OtrosServicios" *ngIf="actualS==4">
+        <h4>Otros servicios:</h4>
+
+        <div *ngFor="let other of otrosServicios">
+
+            <p class="centrarIz " [ngClass]="{'actual':other.visto==true}">
+               {{other.titulo}}
+                
+                
+                <img 
+                [ngClass]="{'UParrow':other.visto==true}"
+                src="{{this.efectos.more}}"  style="width: 22px; margin-left: 10px; cursor: pointer;"
+                (click)="this.efectos. viewOfert(other,'OtrosServicios')"
+                >
+                
+
+            </p>
+
+            <div class="infoOferta centrar" id="{{other.titulo}}">
+
+  
+                <p style="margin: auto; width: 80%;">{{other.info}}</p>
+                
+              
   
             </div>
         
@@ -146,6 +287,42 @@
 
 
 
+
+
+
+
+
+
+     
+
+     
+      
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       
       <div style=" padding: 15px;">
         <h4>Datos de la empresa:</h4>
@@ -153,12 +330,23 @@
         <label>
           <p class="icon centrarIz">
             <img  src="{{this.efectos.direccion}}" >
-            direccion:
+            Direccion:
           </p>
           <p style="margin-left: 20px;">
-            Parque Central Tuxtla Gutiérrez, Chiapas, Zona Sin Asignación de Nombre de Colonia 42, Tuxtla Gutiérrez, Chis.
-          </p>
+            {{direccion}}
+           </p>
         </label>
+
+
+        <label>
+            <p class="icon centrarIz">
+              <img  src="../../../assets/iconos/research.png" >
+              Referencias:
+            </p>
+            <p style="margin-left: 20px;">
+              {{referencias}}
+             </p>
+          </label>
 
 
         <label >
@@ -167,20 +355,12 @@
             Telefono:
           </p>
           <p  style="margin-left: 20px;">
-              000-000-0000
+              {{telefono}}
           </p>
         </label>
 
 
-        <label >
-          <p class="icon centrarIz">
-            <img  src="{{this.efectos.correo}}" >
-            Correo:
-          </p>
-          <p  style="margin-left: 20px;">
-              correo@gmail.com
-          </p>
-        </label>
+       
 
 
         <label >
@@ -189,7 +369,10 @@
             Horario:
           </p>
           <p  style="margin-left: 20px;">
-              Lunes a viernes 08:00 aam - 08:00 pm
+              Lunes a viernes {{horaLI}} - {{horaLF}}
+          </p>
+          <p  style="margin-left: 20px;">
+              Sabados {{horaSI}} - {{horaSF}}
           </p>
         </label>
 

@@ -15,18 +15,18 @@ export class Efectos{
 
     actual=0
 
-    listaServicios=false
-
-    cantidadServicios
-    pedidos=0
-    todo=false
-     
+    listaServicios=false     
 
     tipoDeEntrega
+    entregar
     reparto
 
 
     indicaciones=''
+
+    cantidadPedidaDeLavanderia=0
+    cantidadPedidaDeTintoreria=0
+    cantidadPedidadDePlanchado=0
 
     tipoEntrega(tipo){
        this.tipoDeEntrega= tipo
@@ -35,15 +35,6 @@ export class Efectos{
 
     }
 
-    medir(servicios:any){
- 
-        this.cantidadServicios=servicios.length
-        servicios.forEach(element => {
-            if(element.elegido==true){
-                this.pedidos=this.pedidos+1
-            }
-        });
-    }
 
 
     next(){
@@ -73,36 +64,39 @@ export class Efectos{
       }
 
 
-      addServicio(servicio){
+      addServicio(servicio,tipo,arreglo){
             servicio.elegido=true;
-            this.pedidos=this.pedidos+1
+            this.optenerCantidadPedida(tipo,arreglo)
             
-            if(this.pedidos==this.cantidadServicios){
-                this.todo=true
-            }
       }
 
-      verSiPidioTodo(servicios){
-          let tamanio=servicios.length
-          let sepidio=0
-            servicios.forEach(element => {
-                if(element.elegido==true){
-                    sepidio=sepidio+1
-                    this.pedidos=this.pedidos+1
-                }
-            });
-            if(sepidio==tamanio){
-                this.todo=true
-            }
-      }
+     
 
 
-      removerServicio(servicio){
+      removerServicio(servicio,tipo,arreglo){
           servicio.elegido=false
-          this.pedidos=this.pedidos-1
-          this.todo=false
+          this.optenerCantidadPedida(tipo,arreglo)
       }
 
+
+
+    optenerCantidadPedida(tipo,arreglo:any){
+        let elegidos=0
+        arreglo.forEach(element => {
+            if(element.elegido==true){
+                elegidos=elegidos+1
+            }
+        });
+
+        switch(tipo){
+            case 0: this.cantidadPedidaDeLavanderia=elegidos
+                break;
+            case 1:this.cantidadPedidaDeTintoreria=elegidos
+                break;
+            case 2:this.cantidadPedidadDePlanchado=elegidos
+                break;
+        }
+    }
 
       mostrarReparto(id){
         if(this.reparto==id){
@@ -114,16 +108,26 @@ export class Efectos{
       }
 
 
+     
+
+
+
+
+
+
       optenerTipoDetransporte(){
           if(this.tipoDeEntrega=='tipo1'){
             this.tipoDeEntrega='tipo1'
+            this.entregar='solo_recojer'
           }
           if(this.tipoDeEntrega=='tipo2'){
             this.tipoDeEntrega='tipo2'
+            this.entregar='solo_entregar'
             }
 
             if(this.tipoDeEntrega=='tipo3'){
                 this.tipoDeEntrega='tipo3'
+                this.entregar='completo'
             }
       }
 }

@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'lavanderia', loadChildren: './paginas/lavanderia/lavanderia.module#LavanderiaPageModule' },
   { path: 'solicitud', loadChildren: './paginas/solicitud/solicitud.module#SolicitudPageModule' },
   { path: 'guardados', loadChildren: './paginas/guardados/guardados.module#GuardadosPageModule' },  { path: 'info-pedido', loadChildren: './paginas/info-pedido/info-pedido.module#InfoPedidoPageModule' },
+  { path: 'edit-info', loadChildren: './paginas/edit-info/edit-info.module#EditInfoPageModule' },
 
 ];
 

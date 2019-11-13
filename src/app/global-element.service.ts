@@ -59,8 +59,75 @@ export class GlobalElementService {
 
   }
 
+  getServiciosTintoreria(id:any):Observable<any>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    }
+    return  this.http.get(`${this.api}servicioTintoreria/${id}`,httpOptions)
+  }
 
 
+  getServiciosPlanchados(id:any):Observable<any>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    }
+    return  this.http.get(`${this.api}servicioPlanchado/${id}`,httpOptions)
+  }
+
+
+  getServiciosOtros(id:any):Observable<any>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    }
+    return  this.http.get(`${this.api}servicioOtro/${id}`,httpOptions)
+  }
+
+
+
+  getServiciosOfertar(id:any):Observable<any>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    }
+    return  this.http.get(`${this.api}servicioOferta/${id}`,httpOptions)
+  }
+
+
+solisitarservicio(item:any):Observable<any>{
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  }
+  return  this.http.post(`${this.api}pedidos/`,item,httpOptions)
+}
+
+
+getLavanderia(id:any):Observable<any>{
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  }
+  return  this.http.get(`${this.api}lavanderias/${id}`,httpOptions)
+}
+
+
+getInfoUsuario(id:any):Observable<any>{
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  }
+  return  this.http.get(`${this.api}usuarios/${id}`,httpOptions)
+}
 
 
 }

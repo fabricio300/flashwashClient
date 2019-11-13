@@ -13,6 +13,7 @@
   },
   "private": true,
   "dependencies": {
+    "@adonisjs/websocket-client": "^1.0.9",
     "@agm/core": "^1.0.0",
     "@angular/common": "~8.1.2",
     "@angular/compiler": "~8.1.2",
@@ -23,15 +24,20 @@
     "@angular/router": "~8.1.2",
     "@ionic-native/background-mode": "^5.15.0",
     "@ionic-native/core": "^5.0.0",
+    "@ionic-native/geolocation": "^5.16.0",
     "@ionic-native/local-notifications": "^5.15.0",
+    "@ionic-native/native-geocoder": "^5.16.0",
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^4.7.1",
     "@types/socket.io": "^2.1.4",
+    "angular2-websocket": "^0.9.8",
     "cordova-android": "8.1.0",
     "cordova-plugin-background-mode": "^0.7.3",
     "cordova-plugin-badge": "^0.8.8",
+    "cordova-plugin-geolocation": "^4.0.2",
     "cordova-plugin-local-notification": "^0.9.0-beta.2",
+    "cordova-plugin-nativegeocoder": "^3.2.2",
     "core-js": "^2.5.4",
     "express": "^4.17.1",
     "ngx-socket-io": "^3.0.1",
@@ -84,7 +90,9 @@
       },
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-local-notification": {},
-      "cordova-plugin-background-mode": {}
+      "cordova-plugin-background-mode": {},
+      "cordova-plugin-geolocation": {},
+      "cordova-plugin-nativegeocoder": {}
     },
     "platforms": [
       "android"

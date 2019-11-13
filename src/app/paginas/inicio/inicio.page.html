@@ -128,16 +128,18 @@
 
 
 
-
-
-<div style="display: flex; flex-wrap: wrap; width: 100%;">
+<div style="display: flex; flex-wrap: wrap; width: 100%; padding-top: 20px;">
     
-          <ion-toolbar color=secondary style="text-align: center;">
-             <ion-title style="color: white;" class="centrar">
-              
-              Cerca de ti:</ion-title>
-          </ion-toolbar>
-      
+        <div class="centrar" style="width: 100%;" *ngIf="lavandrias.length==0">
+          <label class="centrar">
+              <img src="../../../assets/iconos/A37.gif" style="width: 80px; margin: auto;">
+              <p>Buscando lavanderias...</p>
+          </label>       
+        </div>
+       
+        
+
+
       
             <div class="lavanderiaCont" *ngFor='let dd of lavandrias'>
               <div class="contImgLavanderia centrar">

@@ -1,0 +1,346 @@
+<ion-header>
+  <ion-toolbar color='primary'>
+    <ion-buttons slot="start">
+        <ion-back-button ></ion-back-button>
+     </ion-buttons> 
+  <ion-title>Editar información</ion-title>
+</ion-toolbar>
+</ion-header>
+
+<ion-content color=secondary>
+
+  <div class="contenedorUno">
+
+    <div class="parte cetrar"  id="Autorizar">
+
+          <form [formGroup]="formValidar" class="formulario cetrar" style="z-index: 90;">
+            <label >
+            <p> Ingrese su contraseña:</p> 
+            <input formControlName="contrasenia" type="password" placeholder="****">
+
+
+            <div class="infoVali2" (click)=" mostraInfoContrasenia()">
+                <img *ngIf="!formValidar.get('contrasenia').hasError('required') && !formValidar.get('contrasenia').hasError('pattern')"
+                src="../../../assets/imagenes/information.png" style="width: 100%;">
+                <img *ngIf="formValidar.get('contrasenia').hasError('required') || formValidar.get('contrasenia').hasError('pattern')"
+                src="../../../assets/imagenes/informationX.png" style="width: 100%;">
+             </div>
+    
+            <p class="infoValidator2" *ngIf="mostrarInfoContraseniaValidar">
+                Campo obligatorio, este debe tener: letras mayúsculas y minúsculas, al menos un número, al menos un carácter especial (#?!@$%^&*-) y una longitud de 8 a 15 caracteres sin espacios. 
+            </p>
+
+
+
+
+            <ion-button  [disabled]="!formValidar.valid"   style="margin: 20px auto; width: 100%;"  (click)="validar()">
+                Aceptar
+              </ion-button>
+            </label>
+           
+            
+          </form>
+    </div>
+
+
+    <div class="parte" style=" overflow: hidden;" id="Dotos">
+
+     
+
+        <div class="menuBotons cetrar">
+            <button class="botonMenu cetrar" [ngClass]="{'actual':actual==0}"
+            (click)="mostrarDatos(0)"
+            >
+              <img src="../../../assets/iconsWhite/user.png" width="20px">
+            </button>
+
+            <button class="botonMenu cetrar" [ngClass]="{'actual':actual==1}"
+            (click)="mostrarDatos(1)"
+            >
+            <img src="../../../assets/iconsWhite/pin.png" width="20px">
+            </button>
+
+        </div>    
+
+
+        <div class="parte cetrar" style="height: 88%;" id="DatosUsuario">
+            <h6>Datos de usuario</h6>
+            <form [formGroup]="formRegistro" class="formularioz" style="min-height: 80%; height: 60%; padding-top:15px; width: 97%;" >
+          
+                <div style=" width: 100%; height: 100%; overflow-y: scroll;">
+                
+                    <label >
+                        <img src="../../../assets/imagenes/user.png" style="width: 12px;">
+                        Nombre(s):</label>
+                      <ion-input formControlName="nombre"  type="text" placeholder="Nombre" ></ion-input>
+            
+                      <div class="infoVali" (click)="mostrarInfoCampo('nombre') ">
+                          <img *ngIf="!formRegistro.get('nombre').hasError('required') && !formRegistro.get('nombre').hasError('pattern')"
+                          src="../../../assets/imagenes/information.png" style="width: 100%;">
+                          <img *ngIf="formRegistro.get('nombre').hasError('required') || formRegistro.get('nombre').hasError('pattern')"
+                          src="../../../assets/imagenes/informationX.png" style="width: 100%;">
+                       </div>
+            
+                      <p class="infoValidator" *ngIf="infoCampos.nombre">
+                          Este campo es obligatorio, no debe tener números o caracteres especiales como: ¡#$%, debe tener una longitud de 3 a 50 caracteres. Puede incluir mayúsculas y minúsculas.  
+                      </p>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+                      <label >
+                        <img src="../../../assets/imagenes/user.png" style="width: 12px;">
+                        Apellido(s):</label>
+                      <ion-input formControlName="apellidos"  type="text" placeholder="Apellido paterno / Apellido Materno" ></ion-input>
+            
+                      <div class="infoVali" (click)="mostrarInfoCampo('apellidos') ">
+                          <img *ngIf="!formRegistro.get('apellidos').hasError('required') && !formRegistro.get('apellidos').hasError('pattern')"
+                          src="../../../assets/imagenes/information.png" style="width: 100%;">
+                          <img *ngIf="formRegistro.get('apellidos').hasError('required') || formRegistro.get('apellidos').hasError('pattern')"
+                          src="../../../assets/imagenes/informationX.png" style="width: 100%;">
+                       </div>
+            
+                      <p class="infoValidator" *ngIf="infoCampos.apellidos">
+                          Este campo es obligatorio, no debe tener números o caracteres especiales como: ¡#$%, debe tener una longitud de 3 a 50 caracteres. Puede incluir mayúsculas y minúsculas.  
+                      </p>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <!---
+                      <label >
+                        <img src="../../../assets/imagenes/key.png" style="width: 12px;">
+                        Contraseña: </label>
+                      <ion-input formControlName="contrasenia" type="password" placeholder="*******"></ion-input>
+            
+                      <div class="infoVali" (click)="mostrarInfoCampo('contrasenia') ">
+                          <img *ngIf="!formRegistro.get('contrasenia').hasError('required') && !formRegistro.get('contrasenia').hasError('pattern')"
+                          src="../../../assets/imagenes/information.png" style="width: 100%;">
+                          <img *ngIf="formRegistro.get('contrasenia').hasError('required') || formRegistro.get('contrasenia').hasError('pattern')"
+                          src="../../../assets/imagenes/informationX.png" style="width: 100%;">
+                       </div>
+            
+                      <p class="infoValidator" *ngIf="infoCampos.contrasenia">
+                        Campo obligatorio, este debe tener: letras mayúsculas y minúsculas, al menos un número, al menos un carácter especial (#?!@$%^&*-) y una longitud de 8 a 15 caracteres sin espacios.
+                      </p>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+                      <label >
+                          <img src="../../../assets/imagenes/lock.png" style="width: 12px;">
+                          Comfirma tu contraseña: </label>
+                      <ion-input formControlName="contraseniaConfir" type="password" placeholder="********"></ion-input>
+              
+                      <div class="infoVali" (click)="mostrarInfoCampo('contrasenia2')">
+                          <img *ngIf="!formRegistro.get('contraseniaConfir').hasError('required') && !formRegistro.get('contraseniaConfir').hasError('pattern')"
+                          src="../../../assets/imagenes/information.png" style="width: 100%;">
+                          <img *ngIf="formRegistro.get('contraseniaConfir').hasError('required') || formRegistro.get('contraseniaConfir').hasError('pattern')"
+                          src="../../../assets/imagenes/informationX.png" style="width: 100%;">
+                       </div>
+            
+                      <p class="infoValidator" *ngIf="infoCampos.contrasenia2">
+                        Campo obligatorio, este campo debe coincidir con el campo contraseña. 
+                      </p>
+            
+            
+            
+                    -->
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+                      <label >
+                          <img src="../../../assets/imagenes/call-answer.png" style="width: 12px;">
+                          Tel: </label>
+                      <ion-input formControlName="telefono" type="number" placeholder="000-000-0000"></ion-input>
+            
+                      <div class="infoVali" (click)="mostrarInfoCampo('telefono')">
+                          <img *ngIf="!formRegistro.get('telefono').hasError('required') && !formRegistro.get('telefono').hasError('pattern')"
+                          src="../../../assets/imagenes/information.png" style="width: 100%;">
+                          <img *ngIf="formRegistro.get('telefono').hasError('required') || formRegistro.get('telefono').hasError('pattern')"
+                          src="../../../assets/imagenes/informationX.png" style="width: 100%;">
+                       </div>
+            
+                      <p class="infoValidator" *ngIf="infoCampos.telefono">
+                          Este campo es obligatorio, solo debe componerse de 10 caracteres numéricos 
+                      </p>
+                  
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+                      <label >
+                          <img src="../../../assets/imagenes/at.png" style="width: 12px;">
+                          Correo: </label>
+                      <ion-input formControlName="correo" type="text" placeholder="micorreo@algo.com"> </ion-input>
+            
+                      <div class="infoVali" (click)="mostrarInfoCampo('correo') ">
+                          <img *ngIf="!formRegistro.get('correo').hasError('required') && !formRegistro.get('correo').hasError('pattern')"
+                          src="../../../assets/imagenes/information.png" style="width: 100%;">
+                          <img *ngIf="formRegistro.get('correo').hasError('required') || formRegistro.get('correo').hasError('pattern') "
+                          src="../../../assets/imagenes/informationX.png" style="width: 100%;">
+                       </div>
+            
+                      <p class="infoValidator" *ngIf="infoCampos.correo">
+                          Este campo es obligatorio. 
+                      </p>
+                
+                
+                </div>
+                
+               
+            
+               
+                
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+              
+        
+              </form>
+      
+              <div class="cetrar" style="width: 100%; margin-top: 5px;">
+      
+                  <ion-button style="margin: auto;">
+                    Guardar cambios
+                  </ion-button>
+                
+                
+              </div>
+        
+        
+        </div>
+    
+        <div class="parte cetrar" style="height: 0px;" id="DireccionUsuario">
+            <h5>Ubicación:</h5>
+
+
+<div class="cetrar" style=" width: 100%; height: 80%; overflow-y: scroll;">
+
+
+    <agm-map class="mapa"
+    [latitude]="lat"
+    [longitude]="lng"
+    [zoom]="zoom"
+    >
+      <agm-marker [latitude]="lat" [longitude]="lng"
+      [markerDraggable]="true"
+      (dragEnd)="markerDragEnd($event)"
+      ></agm-marker>
+   </agm-map>
+   
+   <label > Dirección</label>
+   <p style="width: 90%; border-bottom: 1px solid white;">{{address}}</p>
+    <br>
+
+    <label >Referencias:</label>   
+  <div style=" width: 90%"> 
+    
+    <ion-textarea
+    [(ngModel)]="referencias"
+    style="width: 100%; border: 1px solid white;" rows="3"  placeholder="ejemplo: casa roja"></ion-textarea>
+
+
+  </div>
+
+</div>
+            
+           
+
+            <div class="cetrar" style="width: 100%; margin-top: 5px;">
+      
+                <ion-button style="margin: auto;">
+                  Guardar cambios
+                </ion-button>
+              
+              
+            </div>
+        
+        </div>
+    
+    </div>
+
+
+    
+
+
+  </div>
+
+</ion-content>

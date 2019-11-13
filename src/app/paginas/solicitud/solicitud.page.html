@@ -58,42 +58,136 @@
     
       <h4>Servicios requeridos</h4>      
       <div class="contScroll">
-
+        <h5 *ngIf=" this.efectos.cantidadPedidaDeLavanderia!=0" style="color: #3c9d9b;">
+            <br>
+          Lavandería:</h5>
         <label *ngFor="let servi of servicios">
               <p  class="centrarIZ"  *ngIf="servi.elegido">
-
                   {{servi.servicio}}
                   <img 
-                  (click)="this.efectos.removerServicio(servi)"
+                  (click)="this.efectos.removerServicio(servi,0,servicios)"
                   src="{{this.efectos.iconMenos}}" width="20px" style="margin-left: 5px; cursor: pointer;">
               </p>
-
-
         </label>
 
         
 
-        <label *ngIf="this.efectos.pedidos==0">Ninguno :(</label>
+
+        <h5 *ngIf=" this.efectos.cantidadPedidaDeTintoreria!=0" style="color: #3c9d9b;">
+            <br>
+          Tintoreria:</h5>
+        <label *ngFor="let tinto of tintoreria">
+            <p  class="centrarIZ"  *ngIf="tinto.elegido">
+                {{tinto.servicio}}
+                <img 
+                (click)="this.efectos.removerServicio(tinto,1,tintoreria)"
+                src="{{this.efectos.iconMenos}}" width="20px" style="margin-left: 5px; cursor: pointer;">
+            </p>
+        </label>
+
+
+
+        <h5 *ngIf=" this.efectos.cantidadPedidadDePlanchado!=0" style="color: #3c9d9b;">
+          <br>
+          Planchado:</h5>
+
+        <label *ngFor="let pla of planchados">
+            <p  class="centrarIZ"  *ngIf="pla.elegido">
+                {{pla.servicio}}
+                <img 
+                (click)="this.efectos.removerServicio(pla,2,planchados)"
+                src="{{this.efectos.iconMenos}}" width="20px" style="margin-left: 5px; cursor: pointer;">
+            </p>
+        </label>
+
+        
+
+        <label *ngIf="this.efectos.cantidadPedidaDeLavanderia==0 && 
+                      this.efectos.cantidadPedidaDeTintoreria==0 &&
+                      this.efectos.cantidadPedidadDePlanchado==0
+        ">Ninguno :(
+          </label>
         
           
       </div>    
 
       
       <div class="conteother">
+        
           <div class="listaNoelegida" *ngIf="this.efectos.listaServicios">
-              <label *ngFor="let servi2 of servicios">
-                  <p  
-                  (click)="this.efectos. addServicio(servi2)"
-                  class="centrarIZ"  *ngIf="!servi2.elegido">
-                      {{servi2.servicio}}
-                 </p>
-    
-    
-            </label>
+              <div class="menuBotono centrar">
+                  <button class="botonIcon centrar " *ngIf="servicios!=null" [ngClass]="{'este':actualservicio==0}" (click)="cambiarServicio(0)">
+                      <img *ngIf="actualservicio!=0" src="../../../assets/pedir/washing-machine.png"  style="position: absolute; width: 20px;">
+                      <img *ngIf="actualservicio==0" src="../../../assets/pedir/washing-machineG.png"  style="position: absolute; width: 20px;">
+                  </button>
+                  <button class="botonIcon centrar" *ngIf="tintoreria.length>0" [ngClass]="{'este':actualservicio==1}" (click)="cambiarServicio(1)">
+                    <img *ngIf="actualservicio!=1" src="../../../assets/pedir/suit.png" style="position: absolute; width: 20px;">
+                    <img *ngIf="actualservicio==1" src="../../../assets/pedir/suitG.png" style="position: absolute; width: 20px;">
+                  </button>
+                  <button class="botonIcon centrar" *ngIf="planchados.length>0" [ngClass]="{'este':actualservicio==2}" (click)="cambiarServicio(2)">
+                    <img *ngIf="actualservicio!=2" src="../../../assets/pedir/iron.png" style="position: absolute; width: 20px;">
+                    <img *ngIf="actualservicio==2" src="../../../assets/pedir/ironG.png" style="position: absolute; width: 20px;">
+                  </button>
+              </div>
 
-            <label *ngIf="this.efectos.todo">
-              A solicitado todos los servicios disponibles :)
-            </label>
+
+             <div *ngIf="actualservicio==0">
+              <label *ngFor="let servi2 of servicios">
+                <p  style="margin-left: 10px; margin-right: 10px;"
+                (click)="this.efectos. addServicio(servi2,0,servicios)"
+                class="centrarIZ"  *ngIf="!servi2.elegido">
+                    {{servi2.servicio}}  ${{servi2.precio}}
+               </p>
+               </label>
+
+
+               <p *ngIf="this.efectos.cantidadPedidaDeLavanderia == servicios.length" style="margin-left: 15px; margin-right: 15px; border: none;">
+                  A solicitado todos los servicios de lavandería :)
+                </p>
+             </div> 
+          
+
+             <div *ngIf="actualservicio==1">
+                <label *ngFor="let tinto of tintoreria">
+                    <p  style="margin-left: 10px; margin-right: 10px;"
+                    (click)="this.efectos. addServicio(tinto,1,tintoreria)"
+                    class="centrarIZ"  *ngIf="!tinto.elegido">
+                        {{tinto.servicio}} ${{tinto.precio}}
+                   </p>
+                  </label>
+
+
+                  <p *ngIf="this.efectos.cantidadPedidaDeTintoreria == tintoreria.length" style="margin-left: 15px; margin-right: 15px; border: none;">
+                      A solicitado todos los servicios de tintoreria :)
+                  </p>
+             </div>
+
+            
+
+             <div *ngIf="actualservicio==2">
+                <label *ngFor="let plan of planchados">
+                    <p  style="margin-left: 10px; margin-right: 10px;"
+                    (click)="this.efectos. addServicio(plan,2,planchados)"
+                    class="centrarIZ"  *ngIf="!plan.elegido">
+                        {{plan.servicio}} ${{plan.precio}}
+                   </p>
+                  </label>
+
+                  <p *ngIf="this.efectos.cantidadPedidadDePlanchado == planchados.length" style="margin-left: 15px; margin-right: 15px; border: none;">
+                      A solicitado todos los servicios de planchado :)
+                  </p>
+             </div>
+
+            
+
+
+
+
+  
+            
+
+            
+
           </div>
 
 
@@ -116,7 +210,9 @@
 
 
         <ion-button
-        [disabled]="this.efectos.pedidos==0"
+        [disabled]="this.efectos.cantidadPedidaDeLavanderia==0 && 
+        this.efectos.cantidadPedidaDeTintoreria==0 &&
+        this.efectos.cantidadPedidadDePlanchado==0"
         (click)="this.efectos.next()"
         style="height:30px;"
         >
@@ -410,18 +506,18 @@
               <p >$50</p>
           </label>
           
-          <label >
+          <!--label >
             <p style="font-size: 12px; color: #52de97;">servicios de lavandería:</p>
             <p>
               $50
             </p>
-          </label>
+          </label-->
 
 
           <label >
             <p style="color: gold;">Total:</p>
             <p >
-                $150
+                $100
             </p>
           </label>
 
@@ -430,16 +526,50 @@
 
         <div class="listaSer ">
             <h6 style="color: white; font-size: 15px;">Servicios solicitados:</h6>
-            <label *ngFor="let servi3 of servicios">
-                <p  class="centrarIZ" 
-                style="font-size: 13px;"
-                *ngIf="servi3.elegido">
-    
-                    - {{servi3.servicio}}
-                </p>
-    
-    
-          </label>
+
+            <div *ngIf=" this.efectos.cantidadPedidaDeLavanderia!=0">
+                <h6 style="color: #52de97;">Lavandería:</h6>
+                <label *ngFor="let servi3 of servicios">
+                    <p  class="centrarIZ" 
+                    style="font-size: 13px;"
+                    *ngIf="servi3.elegido">
+        
+                        - {{servi3.servicio}}
+                    </p>
+               </label>
+
+            </div>
+
+
+            <div *ngIf=" this.efectos.cantidadPedidaDeTintoreria!=0">
+                <h6 style="color: #52de97;">
+                  <br>
+                  Tintoreria:</h6>
+                <label *ngFor="let tinto3 of tintoreria">
+                    <p  class="centrarIZ" 
+                    style="font-size: 13px;"
+                    *ngIf="tinto3.elegido">
+                        - {{tinto3.servicio}}
+                    </p>
+               </label>
+
+            </div>
+
+
+            <div *ngIf=" this.efectos.cantidadPedidadDePlanchado!=0">
+                <h6 style="color: #52de97;">
+                  <br>
+                  Planchado:</h6>
+                <label *ngFor="let plan3 of planchados">
+                    <p  class="centrarIZ" 
+                    style="font-size: 13px;"
+                    *ngIf="plan3.elegido">
+                        - {{plan3.servicio}}
+                    </p>
+               </label>
+
+            </div>
+           
 
 
           
@@ -469,7 +599,7 @@
 
           <ion-button
           style="margin: auto; height:30px;"
-          (click)="irAStatus()"
+          (click)="hacerSolicitud()"
           >
             Aceptar
           </ion-button>

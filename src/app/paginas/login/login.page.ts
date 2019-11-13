@@ -5,6 +5,8 @@ import { GlobalElementService } from '../../global-element.service';
 import {Validators, FormBuilder, FormGroup,AbstractControl } from '@angular/forms';
 import { variable } from '@angular/compiler/src/output/output_ast';
 import { AlertController } from '@ionic/angular';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
 
 
 @Component({
@@ -43,7 +45,9 @@ export class LoginPage implements OnInit {
     private router: Router,
     private global:GlobalElementService,
     private formBuilder: FormBuilder,
-    private alertacontroller: AlertController
+    private alertacontroller: AlertController,
+    private geolocation: Geolocation,
+    private nativeGeocoder: NativeGeocoder
   ) {
 
     this.formRegistro = this.formBuilder.group({
@@ -94,7 +98,7 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     this.ocultarPart('part2')
     this.ocultarPart('part3')
-  
+    this.getPosicionActual()
   }
 
 
@@ -123,8 +127,9 @@ export class LoginPage implements OnInit {
 
 
 
-  iniciar(){
+  iniciar(id){
       localStorage.setItem('secion','true')
+      localStorage.setItem('idUser',''+id)
       this.global.status_de_secion=true
       this.router.navigate(['/inicio'])
 
@@ -215,13 +220,18 @@ export class LoginPage implements OnInit {
       correo_electronico: this.formRegistro.get('correo').value,
       contraseña: this.formRegistro.get('contrasenia').value,
       telefono: this.formRegistro.get('telefono').value,
-      direccion:'suchipa'
+      direccion:JSON.stringify({
+        address:this.address,
+        referencias:this.referencias,
+        coordenadas:{lat:this.lat, lon:this.lng}
+      })
     }
 
 
-    this.global.registrar(item).subscribe(()=>{
-      console.log("registrado");
-      this.iniciar()
+    this.global.registrar(item).subscribe(response=>{
+      console.log("registrado",response);
+      let echo:any=response
+      this.iniciar(''+echo.id)
     })
 
   }
@@ -236,7 +246,10 @@ export class LoginPage implements OnInit {
 
     this.global.login(item).subscribe(response=>{
       console.log(response);
-      this.iniciar()
+      let echo:any=response
+      console.log("EEe",echo[0].id);
+      
+      this.iniciar(''+echo[0].id)
     },error=>{
       console.log("error");
       this.verAlerta()
@@ -257,6 +270,71 @@ export class LoginPage implements OnInit {
   })
 
   await alerta.present()
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+  lat: number;
+  lng: number;
+  zoom:number=16
+  address:string=''
+  referencias=''
+
+  getPosicionActual(){
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.lat=parseFloat(''+resp.coords.latitude)
+      this.lng=parseFloat(''+resp.coords.longitude)
+      this.getAddress(this.lat, this.lng);
+     }).catch((error) => {
+       console.log('Error getting location', error);
+     });
+  }
+  
+
+  markerDragEnd($event:any) {
+    console.log($event);
+    this.lat =parseFloat(''+$event.coords.lat);
+    this.lng =parseFloat(''+$event.coords.lng);
+    
+    this.getAddress(this.lat, this.lng);
+  }
+
+
+
+  getAddress(latitude, longitude){
+    this.address=''
+    let options: NativeGeocoderOptions = {
+      useLocale: true,
+      maxResults: 5
+    };
+  
+    this.nativeGeocoder.reverseGeocode(latitude,longitude, options)
+    .then((result: NativeGeocoderResult[]) =>{
+      console.log("es este ",result[0])
+        //console.log("es este ",result[0].thoroughfare,", ",result[0].subLocality,", ",result[0].postalCode,",",result[0].locality,", ",result[0].administrativeArea,", ",result[0].countryName);
+        if(result[0].thoroughfare.length>0){
+          this.address=this.address+result[0].thoroughfare+", "
+        }
+        if(result[0].subLocality.length>0){
+          this.address=this.address+result[0].subLocality+", "
+        }
+        if(result[0].postalCode.length>0){
+          this.address=this.address+result[0].postalCode+", "
+        }
+        this.address=this.address+result[0].locality+", "+result[0].administrativeArea+", "+result[0].countryCode
+  
+       
+    })
+    .catch((error: any) => console.log(error));
   }
 
 }

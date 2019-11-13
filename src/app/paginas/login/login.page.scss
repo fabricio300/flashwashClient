@@ -34,6 +34,7 @@
     margin-bottom: 20px;
     position: relative;
     font-size: 12px;
+    width: 90%;
 }
 
 .formulario::content label{
@@ -70,17 +71,22 @@
 
 .direccion{
     min-height: 80%;
-    height: auto;
-    width: 90%;
+    height: 87%;
+    width: 97%;
     margin: auto;
+    overflow: hidden;
+   
 }
 
-.contMapa{
+
+
+agm-map{
     width: 100%;
     margin: auto;
-    min-height: 280px;
-
-    border: 1px solid white;
+    height: 280px;
+    //border: 1px solid white;
+    border-radius: 10px;
+  
 }
 
 .infoValidator{
@@ -96,9 +102,9 @@
 .infoVali{
     width: 15px;
     height: 15px;
-    background: #252525;
+    background: transparent;
     z-index: 100;
     float:right;
     margin-top: -29px;
-    margin-right: -18px;
+    margin-right: 4%;
 }
