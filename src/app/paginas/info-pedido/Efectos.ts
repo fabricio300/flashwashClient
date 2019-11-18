@@ -18,7 +18,7 @@ export class Efectos{
     getStatusIcon(status){
 
         switch (status) {
-          case 'En proceso': return this.nuevo
+          case 'En proceso': return this.lava
             
           break;
     
