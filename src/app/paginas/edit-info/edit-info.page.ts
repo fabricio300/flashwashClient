@@ -36,6 +36,7 @@ export class EditInfoPage implements OnInit {
 
     anterio
     mostrarInfoContraseniaValidar=false
+    cambios_en_proceso=false
     actual=0
 
 
@@ -58,14 +59,14 @@ export class EditInfoPage implements OnInit {
         Validators.pattern(this.nombreValido),
         
       ])],
-      contrasenia: ['',Validators.compose([
+      /*contrasenia: ['',Validators.compose([
        // Validators.required,
         Validators.pattern(this.contraseniaValida)
       ])],
       contraseniaConfir:['',Validators.compose([
        // Validators.required,
         Validators.pattern(this.contraseniaValida)
-      ])],
+      ])],*/
       telefono: ['',Validators.compose([
         Validators.required,
         Validators.pattern(this.numeroValido)
@@ -124,6 +125,7 @@ export class EditInfoPage implements OnInit {
         case 'nombre': this.infoCampos.nombre=false 
         break;
         case 'apellidos': this.infoCampos.apellidos=false 
+        
         break;
       } 
     }
@@ -157,6 +159,8 @@ export class EditInfoPage implements OnInit {
       this.actual=1
       this.efectos.next('DireccionUsuario','DatosUsuario',88)
     }
+
+    this.getDatosusuario()
   }
 
   async verAlerta(){
@@ -263,12 +267,12 @@ validar(){
 
 
 
-Actualizar(){
+actualizarDatos(){
+  this.cambios_en_proceso=true
   let item={
     nombres:this.formRegistro.get('nombre').value,
     apellidos:this.formRegistro.get('apellidos').value,
     correo_electronico: this.formRegistro.get('correo').value,
-    contraseña: this.formRegistro.get('contrasenia').value,
     telefono: this.formRegistro.get('telefono').value,
     direccion:JSON.stringify({
       address:this.address,
@@ -278,15 +282,28 @@ Actualizar(){
   }
 
 
-  this.global.registrar(item).subscribe(response=>{
+  this.global.editInfoUsuario(localStorage.getItem('idUser'),item).subscribe(response=>{
     console.log("acualizado",response);
-    let echo:any=response
-  
+
+      this.getDatosusuario()
+      this.cambios_en_proceso=false
+      this.verAlerta2()
   })
 
 }
 
 
+async verAlerta2(){
+  const alerta=await this.alertacontroller.create({
+    header:'Proceso finalizado',
+    subHeader:'Cambios realizados',
+    message:'Los cambios realizados han sido exitosos',
+    buttons:['Aceptar']
+
+})
+
+await alerta.present()
+}
 
 
 

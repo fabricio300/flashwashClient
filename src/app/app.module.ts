@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 
+
 const config: SocketIoConfig = { url: 'http://138.197.70.172', options: {} };
 
 

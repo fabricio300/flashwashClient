@@ -13,7 +13,7 @@
 
 
 
-     <ion-input  placeholder="Busca una lavanderia" class="anchoDebuscador">
+     <ion-input [(ngModel)]="busqueda" placeholder="Busca una lavanderia" class="anchoDebuscador">
 
      </ion-input>
          
@@ -141,7 +141,11 @@
 
 
       
-            <div class="lavanderiaCont" *ngFor='let dd of lavandrias'>
+            <div  style="width: 95%; margin: auto; " *ngFor='let dd of lavandrias | inicioFiltro:busqueda'>
+                <div class="lavanderiaCont" style="background: white;"
+                
+                [ngClass]="{'quitar':dd.visto==false}"
+                >
               <div class="contImgLavanderia centrar">
                 <img src="{{dd.imagene}}" >
               </div>
@@ -152,11 +156,10 @@
                       {{dd.nombre}}
                     </h4> 
 
-                   <div style="margin: 5px;">
-                      <label class="statusClose" *ngFor="let service of dd.servicios">
-                          {{service.servicio}} ${{service.precio}} por {{service.unidad}}
-                          <br>
-                        </label>
+                   <div class="conInfosss" >
+
+                    <p style="color: #394a6d;" *ngFor="let service of dd.servicios">{{service.servicio}} ${{service.precio}} por {{service.unidad}}</p>
+                      
 
                    </div> 
                    
@@ -167,7 +170,7 @@
                   >Ver más</ion-button>        
               </div>
              
-             
+            </div>
             </div>
       
             
@@ -210,8 +213,8 @@
     
     <ion-item color=success *ngFor='let fil of filtros' >
 
-        <ion-checkbox style="margin: 5px;"
-        (click)="this.efectos1.activaFiltro(fil)"
+        <ion-checkbox  [(ngModel)]="fil.activo" style="margin: 5px;"
+    
         color="danger"
         ></ion-checkbox>
             {{fil.opcion}}
@@ -226,7 +229,7 @@
       Cancelar
     </ion-button>
       <ion-button color="danger"
-      (click)="this.efectos1.ocultarFiltros()"
+      (click)="this.efectos1. aplicarFiltros(lavandrias)"
       >Buscar</ion-button>
     </div>
 

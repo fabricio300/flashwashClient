@@ -294,9 +294,18 @@ export class LavanderiaPage implements OnInit {
 
 
   getDatosLavanderia(){
+    this.imagenes=[]
     this.global.getLavanderia(this.idLavanderia).subscribe(Response=>{
       console.log("get info=",Response);
       let direccion1:any=JSON.parse(Response.direccion)
+
+      let fotos:any=JSON.parse(Response.fotografias)
+
+      console.log("fotos",fotos);
+      
+      fotos.forEach(element => {
+          this.imagenes.push(element.imagen)
+      });
 
       this.direccion=direccion1.address
       this.referencias=direccion1.referencias

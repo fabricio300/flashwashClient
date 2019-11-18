@@ -14,7 +14,9 @@
     <div class="parte cetrar"  id="Autorizar">
 
           <form [formGroup]="formValidar" class="formulario cetrar" style="z-index: 90;">
+            
             <label >
+            <p style="color: #FCF10F;">{{this.formRegistro.get('nombre').value+' '+this.formRegistro.get('apellidos').value}}</p>
             <p> Ingrese su contraseña:</p> 
             <input formControlName="contrasenia" type="password" placeholder="****">
 
@@ -278,7 +280,10 @@
       
               <div class="cetrar" style="width: 100%; margin-top: 5px;">
       
-                  <ion-button style="margin: auto;">
+                  <ion-button style="margin: auto;"
+                  [disabled]="!formRegistro.valid"
+                  (click)="actualizarDatos()"
+                  >
                     Guardar cambios
                   </ion-button>
                 
@@ -306,11 +311,11 @@
       ></agm-marker>
    </agm-map>
    
-   <label > Dirección</label>
+   <label style="color: gray;"> Dirección: </label>
    <p style="width: 90%; border-bottom: 1px solid white;">{{address}}</p>
     <br>
 
-    <label >Referencias:</label>   
+    <label style="color: gray;">Referencias:</label>   
   <div style=" width: 90%"> 
     
     <ion-textarea
@@ -326,7 +331,10 @@
 
             <div class="cetrar" style="width: 100%; margin-top: 5px;">
       
-                <ion-button style="margin: auto;">
+                <ion-button style="margin: auto;"
+                [disabled]="referencias==null || referencias==''"
+                (click)="actualizarDatos()"
+                >
                   Guardar cambios
                 </ion-button>
               
@@ -340,7 +348,14 @@
 
     
 
-
+<div class="cetrar" style="position: absolute; height: 100%; width: 100%; top: 0; background: rgba(0,0, 0, 0.8); z-index: 100;"
+    *ngIf=" cambios_en_proceso==true"
+>
+    <label class="cetrar">
+        <img src="../../../assets/iconos/A37.gif" style="width: 80px; margin: auto;">
+        <p>Cambios en proceso...</p>
+    </label>   
+</div>
   </div>
 
 </ion-content>

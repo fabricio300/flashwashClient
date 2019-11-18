@@ -130,4 +130,15 @@ getInfoUsuario(id:any):Observable<any>{
 }
 
 
+
+editInfoUsuario(id:any, item:any):Observable<any>{
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  }
+  return  this.http.put(`${this.api}usuarios_edit/${id}`,item,httpOptions)
+}
+
+
 }

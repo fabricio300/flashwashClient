@@ -20,7 +20,7 @@ import { AgmCoreModule } from '@agm/core';
     ]),
     
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBCt0-mEji1fHBi7itS0cf2rNE-LxhXTac'
+      //apiKey: 'AIzaSyBCt0-mEji1fHBi7itS0cf2rNE-LxhXTac'
     })
   ],
   declarations: [HomePage]

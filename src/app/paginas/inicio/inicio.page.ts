@@ -18,7 +18,7 @@ import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 })
 export class InicioPage implements OnInit {
   efectos1=new efectos()
-  
+  busqueda=''
   paginas=[
     {
       titulo:'Editar información',
@@ -41,16 +41,20 @@ export class InicioPage implements OnInit {
 
   filtros=[
     {
-      activo:false,
-      opcion:'opcion1'
+      activo:true,
+      opcion:'Planchado'
     },
     {
-      activo:false,
-      opcion:'opcion2'
+      activo:true,
+      opcion:'Tintoreria'
     },
     {
-      activo:false,
-      opcion:'opcion2'
+      activo:true,
+      opcion:'Ofertas'
+    },
+    {
+      activo:true,
+      opcion:'Otros servicios'
     }
     
   ]
@@ -181,6 +185,7 @@ export class InicioPage implements OnInit {
 
       this.mensaje()
     this.getLavanderias1()
+    this.efectos1.setFiltros(this.filtros)
   }
 
 
@@ -271,15 +276,22 @@ getLavanderias1(){
   this.lavandrias=null
   this.lavandrias=[]
   this.global.getLavanderias().subscribe(Response=>{
-    console.log(Response);
+    console.log("fotos:\n",Response);
     
     Response.forEach(element => {
-      console.log(element.id);
+     
+      
+
+     
+
       this.global.getServiciosLavanderia(element.id).subscribe(echo=>{
-        console.log(echo);
-        this.modificar(echo,element)
+      //  console.log(echo);
+        this.modificar(echo,element,JSON.parse(element.fotografias))
         console.log("LAVANDERIAS:",this.lavandrias)
       })
+
+
+
     });
    
     
@@ -288,32 +300,85 @@ getLavanderias1(){
 }
 
 
-modificar(arreglo:any, element:any){
+modificar(arreglo:any, element:any,imajenes:any){
   console.log("estre,",arreglo);
   console.log(element);
 
-  let servicios1=[]
-  
-
-
-
+  let iterador=0
+  let plachado=false
+  let otrosServicios=false
+  let tintoreria=false
+  let ofertar=false
 
 console.log("servicio",arreglo[0].servicio);
 
+this.global.getServiciosOtros(element.id).subscribe(ResponseO=>{
+  console.log("--------------------------------------------",element.id);
+  console.log("tiene otros servicios", ResponseO);
+  
+  if(ResponseO.length>0){
+    otrosServicios=true
+  }
+  iterador=iterador+1
+  this.addITEMM(element,imajenes,arreglo,tintoreria,plachado,ofertar,otrosServicios,iterador)
 
+})
+
+this.global.getServiciosOfertar(element.id).subscribe(ResponseO=>{
+  console.log("--------------------------------------------",element.id);
+  console.log("tiene ofertas", ResponseO);
+
+  if(ResponseO.length>0){
+    ofertar=true
+  }
+  iterador=iterador+1
+  this.addITEMM(element,imajenes,arreglo,tintoreria,plachado,ofertar,otrosServicios,iterador)
+})
+
+this.global.getServiciosTintoreria(element.id).subscribe(ResponseO=>{
+  console.log("--------------------------------------------",element.id);
+  console.log("tiene Tintoreria", ResponseO);
+  if(ResponseO.length>0){
+    tintoreria=true
+  }
+  iterador=iterador+1
+  this.addITEMM(element,imajenes,arreglo,tintoreria,plachado,ofertar,otrosServicios,iterador)
+})
+
+this.global.getServiciosPlanchados(element.id).subscribe(ResponseO=>{
+  console.log("--------------------------------------------",element.id);
+  console.log("tiene Planchados", ResponseO);
+  if(ResponseO.length>0){
+    plachado=true
+  }
+  iterador=iterador+1
+  this.addITEMM(element,imajenes,arreglo,tintoreria,plachado,ofertar,otrosServicios,iterador)
+})
+  
+}
+
+
+
+addITEMM(element,imajenes,arreglo,tintoreri,planchado,ofertar,otros, iterador){
+
+if(iterador==4){
   let item={
     id:element.id,
     nombre:element.nombre_lavanderia,
-    imagene:'../../../assets/iconos/shutterstock_422824102.jpg',
-    servicios:JSON.parse(arreglo[0].servicio)
+    imagene:imajenes[0].imagen,
+    servicios:JSON.parse(arreglo[0].servicio),
+    tintoreria:tintoreri,
+    planchado:planchado,
+    ofertar:ofertar,
+    otros:otros,
+    visto:true
   }
 
 
   console.log(item);
   
   this.lavandrias.push(item)
-  
 }
-
+}
 
 }

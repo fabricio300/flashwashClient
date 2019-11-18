@@ -5,17 +5,8 @@ import { OnInit } from '@angular/core';
 export class efectos {
    
     filActivo=false;
-    filtros=[
-        {
-          activo:false,
-          opcion:'opcion1'
-        },
-        {
-          activo:false,
-          opcion:'opcion2'
-        }
-        
-      ]
+      
+    flitros:any
 
     constructor(
     ){
@@ -25,13 +16,7 @@ export class efectos {
    
 
 
-    recetearFiltros(){
-        this.filtros.forEach(element => {
-            element.activo=false;
-        });
-      }
-    
-    
+   
     
      
       
@@ -48,15 +33,62 @@ export class efectos {
         this.filActivo=true
       }
     
-      activaFiltro(filtro:any){
-        if(filtro.activo==false)
-          filtro.activo=true
-        else
-          filtro.activo=false
-    
-        //console.log(this.filtros);  
+      setFiltros(filtros){
+        this.flitros=filtros
       }
     
-    
-     
+
+      aplicarFiltros(arreglo:any){
+        
+
+      if(this.todoFalse()==false){
+        arreglo.forEach(element => {
+              let cumple_con_uno=false
+                this.flitros.forEach(element2 => {
+                  
+                  switch(element2.opcion){
+                      case 'Planchado':  if(element2.activo==true && element.planchado==true){ cumple_con_uno=true}
+                      break;
+                      case 'Tintoreria':if(element2.activo==true && element.tintoreria==true){ cumple_con_uno=true}
+                      break;
+                      case 'Ofertas':if(element2.activo==true && element.ofertar==true){ cumple_con_uno=true}
+                      break;
+                      case 'Otros servicios':if(element2.activo==true && element.otros==true){ cumple_con_uno=true}
+                      break;
+                  }
+                  
+                });
+
+                if(cumple_con_uno){
+                    element.visto=true
+                }else{
+                  element.visto=false
+                }
+
+        });
+      }
+        this.ocultarFiltros()
+      }
+      
+     todoFalse(){
+       let res=0
+
+       this.flitros.forEach(element => {
+            if(element.activo==false){
+              res=res+1
+            }
+       });
+
+       if(res==this.flitros.length){
+         return true
+       }else{
+         return false
+       }
+
+
+     }
 }
+
+
+
+

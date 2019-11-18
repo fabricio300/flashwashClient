@@ -168,7 +168,25 @@ ion-item.selectable:hover {
     padding: 4px;
     margin-bottom: 30px;
     margin: 5px;
+   /// text-align: center;
 }  
+.conInfosss{
+   margin: 5px;
+  //background: chartreuse;
+   width: 90%;
+    max-height: 90px;
+    overflow: hidden;
+   //border-bottom: 1px solid red; ;
+   //justify-content: center;
+  // align-items: center;
+   //height: ;
+
+}
+
+.quitar{
+    overflow: hidden;
+    display: none;
+}
 
 @media(max-width:600px){
    

@@ -21,6 +21,12 @@ export class SolicitudPage implements OnInit {
   idLavanderia:any
   actualservicio=0
 
+
+  coordenadasCliente:any
+  coordenadasLavanderia:any
+  direccion_lavanderia
+  direcion_cliente
+
   constructor(
     private route: ActivatedRoute, 
     private router: Router,
@@ -37,6 +43,24 @@ export class SolicitudPage implements OnInit {
       this.tintoreria=todo.tintoreria
       this.planchados=todo.planchado
       this.idLavanderia=todo.idLavanderia
+
+      this.global.getLavanderia(this.idLavanderia).subscribe(Response=>{
+        console.log("lllllll",Response);
+        this.coordenadasLavanderia=JSON.parse(Response.coordenadas)
+        let direccion:any=JSON.parse(Response.direccion)
+        this.direccion_lavanderia=direccion.address
+        console.log("coordenadas lavanderia", this.direccion_lavanderia);
+        
+      })
+
+      this.global.getInfoUsuario(localStorage.getItem('idUser')).subscribe(Response=>{
+        console.log("lllllll2",Response);
+       let cor:any =JSON.parse(Response.direccion)
+        this.coordenadasCliente=cor.coordenadas
+        this.direcion_cliente=cor.address
+        console.log("coordenadas coordenadasCliente",this.direcion_cliente);
+      })
+
     });
 
     
@@ -138,12 +162,13 @@ if(this.efectos.cantidadPedidadDePlanchado>0){
       transporte:this.efectos.entregar
     }),
     precio:'',
-    coordenadas_lavanderia:'',
-    coordenadas_usuario:'',
+    coordenadas_lavanderia:JSON.stringify({lat:this.coordenadasLavanderia.lat, lon:this.coordenadasLavanderia.lon}),
+    coordenadas_usuario:JSON.stringify({lat:this.coordenadasCliente.lat, lon:this.coordenadasCliente.lon}),
     coordenadas_repartidor:'',
-    direccion_usuario:'suchiapa',
-    direccion_lavanderia:'tuxtla',
-    indicaciones:this.efectos.indicaciones
+    direccion_usuario:this.direcion_cliente,
+    direccion_lavanderia:this.direccion_lavanderia,
+    indicaciones:this.efectos.indicaciones,
+    tipo_entrega:this.efectos.entregar
 
 
   }
