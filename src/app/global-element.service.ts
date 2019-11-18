@@ -141,4 +141,25 @@ editInfoUsuario(id:any, item:any):Observable<any>{
 }
 
 
+
+getPedidosPorUsuario(id:any):Observable<any>{
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  }
+  return  this.http.get(`${this.api}pedidos_usuario/${id}`,httpOptions)
+}
+
+
+
+getPedidosPorId(id:any):Observable<any>{
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  }
+  return  this.http.get(`${this.api}pedidos/${id}`,httpOptions)
+}
+
 }

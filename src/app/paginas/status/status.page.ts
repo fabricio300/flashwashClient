@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Efectos } from './Efectos';
 import { Router,NavigationExtras,ActivatedRoute } from '@angular/router';
+import { GlobalElementService } from '../../global-element.service';
+
 
 @Component({
   selector: 'app-status',
@@ -13,7 +15,10 @@ export class StatusPage implements OnInit {
 
   servicios
 
-  pedidos=[
+  sin_parapetros=false
+  
+  pedidos=[]
+  /*pedidos=[
     {
       id:1,
       nombre:'Nombre de lavanderia',
@@ -84,16 +89,23 @@ export class StatusPage implements OnInit {
     }
 
 
-  ]
+  ]*/
 
   constructor(
     private router:Router,
-    private router1:ActivatedRoute
+    private router1:ActivatedRoute,
+    private apiService:GlobalElementService
   ) {
 
     this.router1.queryParams.subscribe(params => {
-      this.servicios = JSON.parse(params.special);
-      console.log("data= ",this.servicios);
+      if(params.special!=null){
+        this.servicios = JSON.parse(params.special);
+        console.log("data= ",this.servicios);
+        this.sin_parapetros=false
+      }else{
+        this.sin_parapetros=true
+      }
+     
     
   });
 
@@ -101,6 +113,7 @@ export class StatusPage implements OnInit {
    }
 
   ngOnInit() {
+    this.getPedidos()
   }
 
 
@@ -117,10 +130,60 @@ export class StatusPage implements OnInit {
 
 
   regresar(){
-    if(this.servicios!=null)
+    if(this.sin_parapetros==false)
       this.router.navigate(['/lavanderia'])
     else
       this.router.navigate(['/inicio'])
   }
 
+
+  getPedidos(){
+      this.apiService.getPedidosPorUsuario(localStorage.getItem('idUser')).subscribe(Response=>{
+        console.log("pedios= ",Response);
+
+        
+        Response.forEach(element => {
+            let hora:any=JSON.parse(element.fecha_pedido)
+              this.apiService.getLavanderia(element.lavanderia_id).subscribe(Response2=>{
+
+                console.log(hora);
+
+                let item={
+                  id:element.id,
+                  nombre:Response2.nombre_lavanderia,
+                  hora:this.tConvert(''+hora.hora+':'+hora.minutos)+'/ '+hora.dia+'/ '+hora.mes,
+                  status: element.status,
+                  icon:this.efectos.getStatusIcon(element.status),
+                }
+
+
+                this.pedidos.push(item)
+              })
+
+                console.log("ppppppppppppp",this.pedidos);
+                
+        });
+        
+      })
+  }
+
+
+
+  tConvert (time) {
+    // Check correct time format and split into components
+    time = time.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+  
+    if (time.length > 1) { // If time format correct
+      time = time.slice (1);  // Remove full string match value
+      time[5] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
+      time[0] = +time[0] % 12 || 12; // Adjust hours
+    }
+    return time.join (''); // return adjusted time or original string
+  }
+
+
+
 }
+
+
+  

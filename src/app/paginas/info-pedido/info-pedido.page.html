@@ -19,13 +19,40 @@
      <h4>{{pedido.nombre}}</h4> 
 
     <h5 class="centrarIz">
+     <br>
+     <br>
      
           <img src="../../../assets/Status/hanger.png" class="iconos">
           Servicios solicitados:
      
       </h5>
-    <p *ngFor="let servico of pedido.servicios">- {{servico}}</p>
-    
+        <h6 style="color: #c0ffb3; border-bottom: 1px solid #c0ffb3;" *ngIf="pedido.servicios_lavanderia.length>0">
+          Lavado
+        </h6>
+          <p *ngFor="let lava of pedido.servicios_lavanderia"> {{lava.servicio}} ${{lava.precio}} por {{lava.unidad}}</p>
+
+        <h6 style="color: #c0ffb3; border-bottom: 1px solid #c0ffb3;" *ngIf="pedido.servicios_tititoreria.length>0">
+            Tintoreria
+          </h6>
+
+          <p *ngFor="let tintor of pedido.servicios_tititoreria"> {{tintor.servicio}} ${{tintor.precio}} por {{tintor.unidad}}</p>
+
+
+
+          <h6 style="color: #c0ffb3;  border-bottom: 1px solid #c0ffb3;" *ngIf="pedido.servicios_planchado.length>0">
+              Planchado
+            </h6>
+            
+          <p *ngFor="let planc of pedido.servicios_tititoreria"> ${{planc.precio}} por {{planc.unidad}}</p>
+
+
+
+
+
+
+
+
+
 
     <br>
     <h5 class="centrarIz">
@@ -36,7 +63,7 @@
     </h5>
 
     <p style="width: 95%;" >
-      En medicina, una indicación es el término que describe una razón válida para emplear una prueba diagnóstica, un procedimiento médico, un determinado medicamento, o técnica quirúrgica.
+     {{pedido.indicaciones}}
     </p>
 
 
@@ -45,7 +72,8 @@
       'lavanderia':pedido.status=='En lavanderia',
       'encalino1':pedido.status=='En entraga',
       'encalino2':pedido.status=='A lavandería',
-      'recojer':pedido.status=='En camino'
+      'recojer':pedido.status=='En camino',
+      'nuevo':pedido.status=='Nuevo pedido'
     }"
     >
         <p style="width: 100%; text-align: center; font-size: 11px;">status:</p>
