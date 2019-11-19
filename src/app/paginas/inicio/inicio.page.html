@@ -88,16 +88,28 @@
            
           </div>
 
+
+
+          <ion-item color='secondary' (click)="closeFirst()" [routerLink]="[('/info-status')]"  style="cursor: pointer;">
+              <img src="../../../assets/iconos/information.png" style="width: 18px; margin: 8px;">
+              Información general
+          </ion-item>
+
+
            
             <ion-item color='secondary'  routerLink='/login'(click)="closeFirst()" *ngIf="!this.global.status_de_secion">
                 <img src="../../../assets/iconos/user.png" style="width: 18px; margin: 8px;">
                Iniciar sesion
             </ion-item>
 
+
+
             <ion-item color='secondary'  (click)="cerraSecion()" *ngIf="this.global.status_de_secion" style="cursor: pointer;">
                 <img src="../../../assets/iconos/close.png" style="width: 18px; margin: 8px;">
                Cerrar sesion
             </ion-item>
+
+
         </ion-content>
       </ion-menu>      
 

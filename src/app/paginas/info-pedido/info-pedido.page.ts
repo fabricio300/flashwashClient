@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { Efectos } from './Efectos';
 import { GlobalElementService } from '../../global-element.service';
+import { Socket } from 'ngx-socket-io';
 
 
 @Component({
@@ -30,7 +31,8 @@ export class InfoPedidoPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router:Router,
-    private apiservice:GlobalElementService
+    private apiservice:GlobalElementService,
+    private socket:Socket
   ) { 
 
     this.route.queryParams.subscribe(params => {
@@ -38,6 +40,13 @@ export class InfoPedidoPage implements OnInit {
       console.log("data= ",pedido1);
       this.idPedido=pedido1.id
       this.getInfoPedido()
+
+
+      socket.on('se_actualiso_el_pedido'+'id_user'+localStorage.getItem('idUser'),(data)=>{
+        console.log("entra soket 1111111111111");
+        this.getInfoPedido()
+    
+      })
   });
 
 
@@ -68,9 +77,71 @@ export class InfoPedidoPage implements OnInit {
 
   getInfoPedido(){
     this.apiservice.getPedidosPorId(this.idPedido).subscribe(Response=>{
-      console.log(Response);
+      console.log("Response------------------------",Response);
       let hora:any=JSON.parse(Response.fecha_pedido)
       this.idLavanderia=Response.lavanderia_id
+
+        let servi_lavanderia:any=[]
+        let servi_tito:any=[]
+        let servi_plan:any=[]
+        
+        if(Response.datos_ropa!=null){
+          let datos:any=JSON.parse(Response.datos_ropa)
+            console.log("dotos---------------",datos);
+            servi_lavanderia=datos.lavanderia
+            servi_tito=datos.tintoreria
+            servi_plan=datos.planchado
+        }else{
+          let servicioss:any=JSON.parse(Response.servicios)
+          console.log("******************",servicioss);
+          if(servicioss.lavanderia.length>0){
+                servicioss.lavanderia.forEach(element => {
+                  console.log("||||||||||||||||||",element);
+                  let item1={
+                    precio:element.precio,
+                    servicio: element.servicio,
+                    unidad: element.unidad,
+                    catidad:0,
+                    costo:0
+                  }
+                  servi_lavanderia.push(item1)
+              });
+          }
+
+          if(servicioss.tintoreria.length>0){
+              servicioss.tintoreria.forEach(element => {
+                console.log("||||||||||||||||||",element);
+                let item1={
+                  precio:element.precio,
+                  servicio: element.servicio,
+                  unidad: element.unidad,
+                  catidad:0,
+                  costo:0
+                }
+                servi_tito.push(item1)
+            });
+
+        }
+
+
+        if(servicioss.planchado.length>0){
+              servicioss.planchado.forEach(element => {
+                console.log("||||||||||||||||||",element);
+                let item1={
+                  precio:element.precio,
+                  unidad: element.unidad,
+                  catidad:0,
+                  costo:0
+                }
+                servi_plan.push(item1)
+            });
+
+        }
+
+
+        }
+
+
       this.apiservice.getLavanderia(Response.lavanderia_id).subscribe(Response2=>{
         
         let services:any=JSON.parse(Response.servicios)
@@ -82,11 +153,13 @@ export class InfoPedidoPage implements OnInit {
           status: Response.status,
           visto: false,
           icon:this.efectos.getStatusIcon(Response.status),
-          servicios_lavanderia:services.lavanderia,
-          servicios_tititoreria:services.tintoreria,
-          servicios_planchado:services.planchado,
+          servicios_lavanderia:servi_lavanderia,
+          servicios_tititoreria:servi_tito,
+          servicios_planchado:servi_plan,
           indicaciones:Response.indicaciones
          }
+
+         
 
          console.log("55555555555555555555555555555 ",this.pedido);
       })

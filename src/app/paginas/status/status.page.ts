@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Efectos } from './Efectos';
 import { Router,NavigationExtras,ActivatedRoute } from '@angular/router';
 import { GlobalElementService } from '../../global-element.service';
+import { Socket } from 'ngx-socket-io';
 
 
 @Component({
@@ -172,7 +173,8 @@ export class StatusPage implements OnInit {
   constructor(
     private router:Router,
     private router1:ActivatedRoute,
-    private apiService:GlobalElementService
+    private apiService:GlobalElementService,
+    private socket:Socket
   ) {
 
     this.router1.queryParams.subscribe(params => {
@@ -184,9 +186,19 @@ export class StatusPage implements OnInit {
         this.sin_parapetros=true
       }
      
+      socket.on('se_actualiso_el_pedido'+'id_user'+localStorage.getItem('idUser'),(data)=>{
+        console.log("entra soket 1111111111111");
+        this.pedidos=null
+        this.getPedidos()
+    
+      })
+      
     
   });
 
+  
+
+ 
 
    }
 
@@ -217,6 +229,7 @@ export class StatusPage implements OnInit {
 
 
   getPedidos(){
+    this.pedidos=[]
       this.apiService.getPedidosPorUsuario(localStorage.getItem('idUser')).subscribe(Response=>{
         console.log("pedios= ",Response);
 

@@ -82,14 +82,21 @@ box-shadow: 1px 4px 13px 3px rgba(0,0,0,0.75);
     color: gold;
 }
 
+
+.cancelado{
+    background: #ff0000;
+    color: aliceblue;
+
+}
+
 .nuevo{
     background: #8a00d4;
-    color: white !important;
+    color: white;
 }
 
 .lavanderia{
     background: #1089ff;
-    color: #e5e5e5 !important;
+    color: #e5e5e5
 }
 
 .encalino1{
@@ -107,6 +114,16 @@ box-shadow: 1px 4px 13px 3px rgba(0,0,0,0.75);
     color: #e5e5e5;
 }
 
+.resperando{
+    background: #00818a;
+    color: #e5e5e5;
+}
+
+
+.final{
+    background: #f45905;
+    color: #e5e5e5;
+}
 
 .rota-horizontal{
     -webkit-transform: scaleX(-1);

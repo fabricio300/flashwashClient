@@ -50,7 +50,7 @@ export class Efectos{
             
           break;
     
-          case 'A lavanderia': return this.moto2
+          case 'A lavandería': return this.moto2
             
             break;
     

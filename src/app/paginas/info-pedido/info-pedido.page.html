@@ -29,15 +29,53 @@
         <h6 style="color: #c0ffb3; border-bottom: 1px solid #c0ffb3;" *ngIf="pedido.servicios_lavanderia.length>0">
           Lavado
         </h6>
-          <p *ngFor="let lava of pedido.servicios_lavanderia"> {{lava.servicio}} ${{lava.precio}} por {{lava.unidad}}</p>
+          
+          <div *ngFor="let lava of pedido.servicios_lavanderia">
+            <p >{{lava.servicio}} ${{lava.precio}} por {{lava.unidad}}</p>
+            <div *ngIf="lava.cantidad!=0" class="centrar" style="width: 100%; ">
+              <p style="margin: auto; color: #52de97; width: 40%;" class="centrar">
+                {{lava.unidad}}/s: 
+                <label style="color: white;">
+                   {{lava.cantidad}}
+                </label>
+               
+              </p>
+              <p style="margin: auto;color:  #52de97; width: 40%;" class="centrar">
+                Costo:      
+                <label style="color: white;">
+                   ${{lava.costo}}
+                </label>
+              </p>
+            </div>
+          
+         </div>
+    
+          
 
-        <h6 style="color: #c0ffb3; border-bottom: 1px solid #c0ffb3;" *ngIf="pedido.servicios_tititoreria.length>0">
+          <h6 style="color: #c0ffb3; border-bottom: 1px solid #c0ffb3;" *ngIf="pedido.servicios_tititoreria.length>0">
             Tintoreria
           </h6>
 
-          <p *ngFor="let tintor of pedido.servicios_tititoreria"> {{tintor.servicio}} ${{tintor.precio}} por {{tintor.unidad}}</p>
-
-
+       
+          <div *ngFor="let tintor of pedido.servicios_tititoreria">
+            <p >{{tintor.servicio}} ${{tintor.precio}} por {{tintor.unidad}}</p>
+            <div *ngIf="tintor.cantidad!=0" class="centrar" style="width: 100%; ">
+              <p style="margin: auto; color: #52de97; width: 40%;" class="centrar">
+                {{tintor.unidad}}/s: 
+                <label style="color: white;">
+                   {{tintor.cantidad}}
+                </label>
+               
+              </p>
+              <p style="margin: auto;color:  #52de97; width: 40%;" class="centrar">
+                Costo:      
+                <label style="color: white;">
+                   ${{tintor.costo}}
+                </label>
+              </p>
+            </div>
+          
+         </div>
 
           <h6 style="color: #c0ffb3;  border-bottom: 1px solid #c0ffb3;" *ngIf="pedido.servicios_planchado.length>0">
               Planchado
@@ -68,14 +106,15 @@
 
 
     <div class="status1 centrar "
-    [ngClass]="{
-      'lavanderia':pedido.status=='En lavanderia',
-      'encalino1':pedido.status=='En entraga',
-      'encalino2':pedido.status=='A lavandería',
-      'recojer':pedido.status=='En camino',
-      'lavanderia':pedido.status=='En proceso',
-      'nuevo':pedido.status=='Nuevo pedido'
-    }"
+    [ngClass]="{'nuevo':pedido.status=='Nuevo pedido', 
+    'cancelado':pedido.status=='Cancelado',
+    'lavanderia':pedido.status=='En proceso',
+    'encalino1':pedido.status=='Entregando',
+    'encalino2':pedido.status=='A lavandería',
+    'recojer':pedido.status=='Recogiendo',
+    'final':pedido.status=='Finalizado',
+    'resperando':pedido.status=='Lista y limpia'
+      }"
     >
         <p style="width: 100%; text-align: center; font-size: 11px;">status:</p>
         <img src="{{pedido.icon}}" width="40px">
@@ -84,29 +123,6 @@
 
 
   </div>
-
-
-
-
-
-
-
-
-  <div class="contPart ">
-      <br>
-    <h5 class="centrarIz">
-    
-      <img src="../../../assets/Status/t-shirt-black-silhouette.png" class="iconos">
-      Datos de ropa:</h5>
-
-    <label >Kilos: </label> <p>5 kg</p>
-    <label >Piezas extras: </label> <p> pieza / tipo</p>
-
-  </div>
-
-
-
-
 
 
 
