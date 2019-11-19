@@ -19,6 +19,7 @@ export class SolicitudPage implements OnInit {
   tintoreria:any
   planchados:any
   idLavanderia:any
+  precio:any
   actualservicio=0
 
 
@@ -49,7 +50,7 @@ export class SolicitudPage implements OnInit {
         this.coordenadasLavanderia=JSON.parse(Response.coordenadas)
         let direccion:any=JSON.parse(Response.direccion)
         this.direccion_lavanderia=direccion.address
-        console.log("coordenadas lavanderia", this.direccion_lavanderia);
+        console.log("coordenadas lavanderia", this.coordenadasLavanderia);
         
       })
 
@@ -71,6 +72,7 @@ export class SolicitudPage implements OnInit {
     this.efectos.optenerCantidadPedida(0,this.servicios)
     this.efectos.optenerCantidadPedida(1,this.tintoreria)
     this.efectos.optenerCantidadPedida(2,this.planchados)
+    this.precio = this.calularPrecio()
   }
 
 
@@ -86,7 +88,6 @@ export class SolicitudPage implements OnInit {
   cambiarServicio(num){
     this.actualservicio=num
   }
-
 
 hacerSolicitud(){
   let lavanderia1=[]
@@ -161,7 +162,7 @@ if(this.efectos.cantidadPedidadDePlanchado>0){
       planchado:plancha,
       transporte:this.efectos.entregar
     }),
-    precio:'',
+    precio:this.precio,
     coordenadas_lavanderia:JSON.stringify({lat:this.coordenadasLavanderia.lat, lon:this.coordenadasLavanderia.lon}),
     coordenadas_usuario:JSON.stringify({lat:this.coordenadasCliente.lat, lon:this.coordenadasCliente.lon}),
     coordenadas_repartidor:'',
@@ -183,6 +184,38 @@ if(this.efectos.cantidadPedidadDePlanchado>0){
 
   this.soket.emit('pedido',solicitud.lavanderia_id)
 
+}
+
+calularPrecio(){
+  this.global.getLavanderia(this.idLavanderia).subscribe(Response=>{
+    this.coordenadasLavanderia=JSON.parse(Response.coordenadas)
+    let direccion:any=JSON.parse(Response.direccion)
+    this.direccion_lavanderia=direccion.address
+   
+    this.global.getInfoUsuario(localStorage.getItem('idUser')).subscribe(Response=>{
+      let cor:any =JSON.parse(Response.direccion)
+       this.coordenadasCliente=cor.coordenadas
+       this.direcion_cliente=cor.address
+       console.log("COSA1", this.coordenadasLavanderia);
+       console.log("COSA2",this.coordenadasCliente);
+       let distancia = this.calculateDistance(this.coordenadasLavanderia.lon,this.coordenadasLavanderia.lon,this.coordenadasLavanderia.lat,this.coordenadasCliente.lat)
+      console.log("LAS DISTANCIA ES DE:", distancia);
+      let precio = 30.0 + (distancia*1.5) + (distancia/2)
+      console.log("El precio es de:", precio.toPrecision(2));
+      this.precio = precio.toPrecision(2);
+     })
+  })
+
+
+
+}
+
+calculateDistance(lon1, lon2, lat1, lat2){
+  let p = 0.017453292519943295;
+  let c = Math.cos;
+  let a = 0.5 - c((lat1-lat2) * p) / 2 + c(lat2 * p) *c((lat1) * p) * (1 - c(((lon1- lon2) * p))) / 2;
+  let dis = (12742 * Math.asin(Math.sqrt(a)));
+  return dis;
 }
 
 }

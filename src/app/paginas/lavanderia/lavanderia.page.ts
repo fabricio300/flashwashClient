@@ -105,6 +105,7 @@ export class LavanderiaPage implements OnInit {
       
      const id=JSON.parse(params.special)
      this.idLavanderia=id.id
+     localStorage.setItem("lavanderia_id",id.id)
       console.log(this.idLavanderia);
       this.getServicios()
       this.getDatosLavanderia()
