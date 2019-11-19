@@ -12,79 +12,157 @@ import { GlobalElementService } from '../../global-element.service';
 export class StatusPage implements OnInit {
 
   efectos=new Efectos()
-
+  viewFilters=false
   servicios
-
+  nombresDecliente=''
   sin_parapetros=false
-  
+  sin_resultados=false
   pedidos=[]
+  
+  filtros=[
+    {
+      filtro:'Recogiendo',
+      stado:true
+    },
+    {
+     filtro:'Entregando',
+     stado:true
+   },
+   {
+     filtro:'Cancelado',
+     stado:true
+   },
+ 
+   {
+     filtro:'Nuevo pedido',
+     stado:true
+   },
+   {
+     filtro:'A lavandería',
+     stado:true
+   },
+   {
+     filtro:'En proceso',
+     stado:true
+   }
+   ,
+   {
+     filtro:'Finalizado',
+     stado:true
+   },
+   {
+     filtro:'Lista y limpia',
+     stado:true
+   }
+     
+   ]
+ 
+
   /*pedidos=[
     {
       id:1,
-      nombre:'Nombre de lavanderia',
+      nombre:'lavadora',
       hora:'11:00 pm',
-      status: 'En lavanderia',
-      visto: false,
+      status: 'En proceso',
+      ser_visto:true,
       icon:this.efectos.enLavanderia,
       servicios:[
         'servicio 1',
         'servicio 2',
-        'servicio 3',
-        'servicio 4',
-        'servicio 5'
+       
       ]
     },
 
     {
       id:2,
-      nombre:'Nombre de lavanderia 2',
+      nombre:'Nombre ',
       hora:'11:00 pm',
-      status: 'En entraga',
-      visto: false,
+      status: 'Entregando',
+      ser_visto:true,
       icon:this.efectos.moto1,
       servicios:[
         'servicio 1',
         'servicio 2',
-        'servicio 3',
-        'servicio 4',
-        'servicio 5'
+        
       ]
     },
 
     {
       id:3,
-      nombre:'Nombre de lavanderia 3',
+      nombre:'chino 3',
       hora:'11:00 pm',
-      status: 'En camino',
-      visto: false,
+      status: 'Recogiendo',
+      ser_visto:true,
       icon:this.efectos.moto0,
       servicios:[
         'servicio 1',
         'servicio 2',
-        'servicio 3',
-        'servicio 4',
-        'servicio 5',
-        'servicio 6',
-        'servicio 7'
+       
       ]
     },
-
-
     {
       id:4,
-      nombre:'Nombre de lavanderia 4',
+      nombre:'freco 4',
       hora:'11:00 pm',
       status: 'A lavandería',
-      visto: false,
+      ser_visto:true,
       icon:this.efectos.moto2,
       servicios:[
         'servicio 1',
         'servicio 2',
-        'servicio 3',
-        'servicio 4',
-        'servicio 5',
-        'servicio 6',
-        'servicio 7'
+        
+      ]
+    },
+    {
+      id:4,
+      nombre:'peso mo',
+      hora:'11:00 pm',
+      status: 'Cancelado',
+      ser_visto:true,
+      icon:this.efectos.cancel,
+      servicios:[
+        'servicio 1',
+        'servicio 2',
+        
+      ]
+    },
+    {
+      id:4,
+      nombre:'opnitrix',
+      hora:'11:00 pm',
+      status: 'Lista y limpia',
+      ser_visto:true,
+      icon:this.efectos.esperando,
+      servicios:[
+        'servicio 1',
+        'servicio 2',
+        
+      ]
+    },
+    {
+      id:4,
+      nombre:'Nombre de lavanderia 4',
+      hora:'11:00 pm',
+      status: 'Finalizado',
+      ser_visto:true,
+      icon:this.efectos.finalsizadp,
+      servicios:[
+        'servicio 1',
+        'servicio 2',
+        
+      ]
+    },
+    {
+      id:4,
+      nombre:'burlo',
+      hora:'11:00 pm',
+      status: 'Nuevo pedido',
+      ser_visto:true,
+      icon:this.efectos.lava,
+      servicios:[
+        'servicio 1',
+        'servicio 2',
+        
       ]
     }
 
@@ -113,6 +191,7 @@ export class StatusPage implements OnInit {
    }
 
   ngOnInit() {
+    this.ocultarFiltro()
     this.getPedidos()
   }
 
@@ -154,6 +233,7 @@ export class StatusPage implements OnInit {
                   hora:this.tConvert(''+hora.hora+':'+hora.minutos)+'/ '+hora.dia+'/ '+hora.mes,
                   status: element.status,
                   icon:this.efectos.getStatusIcon(element.status),
+                  ser_visto:true
                 }
 
 
@@ -182,6 +262,54 @@ export class StatusPage implements OnInit {
   }
 
 
+
+
+  
+  verStadosDefiltros(){
+    let sinVisualizar=0
+    this.pedidos.forEach(element => {
+          this.filtros.forEach(element1 => {
+                  if(element1.filtro==element.status){
+                      if(element1.stado==true){
+                        element.ser_visto=true
+                      }else{
+                        element.ser_visto=false
+                        sinVisualizar=sinVisualizar+1
+                      }
+                  }
+          });
+    });
+    if(sinVisualizar==this.pedidos.length){
+      console.log("sin ver");
+      this.sin_resultados=true
+    }else{
+      this.sin_resultados=false
+    }
+    this.vewFiltros()
+  }
+
+
+  vewFiltros(){
+    if(this.viewFilters==false){
+      this.viewFilters=true
+      this.mostrarFiltro()
+    }else{
+      this.viewFilters=false
+      this.ocultarFiltro()
+    }
+  }
+
+
+
+  ocultarFiltro(){
+    document.getElementById('filtro11').style.transition='0.5s'
+    document.getElementById('filtro11').style.marginTop='-200%'
+  }
+
+  mostrarFiltro(){
+    document.getElementById('filtro11').style.transition='0.5s'
+    document.getElementById('filtro11').style.marginTop='0'
+  }
 
 }
 

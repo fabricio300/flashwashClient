@@ -10,6 +10,8 @@ export class Efectos{
     moto1='../../../assets/iconos/vespa3.png'
     moto2='../../../assets/iconos/vespa2.png'
     nuevo='../../../assets/iconos/new-product.png'
+    finalsizadp='../../../assets/iconos/check-mark.png'
+    esperando='../../../assets/iconos/help.png'
 
     constructor(){
 
@@ -65,6 +67,12 @@ export class Efectos{
                   case 'Nuevo pedido': return this.nuevo
             
                     break;
+                    case 'Lista y limpia': return this.esperando
+        
+                    break;
+                    case 'Finalizado': return this.finalsizadp
+              
+                      break;
         
           default:
             break;

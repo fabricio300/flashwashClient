@@ -3,7 +3,7 @@
     height: auto;
     overflow: hidden;
     border-radius: 10px;
-    margin:10px;
+  
     display: flex;
     flex-wrap: wrap;
     margin-bottom: auto;
@@ -56,6 +56,11 @@
 
 
 
+.cancelado{
+    background: #ff0000;
+    color: aliceblue;
+
+}
 
 .nuevo{
     background: #8a00d4;
@@ -82,6 +87,16 @@
     color: #e5e5e5;
 }
 
+.resperando{
+    background: #00818a;
+    color: #e5e5e5;
+}
+
+
+.final{
+    background: #f45905;
+    color: #e5e5e5;
+}
 
 .rota-horizontal{
     -webkit-transform: scaleX(-1);
@@ -89,6 +104,21 @@
     transform: scaleX(-1);
     filter: FlipH;
     -ms-filter: "FlipH";
+}
+
+
+.filtros{
+    width: 100%;
+    height: 100%;
+    background: gray;
+    position: fixed;
+    z-index: 60;
+    background: rgba($color: #000000, $alpha: 0.7);
+}
+
+.nooo{
+    overflow: hidden;
+    display: none;
 }
 
 @media(max-width:600px){

@@ -11,6 +11,8 @@ import { MenuController } from '@ionic/angular';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 
+import { ToastController } from '@ionic/angular';
+
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.page.html',
@@ -31,9 +33,9 @@ export class InicioPage implements OnInit {
       icon: '../../../assets/iconos/bike.png'
     },
     {
-      titulo:'Guardados',
+      titulo:'Historial',
       url:'/guardados',
-      icon: '../../../assets/iconos/bookmark-black-shape (1).png'
+      icon: '../../../assets/iconos/clock.png'
     }
   ]
   
@@ -143,6 +145,7 @@ export class InicioPage implements OnInit {
     private socket: Socket,
     private notificacion:LocalNotifications,
     private backgroundMode: BackgroundMode,
+    public toastController: ToastController
     ) { 
 
      
@@ -153,6 +156,7 @@ export class InicioPage implements OnInit {
         console.log("ENTRO AL SOCKET",data);
         
         this.getLavanderias1()
+        this.presentToast()
       });
     
      
@@ -227,6 +231,15 @@ export class InicioPage implements OnInit {
     this.router.navigate(['lavanderia'], navigationExtras);
   }
 
+
+
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Una nueva lavandería acaba de unirce.',
+      duration: 4000
+    });
+    toast.present();
+  }
 
 
   emitirMensaje(){

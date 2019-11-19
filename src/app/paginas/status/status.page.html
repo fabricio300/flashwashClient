@@ -1,37 +1,98 @@
-<ion-header>
-    <ion-toolbar color='primary'>
-        <ion-buttons slot="start">
-        <ion-back-button (click)="regresar()"></ion-back-button>
-     </ion-buttons> 
-      <ion-title>Staus de pedido</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-header style="z-index: 100;">
+  <ion-toolbar color="primary" >
+    <ion-buttons slot="start">
+      <ion-back-button >
+
+      </ion-back-button>
+    </ion-buttons>
+       <ion-input  [(ngModel)]="nombresDecliente" placeholder="Ingresa el nombre de un cliente"></ion-input>
+
+       <ion-buttons slot="end">
+        <ion-button style="font-size: 15px;">
+          <img src="../../../assets/iconos/search.png" style="width: 16px; ">
+        </ion-button>
+       
+        <ion-button *ngIf="!viewFilters" (click)="vewFiltros()">
+          <img src="../../../assets/iconos/filter.png" style="width: 16px;">
+        </ion-button>
+
+        <ion-button style="font-size: 15px;"
+        
+        *ngIf="viewFilters" (click)="vewFiltros()">
+          <img src="../../../assets/iconos/filter (1).png" style="width: 16px;">
+        </ion-button>
+      </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+
   
   <ion-content color=secondary>
+
+
+
+
+      <div class="filtros" id="filtro11" > 
+          <ion-header>
+              <ion-toolbar color="success">
+                <ion-title>
+                    Staus del pedido:
+                </ion-title>
+              </ion-toolbar>
+            </ion-header>
+          <div style="z-index: 70;">
+            <ion-item color="medium" *ngFor="let filtro of filtros">
+              <ion-checkbox 
+              [(ngModel)]="filtro.stado"
+              style="margin:6px;"></ion-checkbox>
+               {{filtro.filtro}}
+            </ion-item>
+    
+            <ion-item  color="medium" >
+              <ion-button slot="end" (click)="vewFiltros()">
+                Cancelar
+              </ion-button>
+              <ion-button slot="end" (click)="verStadosDefiltros()">
+                buscar
+              </ion-button>
+            </ion-item>
+          </div>
+          
+  
+  
+  
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
     <div style="width: 100%; height: auto; display: flex; flex-wrap: wrap; padding-bottom: 17px;">
-    <div class="contePrime" *ngFor="let pedido of pedidos">
+
+      <p *ngIf="pedidos.length==0" style="margin:auto; margin-top: 15px;">Sin pedidos realizados :(</p>
+
+    <div class="contePrime" *ngFor="let pedido of pedidos | inicioStatus:nombresDecliente " [ngClass]="{ 'nooo':pedido.ser_visto==false}">
 
 
-
-
-
-
-
-
-
-
-
-
-      <div class="vista centrar "
+      <div  class="vista centrar "
       
-      [ngClass]="{
-            'lavanderia':pedido.status=='En lavanderia',
-            'encalino1':pedido.status=='En entraga',
-            'encalino2':pedido.status=='A lavandería',
-            'recojer':pedido.status=='En camino',
-            'lavanderia':pedido.status=='En proceso',
-            'nuevo':pedido.status=='Nuevo pedido'
-      }"
+      [ngClass]="{'nuevo':pedido.status=='Nuevo pedido', 
+      'cancelado':pedido.status=='Cancelado',
+      'lavanderia':pedido.status=='En proceso',
+      'encalino1':pedido.status=='Entregando',
+      'encalino2':pedido.status=='A lavandería',
+      'recojer':pedido.status=='Recogiendo',
+      'final':pedido.status=='Finalizado',
+      'resperando':pedido.status=='Lista y limpia'
+        }"
       
       >
 
@@ -67,35 +128,6 @@
         </button>
 
       </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     </div>

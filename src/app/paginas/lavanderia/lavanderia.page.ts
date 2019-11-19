@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Efectos } from './Efectos';
 import { Router ,NavigationExtras,ActivatedRoute } from '@angular/router';
 import { GlobalElementService} from '../../global-element.service';
+import { Socket } from 'ngx-socket-io';
+import { ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -95,6 +97,8 @@ export class LavanderiaPage implements OnInit {
     private router:Router,
     private global:GlobalElementService,
     private route: ActivatedRoute, 
+    private socket:Socket,
+    public toastController: ToastController
   ) {
     this.route.queryParams.subscribe(params => {
       console.log("parametros",params);
@@ -104,7 +108,19 @@ export class LavanderiaPage implements OnInit {
       console.log(this.idLavanderia);
       this.getServicios()
       this.getDatosLavanderia()
+
+
+      socket.on('se_actulizo_una_lavanderia'+this.idLavanderia,(data)=>{
+        console.log("actualiza");
+        this.getServicios()
+        this.getDatosLavanderia()
+        this.presentToast()
+      })     
+
+
       });
+
+       
 
    }
 
@@ -153,6 +169,9 @@ export class LavanderiaPage implements OnInit {
   getServicios(){
     this.servicios=null
     this.servicios=[]
+    this.tintoreria=[]
+    this.planchados=[]
+    this.otrosServicios=[]
     this.global.getServiciosLavanderia(this.idLavanderia).subscribe(Response=>{
         //console.log(Response[0]);
         const ser=JSON.parse(Response[0].servicio)
@@ -315,11 +334,15 @@ export class LavanderiaPage implements OnInit {
       
       this.horaLI=this.tConvert(hora.inicio)
       this.horaLF=this.tConvert(hora.fin)
+      console.log("hora 1 ",hora);
+
 
       this.nombreLavanderia=Response.nombre_lavanderia
 
-      this.horaSI=this.tConvert(hora.inicio)
-      this.horaSF=this.tConvert(hora.fin)
+      let hora2:any=JSON.parse(Response.horario_sabado)
+
+      this.horaSI=this.tConvert(hora2.inicio)
+      this.horaSF=this.tConvert(hora2.fin)
 
       console.log("direccion",this.direccion);
       //console.log("hora",this.horaL);
@@ -341,5 +364,14 @@ export class LavanderiaPage implements OnInit {
       time[0] = +time[0] % 12 || 12; // Adjust hours
     }
     return time.join (''); // return adjusted time or original string
+  }
+
+
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'La lavandaría acaba de actualizar su información.',
+      duration: 4000
+    });
+    toast.present();
   }
 }

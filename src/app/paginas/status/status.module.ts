@@ -6,6 +6,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { StatusPage } from './status.page';
+import { InicioFiltroPipe } from '../../filtrosStatus/inicio-filtro.pipe';
+
 
 const routes: Routes = [
   {
@@ -21,6 +23,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [StatusPage]
+  declarations: [StatusPage,InicioFiltroPipe]
 })
 export class StatusPageModule {}

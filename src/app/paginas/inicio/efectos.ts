@@ -41,7 +41,7 @@ export class efectos {
       aplicarFiltros(arreglo:any){
         
 
-      if(this.todoFalse()==false){
+      if(this.todoFalse()==false && this,this.todoTrue()==false){
         arreglo.forEach(element => {
               let cumple_con_uno=false
                 this.flitros.forEach(element2 => {
@@ -67,6 +67,12 @@ export class efectos {
 
         });
       }
+
+      if(this.todoTrue()==true || this.todoFalse()==true){
+        arreglo.forEach(element => {
+          element.visto=true
+        });
+      }
         this.ocultarFiltros()
       }
       
@@ -85,6 +91,23 @@ export class efectos {
          return false
        }
 
+
+     }
+
+     todoTrue(){
+      let res=0
+      this.flitros.forEach(element => {
+           if(element.activo==true){
+             res=res+1
+           }
+      });
+
+      if(res==this.flitros.length){
+        return true
+      }else{
+        return false
+      }
+       
 
      }
 }
