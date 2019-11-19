@@ -147,13 +147,13 @@ export class InicioPage implements OnInit {
 
      
 
-     /* socket.on('mensajeServidor',function(data){
-        console.log('data=',data);
+    
+
+      socket.on('nueva_lavanderia',(data)=>{
+        console.log("ENTRO AL SOCKET",data);
         
-      })*/
-
-
-
+        this.getLavanderias1()
+      });
     
      
      console.log("id usuario=",localStorage.getItem('idUser'));

@@ -19,7 +19,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 
 
-const config: SocketIoConfig = { url: 'http://138.197.70.172', options: {} };
+const config: SocketIoConfig = { url: 'http://165.227.60.169', options: {} };
 
 
 @NgModule({
