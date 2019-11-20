@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { Efectos } from './Efectos';
 import { GlobalElementService } from '../../global-element.service';
 import { Socket } from 'ngx-socket-io';
+import { NotificaService } from '../../notificaciones/notifica.service';
 
 
 @Component({
@@ -11,6 +12,15 @@ import { Socket } from 'ngx-socket-io';
   styleUrls: ['./info-pedido.page.scss'],
 })
 export class InfoPedidoPage implements OnInit {
+
+  tipo_de_entrega
+  costoReparto1
+  costoReparto2
+  costoLavanderia
+  total
+
+  yo_cambie_status=false
+
   pedido={
     id:null,
     nombre:'',
@@ -27,12 +37,14 @@ export class InfoPedidoPage implements OnInit {
 
   idPedido
   idLavanderia
+  idRepartidor
 
   constructor(
     private route: ActivatedRoute,
     private router:Router,
     private apiservice:GlobalElementService,
-    private socket:Socket
+    private socket:Socket,
+    private notificacion:NotificaService
   ) { 
 
     this.route.queryParams.subscribe(params => {
@@ -75,11 +87,43 @@ export class InfoPedidoPage implements OnInit {
   }
 
 
+  regresar(){
+    
+        if(this.yo_cambie_status==true){
+          localStorage.setItem('actualiza','si')
+        }else{
+          localStorage.setItem('actualiza','no')
+        }
+        this.router.navigate(['/status'])
+  }
+
   getInfoPedido(){
     this.apiservice.getPedidosPorId(this.idPedido).subscribe(Response=>{
       console.log("Response------------------------",Response);
       let hora:any=JSON.parse(Response.fecha_pedido)
       this.idLavanderia=Response.lavanderia_id
+
+        this.idRepartidor=Response.repartidor_id
+        this.tipo_de_entrega=Response.tipo_entrega
+     
+
+        let precios:any=JSON.parse(Response.precio)
+        console.log("estos son los precios",precios);
+        
+        if(parseFloat(precios.precio_lavanderia)>0){
+              if(Response.tipo_entrega=='completo'){
+                  this.total=(parseFloat(precios.precio_entregar)*2)+parseFloat(precios.precio_lavanderia)
+              }else{
+                this.total=parseFloat(precios.precio_entregar)+parseFloat(precios.precio_lavanderia)
+              }
+
+            this.costoLavanderia=precios.precio_lavanderia
+        }else{
+          this.costoLavanderia=0
+        }
+
+        this.costoReparto1=precios.precio_entregar
+       
 
         let servi_lavanderia:any=[]
         let servi_tito:any=[]
@@ -183,22 +227,31 @@ export class InfoPedidoPage implements OnInit {
     return time.join (''); // return adjusted time or original string
   }
 
- /* {
-    id:4,
-    nombre:'Nombre de lavanderia 4',
-    hora:'11:00 pm',
-    status: 'A lavandería',
-    visto: false,
-    icon:this.efectos.moto2,
-    servicios:[
-      'servicio 1',
-      'servicio 2',
-      'servicio 3',
-      'servicio 4',
-      'servicio 5',
-      'servicio 6',
-      'servicio 7'
-    ]
-  }*/
+
+  optenerCostoTotal(){
+
+  }
+
+
+  comfirmarRecivido(){
+    let item={
+      status:'Finalizado'
+    }
+    
+   console.log("pedddio",);
+   
+    this.apiservice.setStatusPedido(this.idPedido,item).subscribe(Response=>{
+      this.yo_cambie_status=true
+      this.notificacion.enviarMensaje('Se a finalizado una solucitud','El cliente a recivido su ropa','Repartidor'+this.idRepartidor)
+      this.notificacion.enviarMensaje('Se a finalizado una solucitud','El cliente a recivido su ropa','Lavanderia'+this.idLavanderia)
+      this.socket.emit('asignarReaptidor',this.idRepartidor)
+      this.socket.emit('nuevo_status','id_lavanderia'+this.idLavanderia)
+  
+      this.getInfoPedido()
+    
+    })
+
+
+  }
 
 }

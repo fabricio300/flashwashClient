@@ -213,7 +213,7 @@ export class LoginPage implements OnInit {
 
 
 
-  Registrar(){
+ async Registrar(){
     let item={
       nombres:this.formRegistro.get('nombre').value,
       apellidos:this.formRegistro.get('apellidos').value,

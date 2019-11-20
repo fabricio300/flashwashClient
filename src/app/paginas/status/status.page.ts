@@ -192,6 +192,14 @@ export class StatusPage implements OnInit {
         this.getPedidos()
     
       })
+
+      setInterval(()=>{
+        if(localStorage.getItem('actualiza')!=null && localStorage.getItem('actualiza')=='si'){
+          localStorage.setItem('actualiza','no')
+          this.pedidos=null
+          this.getPedidos()
+        }
+      },1000)
       
     
   });
@@ -204,6 +212,7 @@ export class StatusPage implements OnInit {
 
   ngOnInit() {
     this.ocultarFiltro()
+    this.pedidos=null
     this.getPedidos()
   }
 

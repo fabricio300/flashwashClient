@@ -162,4 +162,15 @@ getPedidosPorId(id:any):Observable<any>{
   return  this.http.get(`${this.api}pedidos/${id}`,httpOptions)
 }
 
+
+setStatusPedido(id:any,item:any):Observable<any>{
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  }
+
+  return  this.http.put(`${this.api}pedidos_repartidor_status/${id}`,item,httpOptions)
+}
+
 }

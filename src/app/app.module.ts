@@ -17,7 +17,7 @@ import {  SocketIoModule, SocketIoConfig } from 'ngx-socket-io'
 import { HttpClientModule } from '@angular/common/http';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
-
+import { FCM } from '@ionic-native/fcm/ngx';
 
 const config: SocketIoConfig = { url: 'http://165.227.60.169', options: {} };
 
@@ -36,6 +36,7 @@ const config: SocketIoConfig = { url: 'http://165.227.60.169', options: {} };
     BackgroundMode,
     Geolocation,
     NativeGeocoder,
+    FCM,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

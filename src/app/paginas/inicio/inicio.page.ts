@@ -12,6 +12,8 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 
 import { ToastController } from '@ionic/angular';
+import { NotificaService } from '../../notificaciones/notifica.service';
+
 
 @Component({
   selector: 'app-inicio',
@@ -32,11 +34,11 @@ export class InicioPage implements OnInit {
       url:'/status',
       icon: '../../../assets/iconos/bike.png'
     },
-    {
+    /*{
       titulo:'Historial',
       url:'/guardados',
       icon: '../../../assets/iconos/clock.png'
-    }
+    }*/
   ]
   
 
@@ -145,7 +147,8 @@ export class InicioPage implements OnInit {
     private socket: Socket,
     private notificacion:LocalNotifications,
     private backgroundMode: BackgroundMode,
-    public toastController: ToastController
+    public toastController: ToastController,
+    public notificacionG: NotificaService
     ) { 
 
      
@@ -177,6 +180,7 @@ export class InicioPage implements OnInit {
   ngOnInit() {
     if(localStorage.getItem('secion')=='true'){
       this.global.status_de_secion=true
+      this.notificacionG.suscrivirceAtema()
      //this.entraAsegudoPlano() //avilitar en segundo plano
     }else{
       this.global.status_de_secion=false
@@ -187,7 +191,7 @@ export class InicioPage implements OnInit {
     document.getElementById('filtros').style.transition="0.5s"
     this.efectos1.ocultarFiltros()
 
-      this.mensaje()
+      //this.mensaje()
     this.getLavanderias1()
     this.efectos1.setFiltros(this.filtros)
   }
@@ -214,6 +218,7 @@ export class InicioPage implements OnInit {
   
 
   cerraSecion(){
+    this.notificacionG.desSuscribirce()
     localStorage.setItem('secion','false')
     this.global.status_de_secion=false
     localStorage.clear()

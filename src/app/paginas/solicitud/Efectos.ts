@@ -12,7 +12,10 @@ export class Efectos{
     iconNota='../../../assets/pedir/invoice.png'
     duda='../../../assets/imagenes/information.png'
 
-
+    costo_entrega=0.0
+    costo_recoger=0.0
+    precioComun=0.0
+  
     actual=0
 
     listaServicios=false     
@@ -119,15 +122,20 @@ export class Efectos{
           if(this.tipoDeEntrega=='tipo1'){
             this.tipoDeEntrega='tipo1'
             this.entregar='solo_recojer'
+            this.costo_recoger=this.precioComun
           }
           if(this.tipoDeEntrega=='tipo2'){
             this.tipoDeEntrega='tipo2'
             this.entregar='solo_entregar'
+            this.costo_entrega=this.precioComun
+          
             }
 
             if(this.tipoDeEntrega=='tipo3'){
                 this.tipoDeEntrega='tipo3'
                 this.entregar='completo'
+                this.costo_entrega=this.precioComun
+                this.costo_recoger=this.precioComun
             }
       }
 }

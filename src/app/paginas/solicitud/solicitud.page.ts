@@ -3,6 +3,7 @@ import { Efectos } from './Efectos';
 import { ActivatedRoute, Router,NavigationExtras } from '@angular/router';
 import { GlobalElementService } from '../../global-element.service';
 import { Socket } from 'ngx-socket-io';
+import { NotificaService } from '../../notificaciones/notifica.service';
 
 
 
@@ -32,7 +33,8 @@ export class SolicitudPage implements OnInit {
     private route: ActivatedRoute, 
     private router: Router,
     private global:GlobalElementService,
-    private soket:Socket
+    private soket:Socket,
+    private notificaciones:NotificaService
     ) {
     this.route.queryParams.subscribe(params => {
       console.log(params.special);
@@ -73,6 +75,8 @@ export class SolicitudPage implements OnInit {
     this.efectos.optenerCantidadPedida(1,this.tintoreria)
     this.efectos.optenerCantidadPedida(2,this.planchados)
     this.precio = this.calularPrecio()
+    this.efectos.precioComun=this.precio
+    
   }
 
 
@@ -140,8 +144,13 @@ if(this.efectos.cantidadPedidadDePlanchado>0){
     }
   });
 }
+  
 
-
+  let pre={  
+    precio_regocojer:this.precio,
+    precio_entregar:this.precio,
+    precio_lavanderia:"0"
+}
 
   let solicitud={
     usuario_id:localStorage.getItem('idUser'),
@@ -162,7 +171,7 @@ if(this.efectos.cantidadPedidadDePlanchado>0){
       planchado:plancha,
       transporte:this.efectos.entregar
     }),
-    precio:this.precio,
+    precio:JSON.stringify(pre),
     coordenadas_lavanderia:JSON.stringify({lat:this.coordenadasLavanderia.lat, lon:this.coordenadasLavanderia.lon}),
     coordenadas_usuario:JSON.stringify({lat:this.coordenadasCliente.lat, lon:this.coordenadasCliente.lon}),
     coordenadas_repartidor:'',
@@ -179,6 +188,7 @@ if(this.efectos.cantidadPedidadDePlanchado>0){
   
   this.global.solisitarservicio(solicitud).subscribe(Response=>{
     console.log("pedido");
+    this.notificaciones.enviarMensaje('Nueva solicitud', 'Tienes un nueva solicitud de servicios','Lavanderia'+solicitud.lavanderia_id)
     this.irAStatus()
   })
 

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color='primary'>
     <ion-buttons slot="start">
-    <ion-back-button ></ion-back-button>
+    <ion-back-button (click)="regresar()"></ion-back-button>
  </ion-buttons> 
   <ion-title>Pedido</ion-title>
 </ion-toolbar>
@@ -32,7 +32,7 @@
           
           <div *ngFor="let lava of pedido.servicios_lavanderia">
             <p >{{lava.servicio}} ${{lava.precio}} por {{lava.unidad}}</p>
-            <div *ngIf="lava.cantidad!=0" class="centrar" style="width: 100%; ">
+            <div *ngIf="lava.costo!=0" class="centrar" style="width: 100%; ">
               <p style="margin: auto; color: #52de97; width: 40%;" class="centrar">
                 {{lava.unidad}}/s: 
                 <label style="color: white;">
@@ -59,7 +59,7 @@
        
           <div *ngFor="let tintor of pedido.servicios_tititoreria">
             <p >{{tintor.servicio}} ${{tintor.precio}} por {{tintor.unidad}}</p>
-            <div *ngIf="tintor.cantidad!=0" class="centrar" style="width: 100%; ">
+            <div *ngIf="tintor.costo!=0" class="centrar" style="width: 100%; ">
               <p style="margin: auto; color: #52de97; width: 40%;" class="centrar">
                 {{tintor.unidad}}/s: 
                 <label style="color: white;">
@@ -80,8 +80,26 @@
           <h6 style="color: #c0ffb3;  border-bottom: 1px solid #c0ffb3;" *ngIf="pedido.servicios_planchado.length>0">
               Planchado
             </h6>
-            
-          <p *ngFor="let planc of pedido.servicios_tititoreria"> ${{planc.precio}} por {{planc.unidad}}</p>
+        
+          <div *ngFor="let planc of pedido.servicios_tititoreria">
+            <p >{{planc.unidad}} ${{planc.precio}}</p>
+            <div *ngIf="planc.costo!=0" class="centrar" style="width: 100%; ">
+              <p style="margin: auto; color: #52de97; width: 40%;"  class="centrar">
+                {{planc.unidad}}/s: 
+                <label style="color: white;">
+                  ${{planc.cantidad}}
+                </label>
+               
+              </p>
+              <p style="margin: auto; color: #52de97; width: 40%;" class="centrar">
+                Costo:      
+                <label style="color: white;">
+                  {{planc.costo}}
+                </label>
+              </p>
+            </div>
+          
+         </div>
 
 
 
@@ -90,17 +108,16 @@
 
 
 
-
-
-    <br>
+    
     <h5 class="centrarIz">
-      
+      <br>
+      <br>
+      <br>
       <img src="../../../assets/Status/strategy.png" class="iconos">
       Indicaciones:
-    
     </h5>
 
-    <p style="width: 95%;" >
+    <p style="width: 95%; margin-left: 15px; margin-top: -1px;" >
      {{pedido.indicaciones}}
     </p>
 
@@ -130,24 +147,33 @@
 
 
   <div class="contPart ">
-      <br>
+
     <h5 class="centrarIz">
       
       <img src="../../../assets/Status/invoice.png" class="iconos">
       Costes:
     </h5>
 
-    <label >Transporte a lavandería:</label>
-    <p>$50</p>
-
-    <label >Transporte a su domicilio:</label>
-    <p>$50</p>
-
-    <label >Servicios de lavandería:</label>
-    <p>$100</p>
-
-    <label >total:</label>
-    <p>$200</p>
+    <div *ngIf="tipo_de_entrega=='solo_recojer' || tipo_de_entrega=='completo'">
+      <label >Transporte a lavandería:</label>
+      <p>${{costoReparto1}}</p>
+    </div>
+    
+    <div *ngIf="tipo_de_entrega=='solo_entregar' || tipo_de_entrega=='completo'">
+      <label >Transporte a su domicilio:</label>
+      <p>${{costoReparto1}}</p>
+    </div>
+  
+    <div *ngIf="costoLavanderia>0">
+      <label >Servicios de lavandería:</label>
+      <p>${{costoLavanderia}}</p>
+    </div>
+  
+    <div *ngIf="costoLavanderia>0">
+      <label >total:</label>
+      <p>${{total}}</p>
+    </div>
+    
 
     <label >fecha</label>
 
@@ -177,6 +203,21 @@
         <img src="../../../assets/iconos/map.png" class="iconos" style="margin:auto;">
     </button>
   </div>
+
+
+  <ion-button *ngIf="pedido.status=='Entregando'" (click)="comfirmarRecivido()" style="width: 90%; margin: auto; margin-top: 15px;">
+    Confirmar entrega
+  </ion-button>
+
+  <ion-button *ngIf="pedido.status=='Lista y limpia'" (click)="comfirmarRecivido()" style="width: 90%; margin: auto; margin-top: 15px;">
+    Confirmar entrega
+  </ion-button>
+
+
+  <ion-button *ngIf="pedido.status=='Nuevo pedido'" style="width: 90%; margin: auto; margin-top: 15px;">
+    Cancelar
+  </ion-button>
+
 </div>
 
 </ion-content>
