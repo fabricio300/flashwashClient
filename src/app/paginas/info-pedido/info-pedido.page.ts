@@ -83,7 +83,12 @@ export class InfoPedidoPage implements OnInit {
   }
 
   irAStatus(){
-    this.router.navigate(['/seguimiento'])
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        special: JSON.stringify({id:this.idRepartidor})
+      }
+    };
+    this.router.navigate(['/seguimiento'],navigationExtras)
   }
 
 

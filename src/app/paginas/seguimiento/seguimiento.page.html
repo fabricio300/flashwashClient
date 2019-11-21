@@ -12,12 +12,25 @@
     <div class="conteMapa">
 
         <agm-map
-        [style.height.px]="height"
+        [zoom]="16"
         [latitude]="lat"
         [longitude]="lng">
           <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
        </agm-map>
     </div>
-  
+
+  <div class="conteMapa contDatos centrar" style="height: 40%; overflow-y: scroll;">
+    <h5 style="width: 100%;">Datos del repartidor</h5>
+    <img src="{{foto_repartidor}}" alt="">
+    
+    <div class="conDatos">
+      <label > <a >Nombre del repartidor:</a>  <br> {{nombre_repartidor}}</label>
+     <br><br>
+      <label  > <a >Matricula:</a> <br> {{matricula_repartidor}}</label>
+     
+    </div>
+
+
+  </div>
   
   </ion-content>

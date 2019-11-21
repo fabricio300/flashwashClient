@@ -214,7 +214,7 @@
         this.efectos.cantidadPedidaDeTintoreria==0 &&
         this.efectos.cantidadPedidadDePlanchado==0"
         (click)="this.efectos.next()"
-        style="height:30px;"
+        style="height:30px; "
         >
           Continuar
         </ion-button>
@@ -266,7 +266,7 @@
                     <ion-radio slot="start"  style="margin:3px; "
                     value="tipo1"
                     ></ion-radio>
-                    Solo deseo que vengan por mi ropa
+                    Solo entregar ropa a lavandería
 
                     <img 
                     (click)="this.efectos.mostrarReparto('tipo1')"
@@ -287,7 +287,7 @@
                 <ion-radio 
                 style="margin:3px; "
                 value="tipo2" ></ion-radio>
-                Solo deseo que traigan  mi ropa
+                Solo entregar ropa a mi domicilio
                 <img 
                 (click)="this.efectos.mostrarReparto('tipo2')"
                 src="{{this.efectos.duda}}" width="20px" style="margin:3px;cursor: pointer; ">
@@ -331,7 +331,7 @@
 
 
       
-      <div class="centrar" style="height: 30px;">
+      <div class="centrar" style="height: 30px; padding: 5px;">
 
           <ion-button
           (click)="this.efectos.regresar()"
@@ -424,7 +424,7 @@
 
 
       
-      <div class="centrar" style="height:30px;">
+      <div class="centrar" style="height:30px; padding: 5px;">
 
           <ion-button
           (click)="this.efectos.regresar()"
@@ -488,98 +488,105 @@
       
     
       <h4>&nbsp; Ticket</h4>      
-      <div class="contScroll " style="display: flex; flex-wrap: wrap; justify-content: center; ">
+      <div class="contScroll " style="display: flex; flex-wrap: wrap; justify-content: center;">
+         
+        
+        <div class="cobros" style="width: 100%;">
+              <h6 style="color: gold;">Costes:</h6>
+            <label *ngIf="this.efectos.tipoDeEntrega=='tipo1' || this.efectos.tipoDeEntrega=='tipo3'">
+                <p style="font-size: 12px; color: #52de97;">transportar a lavandería:</p>
+                <p >${{this.precio}}</p>
+              
+            </label>
+           
+  
+            <label *ngIf="this.efectos.tipoDeEntrega=='tipo2' || this.efectos.tipoDeEntrega=='tipo3'">
+                <p style="font-size: 12px; color: #52de97;">transportar a mi domicilio:</p>
+                <p >${{this.precio}}</p>
+            </label>
+            
+            <!--label >
+              <p style="font-size: 12px; color: #52de97;">servicios de lavandería:</p>
+              <p>
+                $50
+              </p>
+            </label-->
+  
+  
+            <label >
+              <p style="color: gold;">Total:</p>
+              <p style="font-size: 13px;">
+                El coste por los servicios de lavanderia dependera de el pesaje de su ropa.
+              </p>
+            </label>
+  
+  
+          </div>
+
+
+
+          <div class="listaSer " style="width: 100%; height: auto;">
+              <h6 style="color: white; font-size: 15px;">Servicios solicitados:</h6>
+  
+              <div *ngIf=" this.efectos.cantidadPedidaDeLavanderia!=0">
+                  <h6 style="color: #52de97;">Lavandería:</h6>
+                  <label *ngFor="let servi3 of servicios">
+                      <p  class="centrarIZ" 
+                      style="font-size: 13px;"
+                      *ngIf="servi3.elegido">
+          
+                          - {{servi3.servicio}}
+                      </p>
+                 </label>
+  
+              </div>
+  
+  
+              <div *ngIf=" this.efectos.cantidadPedidaDeTintoreria!=0">
+                  <h6 style="color: #52de97;">
+                    <br>
+                    Tintoreria:</h6>
+                  <label *ngFor="let tinto3 of tintoreria">
+                      <p  class="centrarIZ" 
+                      style="font-size: 13px;"
+                      *ngIf="tinto3.elegido">
+                          - {{tinto3.servicio}}
+                      </p>
+                 </label>
+  
+              </div>
+  
+  
+              <div *ngIf=" this.efectos.cantidadPedidadDePlanchado!=0">
+                  <h6 style="color: #52de97;">
+                    <br>
+                    Planchado:</h6>
+                  <label *ngFor="let plan3 of planchados">
+                      <p  class="centrarIZ" 
+                      style="font-size: 13px;"
+                      *ngIf="plan3.elegido">
+                          - {{plan3.servicio}}
+                      </p>
+                 </label>
+  
+              </div>
+             
+  
+  
+            
+          <label *ngIf="this.efectos.indicaciones!=''">
+            <br>
+              <p style="color: white;font-size: 15px;">Indicaciones:</p>
+              <p style="font-size:12px; ">{{this.efectos.indicaciones}}   </p>
+            </label>
+    
+          </div>
+
+
+
+      
 
        
-
-        <div class="cobros">
-            <h6 style="color: gold;">Costes:</h6>
-          <label *ngIf="this.efectos.tipoDeEntrega=='tipo1' || this.efectos.tipoDeEntrega=='tipo3'">
-              <p style="font-size: 12px; color: #52de97;">transportar a lavandería:</p>
-              <p >${{this.precio}}</p>
-            
-          </label>
-         
-
-          <label *ngIf="this.efectos.tipoDeEntrega=='tipo2' || this.efectos.tipoDeEntrega=='tipo3'">
-              <p style="font-size: 12px; color: #52de97;">transportar a domicilio:</p>
-              <p >${{this.precio}}</p>
-          </label>
-          
-          <!--label >
-            <p style="font-size: 12px; color: #52de97;">servicios de lavandería:</p>
-            <p>
-              $50
-            </p>
-          </label-->
-
-
-          <label >
-            <p style="color: gold;">Total:</p>
-            <p >
-              El coste por los servicios de lavanderia dependera de el pesaje de su ropa.
-            </p>
-          </label>
-
-
-        </div>
-
-        <div class="listaSer ">
-            <h6 style="color: white; font-size: 15px;">Servicios solicitados:</h6>
-
-            <div *ngIf=" this.efectos.cantidadPedidaDeLavanderia!=0">
-                <h6 style="color: #52de97;">Lavandería:</h6>
-                <label *ngFor="let servi3 of servicios">
-                    <p  class="centrarIZ" 
-                    style="font-size: 13px;"
-                    *ngIf="servi3.elegido">
-        
-                        - {{servi3.servicio}}
-                    </p>
-               </label>
-
-            </div>
-
-
-            <div *ngIf=" this.efectos.cantidadPedidaDeTintoreria!=0">
-                <h6 style="color: #52de97;">
-                  <br>
-                  Tintoreria:</h6>
-                <label *ngFor="let tinto3 of tintoreria">
-                    <p  class="centrarIZ" 
-                    style="font-size: 13px;"
-                    *ngIf="tinto3.elegido">
-                        - {{tinto3.servicio}}
-                    </p>
-               </label>
-
-            </div>
-
-
-            <div *ngIf=" this.efectos.cantidadPedidadDePlanchado!=0">
-                <h6 style="color: #52de97;">
-                  <br>
-                  Planchado:</h6>
-                <label *ngFor="let plan3 of planchados">
-                    <p  class="centrarIZ" 
-                    style="font-size: 13px;"
-                    *ngIf="plan3.elegido">
-                        - {{plan3.servicio}}
-                    </p>
-               </label>
-
-            </div>
-           
-
-
-          
-        <label *ngIf="this.efectos.indicaciones!=''">
-          <br>
-            <p style="color: white;font-size: 15px;">Indicaciones:</p>
-            <p style="font-size:12px; ">{{this.efectos.indicaciones}}   </p>
-          </label>
-  
-        </div>
 
         
 
@@ -590,7 +597,7 @@
 
 
       
-      <div class="centrar" style="height:30px;">
+      <div class="centrar" style="height:30px; padding: 5px;">
          <ion-button style="margin: auto; height:30px;"
           (click)="this.efectos.regresar()"
           >

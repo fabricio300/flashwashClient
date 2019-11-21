@@ -195,7 +195,7 @@
   </div>
 
   
-  <div style="margin:auto;">
+  <div style="margin:auto;" *ngIf="(pedido.status!='Finalizado' &&  pedido.status!='cancelado' &&  pedido.status!='En proceso' &&  pedido.status!='Nuevo pedido')">
     <p>Ver ruta</p>
     <button
     (click)="irAStatus()"

@@ -1,6 +1,39 @@
 .conteMapa{
     width: 100%;
-    height: 80%;
+    height: 60%;
     background: #252525;
     overflow: hidden;
 }
+
+
+agm-map{
+    height: 100%;
+}
+
+.centrar{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.contDatos{
+    padding: 10px;
+    overflow: hidden;
+    color: white;
+}
+
+.contDatos::content img{
+    max-width: 40%;
+    height: auto;
+    margin: auto;
+    border-radius: 10px;
+}
+
+.conDatos{
+    width: 50%;
+    height: auto;
+   // background: chartreuse;
+    margin: auto;
+}
+
