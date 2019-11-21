@@ -185,4 +185,17 @@ getRepartidor(id:any):Observable<any>{
 }
 
 
+
+
+getCoordenadasRepartidor(id:any):Observable<any>{
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  }
+
+  return  this.http.get(`${this.api}repartidores_show_coords/${id}`,httpOptions)
+  
+}
+
 }

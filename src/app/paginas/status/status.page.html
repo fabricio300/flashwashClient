@@ -77,7 +77,21 @@
 
     <div style="width: 100%; height: auto; display: flex; flex-wrap: wrap; padding-bottom: 17px;">
 
-      <p *ngIf="pedidos.length==0" style="margin:auto; margin-top: 15px;">Sin pedidos realizados :(</p>
+      <div class="centrar" style="width: 100%;" *ngIf="buscando">
+        <label class="centrar">
+            <img src="../../../assets/iconos/A37.gif" style="width: 80px; margin: auto;">
+            <p>Buscando pedidos realizados...</p>
+        </label>       
+      </div>
+
+      <p *ngIf="(pedidos.length==0 && buscando!=true && sin_coteccion!=true)" style="margin:auto; margin-top: 15px;">Sin pedidos realizados :(</p>
+
+      <div class="centrar" style="width: 100%;" *ngIf="sin_coteccion">
+        <label class="centrar">
+            <p>Ninguna pedido encontrada :( <br> Revice su conexión a internet</p>
+        </label>       
+      </div>
+
 
     <div class="contePrime" *ngFor="let pedido of pedidos | inicioStatus:nombresDecliente " [ngClass]="{ 'nooo':pedido.ser_visto==false}">
 

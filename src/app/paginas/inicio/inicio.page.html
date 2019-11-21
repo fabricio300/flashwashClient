@@ -65,9 +65,6 @@
 
 
 
-
-
-
     <ion-menu side="start" menuId="first" style="position: fixed; z-index: 100;">
 
       <ion-header >
@@ -142,10 +139,17 @@
 
 <div style="display: flex; flex-wrap: wrap; width: 100%; padding-top: 20px;">
     
-        <div class="centrar" style="width: 100%;" *ngIf="lavandrias.length==0">
+        <div class="centrar" style="width: 100%;" *ngIf="buscando">
           <label class="centrar">
               <img src="../../../assets/iconos/A37.gif" style="width: 80px; margin: auto;">
               <p>Buscando lavanderias...</p>
+          </label>       
+        </div>
+       
+        <div class="centrar" style="width: 100%;" *ngIf="sin_resultados">
+          <label class="centrar">
+              
+              <p>Ninguna lavanderia encontrada :(. Revice su conexión a internet</p>
           </label>       
         </div>
        

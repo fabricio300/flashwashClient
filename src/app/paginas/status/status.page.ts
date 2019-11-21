@@ -3,6 +3,7 @@ import { Efectos } from './Efectos';
 import { Router,NavigationExtras,ActivatedRoute } from '@angular/router';
 import { GlobalElementService } from '../../global-element.service';
 import { Socket } from 'ngx-socket-io';
+import { error } from 'util';
 
 
 @Component({
@@ -18,8 +19,9 @@ export class StatusPage implements OnInit {
   nombresDecliente=''
   sin_parapetros=false
   sin_resultados=false
+  buscando=true
   pedidos=[]
-  
+  sin_coteccion=false
   filtros=[
     {
       filtro:'Recogiendo',
@@ -238,6 +240,7 @@ export class StatusPage implements OnInit {
 
 
   getPedidos(){
+    this.buscando=true
     this.pedidos=[]
       this.apiService.getPedidosPorUsuario(localStorage.getItem('idUser')).subscribe(Response=>{
         console.log("pedios= ",Response);
@@ -260,13 +263,19 @@ export class StatusPage implements OnInit {
 
 
                 this.pedidos.push(item)
+             
               })
 
                 console.log("ppppppppppppp",this.pedidos);
-                
+          
         });
-        
-      })
+        this.buscando=false
+      },error=>{
+        this.buscando=false
+        this.sin_coteccion=true
+      }
+
+      )
   }
 
 

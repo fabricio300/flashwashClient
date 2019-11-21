@@ -24,6 +24,8 @@ export class LavanderiaPage implements OnInit {
   horaSF:any
   nombreLavanderia:any
 
+  avierto=true
+
   actualS=0
 
   imagenes=[
@@ -321,6 +323,9 @@ export class LavanderiaPage implements OnInit {
 
       let fotos:any=JSON.parse(Response.fotografias)
 
+
+     
+     
       console.log("fotos",fotos);
       
       fotos.forEach(element => {
@@ -333,8 +338,13 @@ export class LavanderiaPage implements OnInit {
 
       let hora:any=JSON.parse(Response.horario_semana)
       
+  
+      
+
       this.horaLI=this.tConvert(hora.inicio)
       this.horaLF=this.tConvert(hora.fin)
+
+
       console.log("hora 1 ",hora);
 
 

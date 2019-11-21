@@ -21,6 +21,9 @@ import { NotificaService } from '../../notificaciones/notifica.service';
   styleUrls: ['./inicio.page.scss'],
 })
 export class InicioPage implements OnInit {
+  buscando=true
+  sin_resultados=false
+
   efectos1=new efectos()
   busqueda=''
   paginas=[
@@ -165,14 +168,7 @@ export class InicioPage implements OnInit {
      
      console.log("id usuario=",localStorage.getItem('idUser'));
      
-        
-     
-     
-
-
-
-
-
+      
     }
 
 
@@ -293,6 +289,8 @@ export class InicioPage implements OnInit {
 getLavanderias1(){
   this.lavandrias=null
   this.lavandrias=[]
+  this.sin_resultados=false
+  this.buscando=true
   this.global.getLavanderias().subscribe(Response=>{
     console.log("fotos:\n",Response);
     
@@ -314,6 +312,9 @@ getLavanderias1(){
    
     
    
+  },erro=>{
+    this.buscando=false
+    this.sin_resultados=true
   })
 }
 
@@ -396,6 +397,7 @@ if(iterador==4){
   console.log(item);
   
   this.lavandrias.push(item)
+  this.buscando=false
 }
 }
 
