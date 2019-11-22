@@ -198,4 +198,30 @@ getCoordenadasRepartidor(id:any):Observable<any>{
   
 }
 
+getUsuarioCorreo(id:any):Observable<any>{
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  }
+  return  this.http.get(`${this.api}usuarios_correo/${id}`,httpOptions)
+}
+
+cambiarcontraseña(id:any, item:any){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  }
+  return  this.http.put(`${this.api}usuarios_cambiar_password/${id}`,item, httpOptions)
+}
+restablecer(info:any):Observable<any>{    
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  }
+  return this.http.post(`https://gentle-springs-37285.herokuapp.com/`,info, httpOptions)
+}
+
 }
