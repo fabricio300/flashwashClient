@@ -215,6 +215,8 @@ cambiarcontraseña(id:any, item:any){
   }
   return  this.http.put(`${this.api}usuarios_cambiar_password/${id}`,item, httpOptions)
 }
+
+
 restablecer(info:any):Observable<any>{    
   const httpOptions = {
     headers: new HttpHeaders({
@@ -222,6 +224,16 @@ restablecer(info:any):Observable<any>{
     })
   }
   return this.http.post(`https://gentle-springs-37285.herokuapp.com/`,info, httpOptions)
+}
+
+
+nuevaContrasenia(id:any,item:any):Observable<any>{
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  }
+  return  this.http.put(`${this.api}usuarios_cambiar_password/${id}`,item, httpOptions)
 }
 
 }

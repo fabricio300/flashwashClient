@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color='primary'>
     <ion-buttons slot="start">
-        <ion-back-button ></ion-back-button>
+        <ion-back-button routerLink="/inicio"></ion-back-button>
      </ion-buttons> 
   <ion-title>Editar información</ion-title>
 </ion-toolbar>
@@ -17,7 +17,9 @@
             
             <label >
             <p style="color: #FCF10F;">{{this.formRegistro.get('nombre').value+' '+this.formRegistro.get('apellidos').value}}</p>
-            <p> Ingrese su contraseña:</p> 
+            <p class="centrar"> 
+                <img src="../../../assets/imagenes/key.png" style="width: 12px;"> 
+              Ingrese su contraseña:</p> 
             <input formControlName="contrasenia" type="password" placeholder="****">
 
 
@@ -31,7 +33,16 @@
             <p class="infoValidator2" *ngIf="mostrarInfoContraseniaValidar">
                 Campo obligatorio, este debe tener: letras mayúsculas y minúsculas, al menos un número, al menos un carácter especial (#?!@$%^&*-) y una longitud de 8 a 15 caracteres sin espacios. 
             </p>
-
+             
+        <button 
+        (click)="irARecuperarPassword()"
+        class="centrar" style="font-size: 13px; color:#52de97; cursor: pointer; margin:15px auto;
+        background: transparent; outline: none; width: 100%; text-align: center;
+        ">
+           
+            ¿olvidaste tu contraseña?
+          
+          </button>
 
 
 
@@ -242,45 +253,29 @@
                           src="../../../assets/imagenes/informationX.png" style="width: 100%;">
                        </div>
             
-                      <p class="infoValidator" *ngIf="infoCampos.correo">
+                      <p class="infoValidator"  *ngIf="infoCampos.correo">
                           Este campo es obligatorio. 
                       </p>
                 
-                
+                      <button (click)="mostrarCambio()" style="color:#52de97; background: transparent; outline: none;">
+                        Restablecer contraseña
+                      </button> 
+             
                 </div>
                 
                
             
                
-                
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
+              
+    
       
               
         
               </form>
       
-              <div class="cetrar" style="width: 100%; margin-top: 5px;">
+              <div class="cetrar" style="width: 100%; margin-top: 5px;  padding: 10px;">
       
-                  <ion-button style="margin: auto;"
+                  <ion-button style="margin: auto; "
                   [disabled]="!formRegistro.valid"
                   (click)="actualizarDatos()"
                   >
@@ -289,7 +284,62 @@
                 
                 
               </div>
-        
+              
+              <div id="RestableContra" class="cetrar" style="position: absolute; top: 0px; height: 100%; width: 100%; background: rgba(65, 65, 65, 0.9); z-index: 100; margin-left: -200%;">
+                <form [formGroup]="formCambiar" class="formulario cetrar" style="height: auto; z-index: 95; margin: auto; background: #414141; padding: 10px; border-radius: 10px; border: 1px solid white;">
+            
+                  <label >
+                  <p style="color: #FCF10F;">Restablecer contraseña</p>
+                  <p> 
+                      <img src="../../../assets/imagenes/key.png" style="width: 12px;">
+                    Ingrese su  nueva contraseña:</p> 
+                  <input formControlName="contrasenia" type="password" placeholder="****">
+      
+      
+                  <div class="infoVali2" (click)=" mostraInfoContrasenia1()">
+                      <img *ngIf="!formCambiar.get('contrasenia').hasError('required') && !formCambiar.get('contrasenia').hasError('pattern')"
+                      src="../../../assets/imagenes/information.png" style="width: 100%;">
+                      <img *ngIf="formCambiar.get('contrasenia').hasError('required') || formCambiar.get('contrasenia').hasError('pattern')"
+                      src="../../../assets/imagenes/informationX.png" style="width: 100%;">
+                   </div>
+          
+                  <p class="infoValidator2" *ngIf="contra1">
+                      Campo obligatorio, este debe tener: letras mayúsculas y minúsculas, al menos un número, al menos un carácter especial (#?!@$%^&*-) y una longitud de 8 a 15 caracteres sin espacios. 
+                  </p>
+
+
+
+                  <p>  <img src="../../../assets/imagenes/lock.png" style="width: 12px;">
+                    Comfirme su  nueva contraseña:</p> 
+                  <input formControlName="contrasenia2" type="password" placeholder="****">
+      
+                    <div class="infoVali2" (click)=" mostraInfoContrasenia2()">
+                      <img *ngIf="!formCambiar.get('contrasenia2').hasError('required') && !formCambiar.get('contrasenia2').hasError('pattern')"
+                      src="../../../assets/imagenes/information.png" style="width: 100%;">
+                      <img *ngIf="formCambiar.get('contrasenia2').hasError('required') || formCambiar.get('contrasenia2').hasError('pattern')"
+                      src="../../../assets/imagenes/informationX.png" style="width: 100%;">
+                   </div>
+          
+                  <p class="infoValidator2" *ngIf="contra2">
+                     Este campo debe coincidir con el anterior
+                  </p>
+                  
+                 
+                  <ion-button  (click)="mostrarCambioNo()" color=tertiary  style="margin-top: 20px; width: 100%;"  >
+                    Cancelar
+                  </ion-button>
+      
+                  <ion-button  [disabled]="!formCambiar.valid"   style="margin-bottom: 20px auto; width: 100%;"  (click)="cambiartContrasenia()">
+                      Aceptar
+                    </ion-button>
+              
+
+                  </label>
+                 
+                  
+                </form>
+                      
+              </div>
         
         </div>
     
