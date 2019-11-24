@@ -364,7 +364,7 @@ confirmar_igualdad(){
 }
 
 
-cambiartContrasenia(){
+async cambiartContrasenia(){
 console.log('este es',localStorage.getItem('idUser'));
 
   if(this.confirmar_igualdad()){

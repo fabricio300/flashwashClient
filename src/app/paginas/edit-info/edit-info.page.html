@@ -253,12 +253,12 @@
                           src="../../../assets/imagenes/informationX.png" style="width: 100%;">
                        </div>
             
-                      <p class="infoValidator"  *ngIf="infoCampos.correo">
+                      <p class="infoValidator"  *ngIf="infoCampos.correo" >
                           Este campo es obligatorio. 
                       </p>
                 
                       <button (click)="mostrarCambio()" style="color:#52de97; background: transparent; outline: none;">
-                        Restablecer contraseña
+                        Cambiar contraseña
                       </button> 
              
                 </div>
@@ -286,41 +286,41 @@
               </div>
               
               <div id="RestableContra" class="cetrar" style="position: absolute; top: 0px; height: 100%; width: 100%; background: rgba(65, 65, 65, 0.9); z-index: 100; margin-left: -200%;">
-                <form [formGroup]="formCambiar" class="formulario cetrar" style="height: auto; z-index: 95; margin: auto; background: #414141; padding: 10px; border-radius: 10px; border: 1px solid white;">
+                <form [formGroup]="formCambiar" class="formulario cetrar" style="width: 95% ; height: auto; z-index: 95; margin: auto; background: #414141; padding: 10px; border-radius: 10px; border: 1px solid white;">
             
-                  <label >
+                  
                   <p style="color: #FCF10F;">Restablecer contraseña</p>
-                  <p> 
+                  <p style="width: 100%; text-align: left;"> 
                       <img src="../../../assets/imagenes/key.png" style="width: 12px;">
                     Ingrese su  nueva contraseña:</p> 
                   <input formControlName="contrasenia" type="password" placeholder="****">
       
       
-                  <div class="infoVali2" (click)=" mostraInfoContrasenia1()">
+                  <div class="infoVali2" style="margin-top: 10px;" (click)=" mostraInfoContrasenia1()">
                       <img *ngIf="!formCambiar.get('contrasenia').hasError('required') && !formCambiar.get('contrasenia').hasError('pattern')"
                       src="../../../assets/imagenes/information.png" style="width: 100%;">
                       <img *ngIf="formCambiar.get('contrasenia').hasError('required') || formCambiar.get('contrasenia').hasError('pattern')"
                       src="../../../assets/imagenes/informationX.png" style="width: 100%;">
                    </div>
           
-                  <p class="infoValidator2" *ngIf="contra1">
+                  <p class="infoValidator2" *ngIf="contra1" style="background: #252525; color: white;">
                       Campo obligatorio, este debe tener: letras mayúsculas y minúsculas, al menos un número, al menos un carácter especial (#?!@$%^&*-) y una longitud de 8 a 15 caracteres sin espacios. 
                   </p>
 
 
 
-                  <p>  <img src="../../../assets/imagenes/lock.png" style="width: 12px;">
+                  <p style="width: 100%; text-align: left;">  <img src="../../../assets/imagenes/lock.png" style="width: 12px;">
                     Comfirme su  nueva contraseña:</p> 
                   <input formControlName="contrasenia2" type="password" placeholder="****">
       
-                    <div class="infoVali2" (click)=" mostraInfoContrasenia2()">
+                    <div class="infoVali2" style="margin-top: 10px;" (click)=" mostraInfoContrasenia2()">
                       <img *ngIf="!formCambiar.get('contrasenia2').hasError('required') && !formCambiar.get('contrasenia2').hasError('pattern')"
                       src="../../../assets/imagenes/information.png" style="width: 100%;">
                       <img *ngIf="formCambiar.get('contrasenia2').hasError('required') || formCambiar.get('contrasenia2').hasError('pattern')"
                       src="../../../assets/imagenes/informationX.png" style="width: 100%;">
                    </div>
           
-                  <p class="infoValidator2" *ngIf="contra2">
+                  <p class="infoValidator2" *ngIf="contra2" style="background: #252525; color: white;">
                      Este campo debe coincidir con el anterior
                   </p>
                   
@@ -334,7 +334,7 @@
                     </ion-button>
               
 
-                  </label>
+                  
                  
                   
                 </form>
