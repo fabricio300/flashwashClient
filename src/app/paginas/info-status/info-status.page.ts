@@ -43,7 +43,7 @@ export class InfoStatusPage implements OnInit {
     {
       status:'Lista y limpia',
       icon:this.esperando,
-      info:'La ropa esta lista para que pase por ella a la lavandería seleccionada. Este se mostrará cuando se solicite un servicio de: “solo deseo que vengan por mi ropa”.',
+      info:'La ropa esta lista para que pase por ella a la lavandería seleccionada. Este se mostrará cuando se solicite un servicio de: “solo deseo entregar ropa a lavandería”.',
     },
     {
       status:'Entregando',
