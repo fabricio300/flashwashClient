@@ -214,7 +214,7 @@
   </ion-button>
 
 
-  <ion-button *ngIf="pedido.status=='Nuevo pedido'" style="width: 90%; margin: auto; margin-top: 15px;">
+  <ion-button *ngIf="pedido.status=='Nuevo pedido'" (click)="cancelarRecivido()" style="width: 90%; margin: auto; margin-top: 15px;">
     Cancelar
   </ion-button>
 
