@@ -7,6 +7,7 @@ import { variable } from '@angular/compiler/src/output/output_ast';
 import { AlertController } from '@ionic/angular';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
+import { NotificaService } from '../../notificaciones/notifica.service';
 
 
 @Component({
@@ -47,7 +48,8 @@ export class LoginPage implements OnInit {
     private formBuilder: FormBuilder,
     private alertacontroller: AlertController,
     private geolocation: Geolocation,
-    private nativeGeocoder: NativeGeocoder
+    private nativeGeocoder: NativeGeocoder,
+    private notificacion:NotificaService
   ) {
 
     this.formRegistro = this.formBuilder.group({
@@ -131,6 +133,7 @@ export class LoginPage implements OnInit {
       localStorage.setItem('secion','true')
       localStorage.setItem('idUser',''+id)
       this.global.status_de_secion=true
+      this.notificacion.suscrivirceAtema()
       this.router.navigate(['/inicio'])
 
 
