@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class GlobalElementService {
-  api : string = 'https://flash-wash-01.herokuapp.com/api/v1/'
+  api : string = 'https://167.172.209.210/api/v1/'
   status_de_secion=false
 
 
