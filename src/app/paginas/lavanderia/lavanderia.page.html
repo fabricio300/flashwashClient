@@ -43,6 +43,11 @@
             <ion-slide *ngFor="let imagen of imagenes">
               <img src="{{imagen}}" >
             </ion-slide>
+
+            <ion-slide *ngIf="imagenes.length==0">
+              <img src="../../../assets/iconos/A37.gif"  style="width: 30%;">
+            </ion-slide>
+            
             
           </ion-slides>
       </div>
