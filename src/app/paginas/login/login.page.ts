@@ -207,7 +207,7 @@ export class LoginPage implements OnInit {
 
 
   irARecuperarPassword(){
-    this.router.navigate(['/menu'])
+    this.router.navigate(['/resetar'])
   }
 
 
