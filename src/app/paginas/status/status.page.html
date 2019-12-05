@@ -5,7 +5,7 @@
 
       </ion-back-button>
     </ion-buttons>
-       <ion-input  [(ngModel)]="nombresDecliente" placeholder="Ingresa el nombre de un cliente"></ion-input>
+       <ion-input  [(ngModel)]="nombresDecliente" placeholder="Ingresa el nombre de una lavandería"></ion-input>
 
        <ion-buttons slot="end">
         <ion-button style="font-size: 15px;">
@@ -77,12 +77,7 @@
 
     <div style="width: 100%; height: auto; display: flex; flex-wrap: wrap; padding-bottom: 17px;">
 
-      <div class="centrar" style="width: 100%;" *ngIf="buscando">
-        <label class="centrar">
-            <img src="../../../assets/iconos/A37.gif" style="width: 80px; margin: auto;">
-            <p>Buscando pedidos realizados...</p>
-        </label>       
-      </div>
+    
 
       <p *ngIf="(pedidos.length==0 && buscando!=true && sin_coteccion!=true)" style="margin:auto; margin-top: 15px;">Sin pedidos realizados :(</p>
 
@@ -145,6 +140,14 @@
 
 
     </div>
+
+
+    <div class="centrar" style="width: 100%;" *ngIf="buscando">
+      <label class="centrar">
+          <img src="../../../assets/iconos/A37.gif" style="width: 80px; margin: auto;">
+          <p>Buscando pedidos realizados...</p>
+      </label>       
+    </div>  
 
 
   </div>

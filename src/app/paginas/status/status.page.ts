@@ -195,13 +195,13 @@ export class StatusPage implements OnInit {
     
       })
 
-      setInterval(()=>{
+     /* setInterval(()=>{
         if(localStorage.getItem('actualiza')!=null && localStorage.getItem('actualiza')=='si'){
           localStorage.setItem('actualiza','no')
           this.pedidos=null
           this.getPedidos()
         }
-      },1000)
+      },1000)*/
       
     
   });
@@ -244,12 +244,12 @@ export class StatusPage implements OnInit {
     this.pedidos=[]
       this.apiService.getPedidosPorUsuario(localStorage.getItem('idUser')).subscribe(Response=>{
         console.log("pedios= ",Response);
-
+          let cantidad=parseInt(Response.length)
         
         Response.forEach(element => {
             let hora:any=JSON.parse(element.fecha_pedido)
               this.apiService.getLavanderia(element.lavanderia_id).subscribe(Response2=>{
-
+              
                 console.log(hora);
 
                 let item={
@@ -263,13 +263,14 @@ export class StatusPage implements OnInit {
 
 
                 this.pedidos.push(item)
-             
+                this.buscando=true
+                this.terminar(this.pedidos,cantidad)
               })
 
                 console.log("ppppppppppppp",this.pedidos);
-          
+                
         });
-        this.buscando=false
+        //this.buscando=false
       },error=>{
         this.buscando=false
         this.sin_coteccion=true
@@ -278,7 +279,14 @@ export class StatusPage implements OnInit {
       )
   }
 
-
+terminar(pedidos:any, cantidad){
+    if(pedidos.length>=cantidad){
+      this.buscando=false
+      if(cantidad==0){
+        this.sin_resultados=true
+      }
+    }
+}
 
   tConvert (time) {
     // Check correct time format and split into components

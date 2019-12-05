@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { GlobalElementService } from 'src/app/global-element.service';
 import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
-import { error } from 'util';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,7 +16,7 @@ export class EditInfoPage implements OnInit {
     efectos=new Efectos()
     private formValidar:FormGroup
     private formRegistro : FormGroup
-
+    private formCambiar:FormGroup
 
     infoCampos={
       nombre:false,
@@ -50,7 +50,8 @@ export class EditInfoPage implements OnInit {
     private formBuilder: FormBuilder,
     private alertacontroller: AlertController,
     private global:GlobalElementService,
-    private nativeGeocoder: NativeGeocoder
+    private nativeGeocoder: NativeGeocoder,
+    private router:Router
   ) { 
 
     this.formRegistro = this.formBuilder.group({
@@ -90,6 +91,17 @@ export class EditInfoPage implements OnInit {
     });
 
 
+    this.formCambiar=this.formBuilder.group({
+      contrasenia: ['',Validators.compose([
+        Validators.required,
+        Validators.pattern(this.contraseniaValida)
+      ])],
+      contrasenia2: ['',Validators.compose([
+        Validators.required,
+        Validators.pattern(this.contraseniaValida)
+      ])]
+    });
+
     console.log("id usuario ",localStorage.getItem('idUser'));
     
 
@@ -100,6 +112,10 @@ export class EditInfoPage implements OnInit {
     this.efectos.ocultarParte('Dotos')
   }
 
+  irARecuperarPassword(){
+    this.router.navigate(['/menu'])
+  }
+
   mostraInfoContrasenia(){
     if(this.mostrarInfoContraseniaValidar){
       this.mostrarInfoContraseniaValidar=false
@@ -108,7 +124,40 @@ export class EditInfoPage implements OnInit {
     }
 
   }
+
+  contra1=false
+  contra2=false
+  mostraInfoContrasenia1(){
+    if(this.contra1){
+      this.contra1=false
+    }else{
+      this.contra1=true
+    }
+
+  }
+
+
+  mostraInfoContrasenia2(){
+    if(this.contra2){
+      this.contra2=false
+    }else{
+      this.contra2=true
+    }
+
+  }
   
+async mostrarCambio(){
+  document.getElementById('RestableContra').style.transition='0.5s'
+    document.getElementById('RestableContra').style.marginLeft='0px'
+    
+}
+
+async mostrarCambioNo(){
+  document.getElementById('RestableContra').style.transition='0.5s'
+  document.getElementById('RestableContra').style.marginLeft='-200%'
+
+}
+
 
   mostrarInfoCampo(tipo){   
     console.log("eci");
@@ -304,7 +353,36 @@ async verAlerta2(){
 
 await alerta.present()
 }
+//////////////////////-----------restablecer contrasenia--------------------------------------------------------------
 
+confirmar_igualdad(){
+  if(this.formCambiar.get('contrasenia').value==this.formCambiar.get('contrasenia2').value){
+    return true
+  }else{
+    return false
+  }
+}
+
+
+async cambiartContrasenia(){
+console.log('este es',localStorage.getItem('idUser'));
+
+  if(this.confirmar_igualdad()){
+    let item={
+      contraseña:this.formCambiar.get('contrasenia').value
+    }
+    this.global.nuevaContrasenia(localStorage.getItem('idUser'),item).subscribe(Response=>{
+      console.log("contraseña camviada");
+      this.mostrarCambioNo()
+      this.verAlerta2()
+    })
+
+  }else{
+    this.contra2=true
+  }
+
+
+}
 
 
 }

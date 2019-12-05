@@ -259,4 +259,25 @@ export class InfoPedidoPage implements OnInit {
 
   }
 
+
+
+  cancelarRecivido(){
+    let item={
+      status:'Cancelado'
+    }
+    
+   console.log("pedddio",);
+   
+    this.apiservice.setStatusPedido(this.idPedido,item).subscribe(Response=>{
+      this.yo_cambie_status=true
+      this.notificacion.enviarMensaje('Se a cancelado una solucitud','El cliente a cancelado','Lavanderia'+this.idLavanderia)
+      this.socket.emit('nuevo_status','id_lavanderia'+this.idLavanderia)
+  
+      this.getInfoPedido()
+    
+    })
+
+
+  }
+
 }

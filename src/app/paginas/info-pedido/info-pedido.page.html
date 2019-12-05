@@ -194,13 +194,13 @@
       </button>
   </div>
 
-  
+  <!--*ngIf="(pedido.status=='Entregando' || pedido.status=='Recogiendo' || pedido.status=='A lavandería')"-->
   <div style="margin:auto;" *ngIf="(pedido.status=='Entregando' || pedido.status=='Recogiendo' || pedido.status=='A lavandería')">
-    <p>Ver ruta</p>
+    <p>Ver repartidor</p>
     <button
     (click)="irAStatus()"
     class="butonicon centrar" style="text-align: center;">
-        <img src="../../../assets/iconos/map.png" class="iconos" style="margin:auto;">
+        <img src="../../../assets/iconos/bike.png" class="iconos" style="margin:auto;">
     </button>
   </div>
 
@@ -214,7 +214,7 @@
   </ion-button>
 
 
-  <ion-button *ngIf="pedido.status=='Nuevo pedido'" style="width: 90%; margin: auto; margin-top: 15px;">
+  <ion-button *ngIf="pedido.status=='Nuevo pedido'" (click)="cancelarRecivido()" style="width: 90%; margin: auto; margin-top: 15px;">
     Cancelar
   </ion-button>
 

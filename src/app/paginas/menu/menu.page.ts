@@ -62,7 +62,7 @@ export class MenuPage implements OnInit {
     this.anterio=tipo
   }
 
-  resetarPass(){
+ async resetarPass(){
     console.log(this.randomString(15, '###aA!'));
     let pass = this.randomString(10, '###aA!')
    this.global.getUsuarioCorreo(this.formInicio.get('nombre').value).subscribe(response=>{
@@ -82,8 +82,12 @@ export class MenuPage implements OnInit {
 
   }
 
-  retornar(){
+  async retornar(){
+    if(localStorage.getItem('secion')=='true'){
+      this.router.navigate(['/edit-info'])
+    }else
     this.router.navigate(['/login'])
+  
   }
 
 randomString(length, chars) {
