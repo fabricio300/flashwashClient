@@ -63,6 +63,7 @@ export class MenuPage implements OnInit {
   }
 
  async resetarPass(){
+   this.mostrar()
     console.log(this.randomString(15, '###aA!'));
     let pass = this.randomString(15, '##aA!')
    this.global.getUsuarioCorreo(this.formInicio.get('nombre').value).subscribe(response=>{
@@ -72,12 +73,15 @@ export class MenuPage implements OnInit {
       }
       this.global.cambiarcontraseña(response[0].id,{contraseña:pass}).subscribe(response=>{
         this.global.restablecer({email:this.formInicio.get('nombre').value,password:pass}).subscribe(response=>{
+          this.mostrarNo()
           alert("Revise su bandeja")
-          this.router.navigate(['/'])
+          this.retornar()
         })
       })
     }),error => {
+      this.mostrarNo()
       console.log("err", error);
+      
     }
 
   }
@@ -101,6 +105,15 @@ randomString(length, chars) {
   return result;
 }
 
-  
 
+mostrar(){
+  document.getElementById('VistaEspera').style.transition='0.5s'
+  document.getElementById('VistaEspera').style.marginLeft="0px"
+}
+
+
+mostrarNo(){
+  document.getElementById('VistaEspera').style.transition='0.5s'
+  document.getElementById('VistaEspera').style.marginLeft="200%"
+}
 }
