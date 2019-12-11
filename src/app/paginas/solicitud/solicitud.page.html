@@ -275,7 +275,7 @@
     
                
                 <p class="infoS"  *ngIf="this.efectos.reparto=='tipo1'">
-                    En este servicio un empleado de flash wash llegara su domicilio para encargarse del pesaje de las prendas que tenga a disposición, del cobro de servicios de lavandería y transporte. Para posteriormente transporta la ropa a la lavandería seleccionada.
+                    En este servicio un empleado de flash wash llegará su domicilio para encargarse del pesaje de las prendas que tenga a disposición, del cobro de servicios de lavandería y transporte. Para posteriormente transporta la ropa a la lavandería seleccionada.
                 </p>
 
           
@@ -295,7 +295,7 @@
 
 
             <p class="infoS" *ngIf="this.efectos.reparto=='tipo2'">
-                En este servicio un empleado de flash wash se encargar de entregar a su domicilio las prendas que usted llevara a la lavandería seleccionada. Una vez echa la entrega se cobrará este servicio. 
+                En este servicio un empleado de flash wash se encargará de entregar a su domicilio las prendas que usted llevará a la lavandería seleccionada. Una vez se le sea entregada su ropa se cobrará este servicio. 
             </p>
 
             
@@ -312,7 +312,7 @@
            
             <p class="infoS" *ngIf="this.efectos.reparto=='tipo3'">
                
-              Este servicio incluye el transporte de la ropa de: su domicilio a lavandería y de lavandería a su domicilio.  Este servicio se divide en dos cobros:  cuando se recoge la ropa y cuando se entrega. 
+              Este servicio incluye el transporte de ropa de: su domicilio a lavandería y de lavandería a su domicilio.  Este servicio se divide en dos cobros:  cuando se recoge la ropa y cuando se entrega. 
 
             </p>
           
@@ -412,7 +412,7 @@
         <label >
           Indique información respecto a la situación de sus prendas:
           <br>
-          <a style="font-size: 12px; color: #52de97;">Este campo es opcional</a>
+          <a style="font-size: 14px; color: #52de97;">Este campo es opcional</a>
         </label>
 
         <ion-textarea [(ngModel)]="this.efectos.indicaciones"
@@ -494,14 +494,16 @@
         <div class="cobros" style="width: 100%;">
               <h6 style="color: gold;">Costes:</h6>
             <label *ngIf="this.efectos.tipoDeEntrega=='tipo1' || this.efectos.tipoDeEntrega=='tipo3'">
-                <p style="font-size: 12px; color: #52de97;">transportar a lavandería:</p>
+                <p style="font-size: 14px; color: #52de97;">Transportar a lavandería: </p>
+                <a style="font-size: 14px; color: #c0ffb3;">Se cobrará cuando el repartidor realize el pesaje de sus prendas.</a>
                 <p >${{this.precio}}</p>
               
             </label>
            
   
             <label *ngIf="this.efectos.tipoDeEntrega=='tipo2' || this.efectos.tipoDeEntrega=='tipo3'">
-                <p style="font-size: 12px; color: #52de97;">transportar a mi domicilio:</p>
+                <p style="font-size: 14px; color: #52de97;">Transportar a mi domicilio:</p>
+                <a style="font-size: 14px; color: #c0ffb3;">Se cobrará cuando se le haga entreda de sus prendas listas.</a>
                 <p >${{this.precio}}</p>
             </label>
             
@@ -514,8 +516,8 @@
   
   
             <label >
-              <p style="color: gold;">Total:</p>
-              <p style="font-size: 13px;">
+              <p style="font-size: 14px; color: #52de97;">Servicios de lavandería: </p>
+              <p style="font-size: 14px;">
                 El coste por los servicios de lavanderia dependera de el pesaje de su ropa.
               </p>
             </label>
@@ -577,7 +579,7 @@
           <label *ngIf="this.efectos.indicaciones!=''">
             <br>
               <p style="color: white;font-size: 15px;">Indicaciones:</p>
-              <p style="font-size:12px; ">{{this.efectos.indicaciones}}   </p>
+              <p style="font-size:14px; ">{{this.efectos.indicaciones}}   </p>
             </label>
     
           </div>
