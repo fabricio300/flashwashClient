@@ -16,11 +16,22 @@
 
 
   <div class="contPart1 primero">
-     <h4>{{pedido.nombre}}</h4> 
-
+      <div class="centrarIz" style="float: left; margin: auto; margin-top: auto; width:calc(100% - 114px);">
+        <label >
+            <p style="color: #ABABAB; text-align: center;">Lavandería:</p>
+            <h4 style="margin-left: 15px;">{{pedido.nombre}}</h4> 
+        </label>  
+   
+      </div>
+    
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
     <h5 class="centrarIz">
-     <br>
-     <br>
+    
+  
      
           <img src="../../../assets/Status/hanger.png" class="iconos">
           Servicios solicitados:
@@ -31,7 +42,7 @@
         </h6>
           
           <div *ngFor="let lava of pedido.servicios_lavanderia">
-            <p >{{lava.servicio}} ${{lava.precio}} por {{lava.unidad}}</p>
+            <p style="width: 100%; ">{{lava.servicio}} ${{lava.precio}} por {{lava.unidad}}</p>
             <div *ngIf="lava.costo!=0" class="centrar" style="width: 100%; ">
               <p style="margin: auto; color: #52de97; width: 40%;" class="centrar">
                 {{lava.unidad}}/s: 
@@ -58,7 +69,7 @@
 
        
           <div *ngFor="let tintor of pedido.servicios_tititoreria">
-            <p >{{tintor.servicio}} ${{tintor.precio}} por {{tintor.unidad}}</p>
+            <p style="width: 100%; ">{{tintor.servicio}} ${{tintor.precio}} por {{tintor.unidad}}</p>
             <div *ngIf="tintor.costo!=0" class="centrar" style="width: 100%; ">
               <p style="margin: auto; color: #52de97; width: 40%;" class="centrar">
                 {{tintor.unidad}}/s: 
@@ -81,8 +92,8 @@
               Planchado
             </h6>
         
-          <div *ngFor="let planc of pedido.servicios_tititoreria">
-            <p >{{planc.unidad}} ${{planc.precio}}</p>
+          <div *ngFor="let planc of pedido.servicios_planchado">
+            <p style="width: 100%; ">{{planc.unidad}} ${{planc.precio}}</p>
             <div *ngIf="planc.costo!=0" class="centrar" style="width: 100%; ">
               <p style="margin: auto; color: #52de97; width: 40%;"  class="centrar">
                 {{planc.unidad}}/s: 
@@ -109,7 +120,7 @@
 
 
     
-    <h5 class="centrarIz">
+    <h5 class="centrarIz" *ngIf="pedido.indicaciones!=null">
       <br>
       <br>
       <br>
@@ -133,9 +144,9 @@
     'resperando':pedido.status=='Lista y limpia'
       }"
     >
-        <p style="width: 100%; text-align: center; font-size: 11px;">status:</p>
+        <p style="width: 100%; text-align: center; font-size: 14px;">status:</p>
         <img src="{{pedido.icon}}" width="40px">
-        <p style="width: 100%; text-align: center; font-size: 12px;">{{pedido.status}}</p>
+        <p style="width: 100%; text-align: center; font-size: 14px;">{{pedido.status}}</p>
     </div>
 
 
@@ -170,13 +181,13 @@
     </div>
   
     <div *ngIf="costoLavanderia>0">
-      <label >total:</label>
+      <label >Total:</label>
       <p>${{total}}</p>
     </div>
     
 
-    <label >fecha</label>
-
+    <label >Fecha:</label>
+    <p style="font-size: 14;"> {{fecha}}</p>
   </div>
 
 

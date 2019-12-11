@@ -18,6 +18,7 @@ export class InfoPedidoPage implements OnInit {
   costoReparto2
   costoLavanderia
   total
+  fecha
 
   yo_cambie_status=false
 
@@ -110,7 +111,7 @@ export class InfoPedidoPage implements OnInit {
 
         this.idRepartidor=Response.repartidor_id
         this.tipo_de_entrega=Response.tipo_entrega
-     
+        this.fecha=Response.updated_at
 
         let precios:any=JSON.parse(Response.precio)
         console.log("estos son los precios",precios);

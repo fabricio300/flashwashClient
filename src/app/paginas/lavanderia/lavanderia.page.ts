@@ -23,6 +23,8 @@ export class LavanderiaPage implements OnInit {
   horaSI:any
   horaSF:any
   nombreLavanderia:any
+  lat:number
+  lng:number
 
   avierto=true
 
@@ -323,6 +325,9 @@ export class LavanderiaPage implements OnInit {
 
       let fotos:any=JSON.parse(Response.fotografias)
 
+      let coor:any=JSON.parse(Response.coordenadas)
+      this.lat=coor.lat
+      this.lng=coor.lon
 
      
      
