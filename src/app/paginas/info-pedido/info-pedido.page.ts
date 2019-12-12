@@ -248,8 +248,8 @@ export class InfoPedidoPage implements OnInit {
    
     this.apiservice.setStatusPedido(this.idPedido,item).subscribe(Response=>{
       this.yo_cambie_status=true
-      this.notificacion.enviarMensaje('Se a finalizado una solucitud','El cliente a recivido su ropa','Repartidor'+this.idRepartidor)
-      this.notificacion.enviarMensaje('Se a finalizado una solucitud','El cliente a recivido su ropa','Lavanderia'+this.idLavanderia)
+      this.notificacion.enviarMensaje('Se a finalizado una solicitud','El cliente ha recibido su ropa','Repartidor'+this.idRepartidor)
+      this.notificacion.enviarMensaje('Se a finalizado una solicitud','El cliente ha recibido su ropa','Lavanderia'+this.idLavanderia)
       this.socket.emit('asignarReaptidor',this.idRepartidor)
       this.socket.emit('nuevo_status','id_lavanderia'+this.idLavanderia)
   

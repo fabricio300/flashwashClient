@@ -213,11 +213,15 @@ export class StatusPage implements OnInit {
    }
 
   ngOnInit() {
+    
+  }
+
+  ionViewWillEnter() {
+
     this.ocultarFiltro()
     this.pedidos=null
     this.getPedidos()
   }
-
 
 
   verDetalles(pedido){

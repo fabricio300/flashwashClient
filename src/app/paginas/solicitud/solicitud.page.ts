@@ -93,7 +93,10 @@ export class SolicitudPage implements OnInit {
     this.actualservicio=num
   }
 
-hacerSolicitud(){
+async hacerSolicitud(){
+
+  this.mostrarCarga()
+
   let lavanderia1=[]
   let titore=[]
   let plancha=[]
@@ -189,6 +192,7 @@ if(this.efectos.cantidadPedidadDePlanchado>0){
   this.global.solisitarservicio(solicitud).subscribe(Response=>{
     console.log("pedido");
     this.notificaciones.enviarMensaje('Nueva solicitud', 'Tienes un nueva solicitud de servicios','Lavanderia'+solicitud.lavanderia_id)
+    this.noMostrarCarga()
     this.irAStatus()
   })
 
@@ -227,5 +231,17 @@ calculateDistance(lon1, lon2, lat1, lat2){
   let dis = (12742 * Math.asin(Math.sqrt(a)));
   return dis;
 }
+
+
+mostrarCarga(){
+  document.getElementById('Carga').style.transition="0.5s"
+  document.getElementById('Carga').style.marginLeft="0px"
+}
+
+noMostrarCarga(){
+  document.getElementById('Carga').style.transition="0.5s"
+  document.getElementById('Carga').style.marginLeft="200%"
+}
+
 
 }
